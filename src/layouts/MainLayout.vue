@@ -3,6 +3,9 @@
     
     <q-header elevated>
       <q-toolbar>
+         <q-toolbar-title class="row items-center cursor-pointer" @click="$router.replace('/')">
+        <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
+  
         <!-- <q-btn
           flat
           dense
@@ -12,8 +15,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         /> -->
 
-        <q-toolbar-title>
-          e-Sugo app
+        
         </q-toolbar-title>
 
          <q-btn color="primary" label="Sign-Up" />
