@@ -170,27 +170,31 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step
-        :name="3"
-        title="Finish"
-        icon="add_comment"
-        :header-nav="step > 3"
-      >
-        Try out different ad text to see what brings in the most customers, and
-        learn how to enhance your ads using features like ad extensions. If you
-        run into any problems with your ads, find out how to tell if they're
-        running and how to resolve approval issues.
+     
+              <q-step
+                :name="3"
+                title="Done"
+                icon="add_comment"
+                :header-nav="step > 3"
+              >
+                The Moderator will review your account. Thank you for signing up
+                in eSugo APP
 
-        <q-stepper-navigation>
-          <q-btn color="primary" @click="done3 = true" label="Finish" />
-          <q-btn
-            flat
-            @click="step = 2"
-            color="primary"
-            label="Back"
-            class="q-ml-sm"
-          />
-        </q-stepper-navigation>
+                <q-stepper-navigation>
+                  <q-btn
+                    color="primary"
+                    @click="done3 = true"
+                    label="Finish"
+                    to="/"
+                  />     
+                         <q-btn
+                    flat
+                    @click="step = 2"
+                    color="primary"
+                    label="Back"
+                    class="q-ml-sm"
+                  />
+                </q-stepper-navigation>  
       </q-step>
     </q-stepper>
   </div>
