@@ -1,5 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -12,11 +13,12 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          e-Sugo app
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+         <q-btn color="primary" label="Sign-Up" />
       </q-toolbar>
+      
     </q-header>
 
     <q-drawer
