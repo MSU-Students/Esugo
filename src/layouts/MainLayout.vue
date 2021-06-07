@@ -5,6 +5,7 @@
       <q-toolbar>
          <q-toolbar-title class="row items-center cursor-pointer" @click="$router.replace('/')">
         <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
+        
   
         <!-- <q-btn
           flat
@@ -18,7 +19,13 @@
         
         </q-toolbar-title>
 
-         <q-btn color="primary" label="Sign-Up" />
+       <div v-if="$route.path != '/signup'" class="q-gutter-x-md">
+        <q-btn flat color="white" 
+        icon = person
+        label="Sign-in" to="/signup" />
+        <!-- <span>|</span>
+        <q-btn flat color="white" label="Sign Up" to="/registerworker"/> -->
+      </div>
       </q-toolbar>
       
     </q-header>

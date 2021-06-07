@@ -212,7 +212,7 @@ export default class PageIndex extends Vue {
   age: string = '';
   pAddress: string = '';
   eAddress: string = '';
-  number: number = 1;
+  number: string = '';
 
   //  addStudebt(): void {
   //  }
