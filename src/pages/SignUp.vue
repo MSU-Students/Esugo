@@ -170,31 +170,20 @@
         </q-stepper-navigation>
       </q-step>
 
-     
-              <q-step
-                :name="3"
-                title="Done"
-                icon="add_comment"
-                :header-nav="step > 3"
-              >
-                The Moderator will review your account. Thank you for signing up
-                in eSugo APP
+      <q-step :name="3" title="Done" icon="add_comment" :header-nav="step > 3">
+        The Moderator will review your account. Thank you for signing up in
+        eSugo APP
 
-                <q-stepper-navigation>
-                  <q-btn
-                    color="primary"
-                    @click="done3 = true"
-                    label="Finish"
-                    to="/"
-                  />     
-                         <q-btn
-                    flat
-                    @click="step = 2"
-                    color="primary"
-                    label="Back"
-                    class="q-ml-sm"
-                  />
-                </q-stepper-navigation>  
+        <q-stepper-navigation>
+          <q-btn color="primary" @click="done3 = true" label="Finish" to="/" />
+          <q-btn
+            flat
+            @click="step = 2"
+            color="primary"
+            label="Back"
+            class="q-ml-sm"
+          />
+        </q-stepper-navigation>
       </q-step>
     </q-stepper>
   </div>
@@ -205,14 +194,14 @@ import { Vue, Component } from 'vue-property-decorator';
 
 @Component({})
 export default class PageIndex extends Vue {
-  step: number = 1;
-  fName: string = '';
-  mName: string = '';
-  lName: string = '';
-  age: string = '';
-  pAddress: string = '';
-  eAddress: string = '';
-  number: string = '';
+  step = 1;
+  fName = '';
+  mName = '';
+  lName = '';
+  age = '';
+  pAddress = '';
+  eAddress = '';
+  number = '';
 
   //  addStudebt(): void {
   //  }
