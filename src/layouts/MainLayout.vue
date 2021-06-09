@@ -19,11 +19,11 @@
         
         </q-toolbar-title>
 
-       <div v-if="$route.path != '/signup'" class="q-gutter-x-md">
+       <div v-if="$route.path != '/signup' &&$route.path != '/review' " class="q-gutter-x-md">
         <q-btn flat color="white" 
         icon = person
         label="Sign-in" to="/signup" />
-        <span>|</span>
+        <span>|</span>  
         <q-btn flat color="white" 
         icon = person
         label="Log-in" to="/login" />
