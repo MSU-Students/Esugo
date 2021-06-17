@@ -29,7 +29,7 @@
             Notice and Privacy.
           </p>
 
-          <q-btn class="full-width" color="primary" label="Login" />
+          <q-btn class="full-width" color="primary" label="Login" to = "/" />
         </div>
       </q-card-section>
     </div>
