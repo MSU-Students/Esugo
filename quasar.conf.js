@@ -113,9 +113,9 @@ module.exports = configure(function(/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `esugo-app`,
-        short_name: `esugo-app`,
-        description: `Job Posting Application`,
+        name: 'esugo-app',
+        short_name: 'esugo-app',
+        description: 'Job Posting Application',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
