@@ -22,13 +22,16 @@
        <div v-if="$route.path != '/signup' &&$route.path != '/review' " class="q-gutter-x-md">
         <q-btn flat color="white" 
         icon = person
-        label="Sign-in" to="/signup" />
+        label="Sign-up" to="/signup" />
         <span>|</span>  
         <q-btn flat color="white" 
         icon = person
         label="Log-in" to="/login" />
-        <!-- <span>|</span>
-        <q-btn flat color="white" label="Sign Up" to="/registerworker"/> -->
+      </div>
+      <div v-if="$route.path == '/review'" class="q-gutter-x-md">
+         <q-btn flat color="white" 
+        icon = person
+        label="Log-out" to="/"/>
       </div>
       </q-toolbar>
       

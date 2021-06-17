@@ -142,7 +142,7 @@
         :name="2"
         title="Skill set"
         caption="Optional"
-        icon="Github_Outlined"
+        icon="engineering"
         :done="step > 2"
         :header-nav="step > 2"
       >
@@ -170,15 +170,47 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="3" title="Done" icon="add_comment" :header-nav="step > 3">
+        <q-step
+        :name="3"
+        title="Certification"
+        caption="license"
+        icon="badge"
+        :done="step > 3"
+        :header-nav="step > 3"
+      >
+        An ad group contains one or more ads which target a shared set of
+        keywords.
+
+        <q-stepper-navigation>
+          <q-btn
+            @click="
+              () => {
+                don3 = true;
+                step = 4;
+              }
+            "
+            color="primary"
+            label="Continue"
+          />
+          <q-btn
+            flat
+            @click="step = 1"
+            color="primary"
+            label="Back"
+            class="q-ml-sm"
+          />
+        </q-stepper-navigation>
+      </q-step>
+
+      <q-step :name="4" title="Done" icon="close" :header-nav="step > 4">
         The Moderator will review your account. Thank you for signing up in
         eSugo APP
 
         <q-stepper-navigation>
-          <q-btn color="primary" @click="done3 = true" label="Finish" to="/" />
+          <q-btn color="primary" @click="done4 = true" label="Finish" to="/" />
           <q-btn
             flat
-            @click="step = 2"
+            @click="step = 3"
             color="primary"
             label="Back"
             class="q-ml-sm"
