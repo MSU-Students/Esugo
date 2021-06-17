@@ -17,19 +17,26 @@
         </h5>
         <div class="q-gutter-md">
           <q-input outlined v-model="username" label="Username" standout="bg-white text-primary"/>
+          
           <q-input
             color="blue-9"
             outlined
             v-model="password"
-            type="password"
+            filled
+            :type="isPwd ? 'password' : 'text'"
             label="Password"
             standout="bg-white text-primary"
+          >
+          <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
           />
-            
+          </template>
+         </q-input>
             <q-checkbox size="xs" v-model="val" label = " By signing up, you confirm that you've read and accepted our User
             Notice and Privacy"/>
-          
-
           <q-btn class="full-width" color="primary" label="Login" to = "/" />
         </div>
       </q-card-section>
@@ -41,10 +48,11 @@
 import { Vue, Component } from 'vue-property-decorator';
 @Component({})
 export default class PageIndex extends Vue {
-  val = true;
+  val = true; 
   username = '';
   password = '';
   signup = '';
+  isPwd = true;
 }
 </script>
 <style scoped>
