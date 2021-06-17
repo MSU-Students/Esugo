@@ -1,22 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     
-    <q-header elevated>
+    <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
       <q-toolbar>
          <q-toolbar-title class="row items-center cursor-pointer" @click="$router.replace('/')">
         <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
-        
-  
-        <!-- <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        /> -->
-
-        
         </q-toolbar-title>
 
        <div v-if="$route.path != '/signup' &&$route.path != '/review' " class="q-gutter-x-md">
@@ -29,7 +17,7 @@
         label="Log-in" to="/login" />
       </div>
       <div v-if="$route.path == '/review'" class="q-gutter-x-md">
-         <q-btn flat color="white" 
+         <q-btn flat color="white " 
         icon = person
         label="Log-out" to="/"/>
       </div>
@@ -58,7 +46,7 @@
       </q-list>
     </q-drawer> -->
 
-    <q-page-container>
+    <q-page-container :style="$route.path == '/login' ? 'padding-top: 0 !important;' : ''">
       <router-view />
     </q-page-container>
   </q-layout>
