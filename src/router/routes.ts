@@ -11,6 +11,7 @@ const routes: RouteConfig[] = [
       { path: '/review', component: () => import('pages/reviewPage.vue') },
       { path: '/workerProfile', component: () => import('pages/worker/workerProfile.vue') },
       { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') },
+      { path: '/manageaccount', component: () => import('pages/admin/ManageAccount.vue') },
       
     ]
   },
