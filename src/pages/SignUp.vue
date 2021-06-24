@@ -202,7 +202,7 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="4" title="Done" icon="close" :header-nav="step > 4">
+      <q-step :name="4" title="Review" icon="close" :header-nav="step > 4">
         The Moderator will review your account. Thank you for signing up in
         eSugo APP
 

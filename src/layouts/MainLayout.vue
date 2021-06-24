@@ -7,7 +7,7 @@
         <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
 
-       <div v-if="$route.path != '/signup' &&$route.path != '/review' " class="q-gutter-x-md">
+       <div v-if="$route.path == '/'" class="q-gutter-x-md">
         <q-btn flat color="white" 
         icon = person
         label="Sign-up" to="/signup" />
@@ -16,7 +16,7 @@
         icon = person
         label="Log-in" to="/login" />
       </div>
-      <div v-if="$route.path == '/review'" class="q-gutter-x-md">
+      <div v-if="$route.path == '/review' || $route.path == '/home'" class="q-gutter-x-md">
          <q-btn flat color="white " 
         icon = person
         label="Log-out" to="/"/>
