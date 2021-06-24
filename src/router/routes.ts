@@ -9,7 +9,11 @@ const routes: RouteConfig[] = [
       { path: '/home', component: () => import('pages/homePage2.vue') },
       { path: '/signup', component: () => import('pages/SignUp.vue') },
       { path: '/login', component: () => import('pages/loginPage.vue') },
-      { path: '/review', component: () => import('pages/reviewPage.vue') }
+      { path: '/review', component: () => import('pages/reviewPage.vue') },
+      { path: '/workerProfile', component: () => import('pages/worker/workerProfile.vue') },
+      { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') },
+      { path: '/manageaccount', component: () => import('pages/admin/ManageAccount.vue') },
+      
     ]
   },
 
