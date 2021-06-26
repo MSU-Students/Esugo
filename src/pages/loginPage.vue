@@ -1,11 +1,11 @@
 <template>
-  <q-page   style="background: linear-gradient(to bottom, #238ffb 29%,#FF8AB3 40%, #ffffff 100%);" 
+  <q-page   style="background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);" 
   class="flex flex-center">
     <div>
       <q-card class="my-card no-shadow">
         <div class="pic-text absolute-bottom-left text-white q-gutter-xl"></div>
       </q-card>
-    </div>x
+    </div>
 
     <div class="col-4">
       <q-card-section class="q-pa-xl  " >

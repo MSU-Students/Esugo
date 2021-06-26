@@ -1,22 +1,13 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hhh LpR lFf">
     
-    <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
+    <q-header elevated>
       <q-toolbar>
-         <q-toolbar-title class="row items-center cursor-pointer" @click="$router.replace('/')">
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+         <q-toolbar-title class="row items-center cursor-pointer">
         <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
-
-       <div v-if="$route.path == '/'" class="q-gutter-x-md">
-        <q-btn flat color="white" 
-        icon = person
-        label="Sign-up" to="/signup" />
-        <span>|</span>
-        <q-btn flat color="white" 
-        icon = person
-        label="Log-in" to="/login" />
-      </div>
-      <div v-if="$route.path == '/review' || $route.path == '/home'" class="q-gutter-x-md">
+      <div class="q-gutter-x-md">
          <q-btn flat color="white " 
         icon = person
         label="Log-out" to="/"/>
@@ -25,26 +16,41 @@
       
     </q-header>
 
-    <!-- <q-drawer
-      v-model="leftDrawerOpen"
+    <q-drawer
+      v-model="drawer"
       show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer> -->
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
+      :width="250"
+      :breakpoint="500"
+      elevated
+      >
+        <q-scroll-area class="fit">
+          <q-list padding>
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="person" />
+              </q-item-section>
+
+              <q-item-section>
+                Accounts List
+              </q-item-section>
+            </q-item>
+
+            <q-item active clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="person" />
+              </q-item-section>
+              <q-item-section>
+                Account Reported
+              </q-item-section>
+            </q-item>
+
+
+          </q-list>
+        </q-scroll-area>
+      </q-drawer>
 
     <q-page-container :style="$route.path == '/login' ? 'padding-top: 0 !important;' : ''">
       <router-view />
@@ -105,8 +111,14 @@ import { Vue, Component } from 'vue-property-decorator';
 @Component({
   components: { EssentialLink }
 })
+
 export default class MainLayout extends Vue {
-  leftDrawerOpen = false;
+  drawer = false;
+  miniState = true;
   essentialLinks = linksData;
+  toggleLeftDrawer () {
+        this.drawer = !this.drawer
+      }
 }
+
 </script>

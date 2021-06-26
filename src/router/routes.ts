@@ -11,11 +11,19 @@ const routes: RouteConfig[] = [
       { path: '/login', component: () => import('pages/loginPage.vue') },
       { path: '/review', component: () => import('pages/reviewPage.vue') },
       { path: '/workerProfile', component: () => import('pages/worker/workerProfile.vue') },
-      { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') },
-      { path: '/manageaccount', component: () => import('pages/admin/ManageAccount.vue') },
-      
+      { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') } 
     ]
   },
+  {
+    path: '/admins/',
+    component: () =>
+        import ('src/layouts/adminLayout.vue'),
+    children: [
+      { path: 'accounts', component: () => import ('../pages/admin/adminPage.vue') },
+      { path: 'jobs', component: () => import ('../pages/moderator/moderatorPage.vue') },
+  
+    ]
+},
 
   // Always leave this as last one,
   // but you can also remove it
