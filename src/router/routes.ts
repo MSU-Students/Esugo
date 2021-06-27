@@ -11,7 +11,7 @@ const routes: RouteConfig[] = [
       { path: '/login', component: () => import('pages/loginPage.vue') },
       { path: '/review', component: () => import('pages/reviewPage.vue') },
       { path: '/workerProfile', component: () => import('pages/worker/workerProfile.vue') },
-      { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') } 
+     // { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') } 
     ]
   },
   {
