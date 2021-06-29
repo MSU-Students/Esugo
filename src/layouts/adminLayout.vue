@@ -35,8 +35,9 @@ export default {
     };
   },
   methods: {
-    onDrawerEvent(){
-      drawerOpen = !drawerOpen;
+    onDrawerEvent(value) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      this.drawerOpen = value;
     },
   },
 };
