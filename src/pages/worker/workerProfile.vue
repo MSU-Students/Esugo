@@ -1,6 +1,6 @@
 <template>
 
-  <q-page class="flex flex-center" padding>
+  <q-page class="flex flex-center" padding style="background: linear-gradient(to bottom left,  #0066eb 0%, #ff8ab3 100%  );">
     <!-- <q-btn
       class="float-right"
       color="primary"
@@ -94,7 +94,7 @@
 
         <div class="col q-pa-md">
           <div class="q-gutter-md">
-            <div class="text-h4 text-weight-medium">Yassier Gania Bashier</div>
+            <div class="text-h4 text-white text-weight-medium">Yassier Gania Bashier</div>
           </div>
 
           <div>
@@ -112,15 +112,14 @@
 
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-@Component({})
-export default class PageIndex extends Vue {
-  //   val = true;
-  //   username = '';
-  //   password = '';
-  //   signup = '';
-  //   isPwd = true;
+<script>
+
+import TabPanels from 'components/TabPanels.vue';
+export default {
+  name: 'EmpolerProfile',
+  components: {
+    TabPanels,
+  }
 }
 </script>
 <style scoped>
