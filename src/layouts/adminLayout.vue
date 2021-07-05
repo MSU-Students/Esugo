@@ -13,8 +13,8 @@
       </div>
       </q-toolbar>
     </q-header>
-    <ADrawer v-if="$route.path == '/admins/accounts'" :drawerOpen="drawerOpen"/>
-    <MDrawer v-if="$route.path == '/admins/jobs'" :drawerOpen="drawerOpen"/>
+    <ADrawer v-if="$route.path == '/admin/home'  || $route.path == '/admin/accounts'" :drawerOpen="drawerOpen"/>
+    <MDrawer v-if="$route.path == '/moderator/jobs' || $route.path == '/moderator/home'" :drawerOpen="drawerOpen"/>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -35,9 +35,9 @@ export default {
     };
   },
   methods: {
-    onDrawerEvent(value) {
+    onDrawerEvent() {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      this.drawerOpen = value;
+      this.drawerOpen = !this.drawerOpen;
     },
   },
 };

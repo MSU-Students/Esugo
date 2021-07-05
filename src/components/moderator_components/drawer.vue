@@ -11,28 +11,20 @@
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item clickable v-ripple>
+            <q-item clickable  to ="/moderator/home" v-ripple>
+              <q-item-section avatar>
+                <q-icon name="home" />
+              </q-item-section>
+              <q-item-section>
+                Home
+              </q-item-section>
+            </q-item>
+             <q-item clickable  to ="/moderator/jobs" v-ripple>
               <q-item-section avatar>
                 <q-icon name="work" />
               </q-item-section>
               <q-item-section>
-                Approved Jobs
-              </q-item-section>
-            </q-item>
-             <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="work" />
-              </q-item-section>
-              <q-item-section>
-                Pending Jobs
-              </q-item-section>
-            </q-item>
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="warning" />
-              </q-item-section>
-              <q-item-section>
-                Reported Jobs
+                Jobs
               </q-item-section>
             </q-item>
           </q-list>

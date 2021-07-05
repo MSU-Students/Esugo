@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card bg-blue>
     <q-table
-      title="Pending Accounts "
+      title="Pending Accounts"
       :data="data"
       :columns="columns"
       row-key="name"

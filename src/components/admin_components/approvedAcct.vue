@@ -1,16 +1,12 @@
 <template>
 
   <div >
-  
-     
     <q-table
       title="List of Accounts"
       :data="data"
       :columns="columns"
       row-key="name"
-    >
-    
-      
+    >  
     <template v-slot:header="props">
       <q-tr :props="props">
         <q-th auto-width class="bg-grey-3 text-blue">
@@ -71,6 +67,7 @@
             icon="pageview"
             round
             dense
+            to ="/workerprofile"
           >
             <q-tooltip content-class="bg-grey-9" :offset="[10, 10]">
               View Account Profile

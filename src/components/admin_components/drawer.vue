@@ -11,32 +11,22 @@
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item clickable v-ripple>
+            <q-item clickable to ="/admin/home" v-ripple>
+              <q-item-section avatar>
+                <q-icon name="home" />
+              </q-item-section>
+              <q-item-section>
+                Home
+              </q-item-section>
+            </q-item>
+             <q-item clickable to ="/admin/accounts" v-ripple>
               <q-item-section avatar>
                 <q-icon name="person" />
               </q-item-section>
               <q-item-section>
-                Approved Accounts
+                Accounts
               </q-item-section>
             </q-item>
-             <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="person" />
-              </q-item-section>
-              <q-item-section>
-                Pending Accounts
-              </q-item-section>
-            </q-item>
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="warning" />
-              </q-item-section>
-              <q-item-section>
-                Reported Accounts
-              </q-item-section>
-            </q-item>
-
-
           </q-list>
         </q-scroll-area>
       </q-drawer>

@@ -5,24 +5,33 @@ const routes: RouteConfig[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/homePage.vue') },
-      { path: '/home', component: () => import('pages/homePage2.vue') },
+      { path: '', component: () => import('pages/LandingPage.vue') },
+      { path: '/home', component: () => import('pages/LandingPage.vue') },
       { path: '/signup', component: () => import('pages/SignUp.vue') },
       { path: '/login', component: () => import('pages/loginPage.vue') },
       { path: '/review', component: () => import('pages/reviewPage.vue') },
       { path: '/workerProfile', component: () => import('pages/worker/workerProfile.vue') },
-     // { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') } 
+      { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') } 
     ]
   },
   {
-    path: '/admins/',
+    path: '/admin/',
     component: () =>
         import ('src/layouts/adminLayout.vue'),
     children: [
       { path: 'accounts', component: () => import ('../pages/admin/adminPage.vue') },
-      { path: 'jobs', component: () => import ('../pages/moderator/moderatorPage.vue') },
-  
+      { path: 'home', component: () => import('pages/LandingPage.vue') },
     ]
+},
+{
+  path: '/moderator/',
+  component: () =>
+      import ('src/layouts/adminLayout.vue'),
+  children: [
+    { path: 'jobs', component: () => import ('../pages/moderator/moderatorPage.vue') },
+    { path: 'home', component: () => import('pages/LandingPage.vue') },
+
+  ]
 },
 
   // Always leave this as last one,

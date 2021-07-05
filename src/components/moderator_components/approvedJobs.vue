@@ -96,16 +96,16 @@ export default {
           sortable: true
         },
         {
-          name: "Date Posted",
+            name: "Date Posted",
           align: "left",
           label: "Date Posted",
           field: "dateposted",
           sortable: true
         },
         {
-          name: "Date Reported",
-          label: "Date Reported",
-          field: "datereported",
+          name: "Account Name",
+          label: "Account Name",
+          field: "accountname",
           sortable: true,
           align: "left"
         }
@@ -114,17 +114,17 @@ export default {
         {
           name: "Capentry",
           dateposted: "03-16-2021",
-          datereported: "03-17-2021"
+          accountname: "Yasser Gania Bashier"
         },
         {
           name: "Cook",
           dateposted: "03-22-2021",
-          datereported: "03-27-2021"
+          accountname: "Yasser Gania Bashier"
         },
         {
           name: "Encoder",
           dateposted: "03-05-2021",
-          datereported: "03-08-2021"
+          accountname: "Yasser Gania Bashier"
         }
       ]
     };

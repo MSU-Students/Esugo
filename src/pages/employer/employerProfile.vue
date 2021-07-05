@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center" padding>
+  <q-page class="flex flex-center" padding  style="background: linear-gradient(to bottom left,  #0066eb 0%, #ff8ab3 100%  );">
     <!-- <q-btn
       class="float-right"
       color="primary"
@@ -93,13 +93,12 @@
 
         <div class="col q-pa-md">
           <div class="q-gutter-md">
-            <div class="text-h4 text-weight-medium">Yassier Gania Bashier</div>
+            <div class="text-h4 text-white text-weight-medium">Yassier Gania Bashier</div>
           </div>
 
           <div>
             <q-chip color="blue-5" text-color="white"> Employer </q-chip>
           </div>
-
           <div class="q-pt-md">
             <TabPanels />
           </div>
@@ -112,6 +111,13 @@
 
 <script>
 
+import TabPanels from 'components/TabPanels.vue';
+export default {
+  name: 'EmpolerProfile',
+  components: {
+    TabPanels,
+  }
+}
 </script>
 
 <style lang="sass" scoped>

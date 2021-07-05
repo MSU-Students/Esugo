@@ -7,8 +7,6 @@
       row-key="name"
       selection= "single"
     >
-
-
       <template v-slot:body-selection="scope">
         <q-btn v-model="scope.greenModel" color="white" :label= "greenModel" text-color="black">
         <q-menu
