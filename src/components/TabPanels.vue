@@ -11,8 +11,8 @@
         narrow-indicator
       >
         <q-tab name="notif" label="Notification" />
-        <q-tab  v-if="$route.path == '/workerProfile'" name="about" label="About Me" />
-        <q-tab  v-if="$route.path == '/workerProfile'" name="exp" label="Experience" />
+        <q-tab  v-if="$route.path == '/workerprofile'" name="about" label="About Me" />
+        <q-tab  v-if="$route.path == '/workerprofile'" name="exp" label="Experience" />
         <q-tab name="rev" label="Reviews" />
       </q-tabs>
 

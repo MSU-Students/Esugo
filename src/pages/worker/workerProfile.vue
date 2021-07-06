@@ -1,6 +1,6 @@
 <template>
 
-  <q-page class="flex flex-center" padding style="background: linear-gradient(to bottom left,  #0066eb 0%, #ff8ab3 100%  );">
+  <q-page class="flex flex-center" padding style="background: linear-gradient(to top right, #0066eb 0%, #71f4e4 100%);">
     <!-- <q-btn
       class="float-right"
       color="primary"
