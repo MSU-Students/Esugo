@@ -130,6 +130,7 @@
             color="primary"
             icon="add"
             label="Post job"
+            @click="() => (dialogOpened = true)"
           />
           <div class="q-gutter-md">
             <div class="text-h4 text-white text-weight-medium">Yassin B. Amjad</div>
@@ -143,17 +144,31 @@
         </div>
       </div>
     </div>
+    <Dialog :dialogOpened="dialogOpened" @hideDialog="hideDialog" />
   </q-page>
 </template>
 
 <script>
 import TabPanels from "components/TabPanels.vue";
+import Dialog from "src/components//Dialog.vue";
 
 export default {
   name: "EmployerProfile",
   components: {
     TabPanels,
+    Dialog,
   },
+   data() {
+    return {
+      dialogOpened: false
+    };
+  },
+  methods: {
+    hideDialog(value) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      this.dialogOpened = value;
+    }
+  }
 };
 </script>
 
