@@ -1,5 +1,9 @@
 <template>
-  <q-page class="flex flex-center" padding style="background: linear-gradient(to bottom left,  #0066eb 0%, #ff8ab3 100%  );">
+  <q-page
+    class="flex flex-center"
+    padding
+    style="background: linear-gradient(to bottom left,  #0066eb 0%, #ff8ab3 100%  );"
+  >
     <div class="q-pa-md q-gutter-sm">
       <div class="row">
         <div class="col-4">
@@ -133,7 +137,9 @@
             @click="() => (dialogOpened = true)"
           />
           <div class="q-gutter-md">
-            <div class="text-h4 text-white text-weight-medium">Yassin B. Amjad</div>
+            <div class="text-h4 text-white text-weight-medium">
+              Yassin B. Amjad
+            </div>
           </div>
           <div>
             <q-chip color="blue-5" text-color="white"> Private Company </q-chip>
@@ -149,16 +155,16 @@
 </template>
 
 <script>
-import TabPanels from "components/TabPanels.vue";
-import Dialog from "src/components//Dialog.vue";
+import TabPanels from 'components/TabPanels.vue';
+import Dialog from 'src/components//Dialog.vue';
 
 export default {
-  name: "EmployerProfile",
+  name: 'EmployerProfile',
   components: {
     TabPanels,
-    Dialog,
+    Dialog
   },
-   data() {
+  data() {
     return {
       dialogOpened: false
     };

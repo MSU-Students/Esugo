@@ -88,65 +88,62 @@ export default {
       selectedIndex: null,
       columns: [
         {
-          name: "Priority level",
-          label: "Priority Level",
-          field: "prioritylevel",
-          align: "left",
+          name: 'Priority level',
+          label: 'Priority Level',
+          field: 'prioritylevel',
+          align: 'left',
           width: 100,
           sortable: true
         },
         {
-          name: "name",
+          name: 'name',
           required: true,
-          label: "Description",
-          align: "left",
+          label: 'Description',
+          align: 'left',
           field: row => row.name,
           format: val => `${val}`,
           sortable: true
         },
         {
-          name: "Date Posted",
-          align: "left",
-          label: "Date Posted",
-          field: "dateposted",
+          name: 'Date Posted',
+          align: 'left',
+          label: 'Date Posted',
+          field: 'dateposted',
           sortable: true
         },
         {
-          name: "Date Reported",
-          label: "Date Reported",
-          field: "datereported",
+          name: 'Date Reported',
+          label: 'Date Reported',
+          field: 'datereported',
           sortable: true,
-          align: "left"
+          align: 'left'
         },
-        { name: "Remark",
-         label: "Remark", 
-         field: "remark",
-         align: "left", }
+        { name: 'Remark', label: 'Remark', field: 'remark', align: 'left' }
       ],
       data: [
         {
-          name: "Capentry",
-          dateposted: "03-16-2021",
-          datereported: "03-17-2021",
-          remark: "Scam",
-          prioritylevel: "low",
-          Action: ""
+          name: 'Capentry',
+          dateposted: '03-16-2021',
+          datereported: '03-17-2021',
+          remark: 'Scam',
+          prioritylevel: 'low',
+          Action: ''
         },
-            {
-          name: "Cook",
-          dateposted: "03-22-2021",
-          datereported: "03-27-2021",
-          remark: "Scam",
-          prioritylevel: "moderate",
-          Action: ""
-        },  
-            {
-          name: "Encoder",
-          dateposted: "03-05-2021",
-          datereported: "03-08-2021",
-          remark: "Scam",
-          prioritylevel: "high",
-          Action: ""
+        {
+          name: 'Cook',
+          dateposted: '03-22-2021',
+          datereported: '03-27-2021',
+          remark: 'Scam',
+          prioritylevel: 'moderate',
+          Action: ''
+        },
+        {
+          name: 'Encoder',
+          dateposted: '03-05-2021',
+          datereported: '03-08-2021',
+          remark: 'Scam',
+          prioritylevel: 'high',
+          Action: ''
         }
       ]
     };

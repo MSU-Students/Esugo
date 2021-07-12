@@ -125,8 +125,8 @@
 
 <script>
 export default {
-  name: "Card",
-  props: ["jobPhoto", "profilePic", "job", "stars", "salary", "jobDesc", "to"],
+  name: 'Card',
+  props: ['jobPhoto', 'profilePic', 'job', 'stars', 'salary', 'jobDesc', 'to'],
   data() {
     return {
       alerts: false,
@@ -134,7 +134,7 @@ export default {
       showReport: false,
       showReportButton: false,
       confirmReport: false,
-      shape: "line"
+      shape: 'line'
     };
   }
 };

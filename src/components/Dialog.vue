@@ -61,8 +61,7 @@
         <q-dialog v-model="alert">
           <q-card>
             <q-card-section>
-              
-              <div  class="text-h6">Job Posted Successfully</div>
+              <div class="text-h6">Job Posted Successfully</div>
             </q-card-section>
 
             <!-- <q-card-section class="q-pt-none">
@@ -84,15 +83,15 @@
 
 <script>
 export default {
-  name: "Dialog",
-  props: ["dialogOpened"],
+  name: 'Dialog',
+  props: ['dialogOpened'],
   data() {
     return {
-      jobTitle: "",
-      salary: "",
-      jobDesc: "",
-      location: "",
-      hire: "",
+      jobTitle: '',
+      salary: '',
+      jobDesc: '',
+      location: '',
+      hire: '',
       alert: false,
       dialogValue: true,
       model: null,
