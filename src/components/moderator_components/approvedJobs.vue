@@ -1,6 +1,11 @@
 <template>
   <div>
-    <q-table title="Approved Jobs" :data="data" :columns="columns" row-key="name">
+    <q-table
+      title="Approved Jobs"
+      :data="data"
+      :columns="columns"
+      row-key="name"
+    >
       <template v-slot:header="props">
         <q-tr :props="props">
           <q-th auto-width class="bg-grey-3 text-blue">
@@ -84,47 +89,47 @@
 export default {
   data() {
     return {
-      tab: "mails",
+      tab: 'mails',
       columns: [
         {
-          name: "name",
+          name: 'name',
           required: true,
-          label: "Description",
-          align: "left",
+          label: 'Description',
+          align: 'left',
           field: row => row.name,
           format: val => `${val}`,
           sortable: true
         },
         {
-            name: "Date Posted",
-          align: "left",
-          label: "Date Posted",
-          field: "dateposted",
+          name: 'Date Posted',
+          align: 'left',
+          label: 'Date Posted',
+          field: 'dateposted',
           sortable: true
         },
         {
-          name: "Account Name",
-          label: "Account Name",
-          field: "accountname",
+          name: 'Account Name',
+          label: 'Account Name',
+          field: 'accountname',
           sortable: true,
-          align: "left"
+          align: 'left'
         }
       ],
       data: [
         {
-          name: "Capentry",
-          dateposted: "03-16-2021",
-          accountname: "Yasser Gania Bashier"
+          name: 'Capentry',
+          dateposted: '03-16-2021',
+          accountname: 'Yasser Gania Bashier'
         },
         {
-          name: "Cook",
-          dateposted: "03-22-2021",
-          accountname: "Yasser Gania Bashier"
+          name: 'Cook',
+          dateposted: '03-22-2021',
+          accountname: 'Yasser Gania Bashier'
         },
         {
-          name: "Encoder",
-          dateposted: "03-05-2021",
-          accountname: "Yasser Gania Bashier"
+          name: 'Encoder',
+          dateposted: '03-05-2021',
+          accountname: 'Yasser Gania Bashier'
         }
       ]
     };

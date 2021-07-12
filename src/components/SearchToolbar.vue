@@ -2,16 +2,19 @@
   <div>
     <q-toolbar
       class="text-white "
-      style= "background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);" >
+      style="background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);"
+    >
       <q-toolbar-title :class="$q.screen.lt.md ? 'text-caption' : 'text-h4'">
         <div>Find the <strong>jobs </strong> that matter to you</div>
         <div
           class="row q-col-gutter-x-md items-center q-pt-sm"
-          :style="$q.screen.lt.md ? 'width: 95%' : ''" >
+          :style="$q.screen.lt.md ? 'width: 95%' : ''"
+        >
           <div class="col-11">
             <div
               class=" justify-between q-col-gutter-x-md q-pt-none"
-              :class="!$q.screen.lt.md ? 'row' : 'q-gutter-y-sm'" >
+              :class="!$q.screen.lt.md ? 'row' : 'q-gutter-y-sm'"
+            >
               <div class="col-4">
                 <q-input
                   outlined
@@ -108,115 +111,115 @@
 </template>
 
 <script>
-import Card from "components/Card.vue";
+import Card from 'components/Card.vue';
 
 const items = [
   {
     id: 1,
-    jobPhoto: "carpentry.jpg",
-    profilePic: "employer1.jpg",
-    job: "Carpentry",
+    jobPhoto: 'carpentry.jpg',
+    profilePic: 'employer1.jpg',
+    job: 'Carpentry',
     stars: 5,
     salary: 100,
-    jobDesc: "Make a 5 feet tall cabinet with 2 doors and a mirror.",
-    to: "/employerprofile/1"
+    jobDesc: 'Make a 5 feet tall cabinet with 2 doors and a mirror.',
+    to: '/employerprofile/1'
   },
   {
     id: 2,
-    jobPhoto: "cook.jpg",
-    profilePic: "employer2.jpg",
-    job: "Cook",
+    jobPhoto: 'cook.jpg',
+    profilePic: 'employer2.jpg',
+    job: 'Cook',
     stars: 5,
     salary: 450,
-    jobDesc: "Looking for 2 experienced cooks.",
-    to: "/employerprofile/2"
+    jobDesc: 'Looking for 2 experienced cooks.',
+    to: '/employerprofile/2'
   },
   {
     id: 3,
-    jobPhoto: "StudentAssistant.png",
-    profilePic: "employer1.jpg",
-    job: "Encoder",
+    jobPhoto: 'StudentAssistant.png',
+    profilePic: 'employer1.jpg',
+    job: 'Encoder',
     stars: 5,
     salary: 500,
-    jobDesc: "Looking for Encoder.",
-    to: "/employerprofile/3"
+    jobDesc: 'Looking for Encoder.',
+    to: '/employerprofile/3'
   },
   {
     id: 4,
-    jobPhoto: "plumber.jpeg",
-    profilePic: "employer2.jpg",
-    job: "Plumber",
+    jobPhoto: 'plumber.jpeg',
+    profilePic: 'employer2.jpg',
+    job: 'Plumber',
     stars: 5,
     salary: 1500,
-    jobDesc: "Looking for best plumber.",
-    to: "/employerprofile/4"
+    jobDesc: 'Looking for best plumber.',
+    to: '/employerprofile/4'
   },
   {
     id: 5,
-    jobPhoto: "StudentAssistant.png",
-    profilePic: "employer1.jpg",
-    job: "Student Assistant",
+    jobPhoto: 'StudentAssistant.png',
+    profilePic: 'employer1.jpg',
+    job: 'Student Assistant',
     stars: 5,
     salary: 3000,
-    jobDesc: "Looking for SA Stay-in / Stay-Out",
-    to: "/employerprofile/5"
+    jobDesc: 'Looking for SA Stay-in / Stay-Out',
+    to: '/employerprofile/5'
   },
   {
     id: 6,
-    jobPhoto: "driver.jpg",
-    profilePic: "employer2.jpg",
-    job: "Driver",
+    jobPhoto: 'driver.jpg',
+    profilePic: 'employer2.jpg',
+    job: 'Driver',
     stars: 5,
     salary: 2700,
-    jobDesc: "Must have 2 Years of driving experience.",
-    to: "/employerprofile/6"
+    jobDesc: 'Must have 2 Years of driving experience.',
+    to: '/employerprofile/6'
   },
   {
     id: 7,
-    jobPhoto: "sport&fitness.jpg",
-    profilePic: "employer1.jpg",
-    job: "Gym Instructor",
+    jobPhoto: 'sport&fitness.jpg',
+    profilePic: 'employer1.jpg',
+    job: 'Gym Instructor',
     stars: 5,
     salary: 1500,
-    jobDesc: "Must have a valid certificate for Gym Instructions.",
-    to: "/employerprofile/7"
+    jobDesc: 'Must have a valid certificate for Gym Instructions.',
+    to: '/employerprofile/7'
   },
   {
     id: 8,
-    jobPhoto: "ITspecialist.jpg",
-    profilePic: "employer2.jpg",
-    job: "Computer Technician",
+    jobPhoto: 'ITspecialist.jpg',
+    profilePic: 'employer2.jpg',
+    job: 'Computer Technician',
     stars: 5,
     salary: 1500,
-    jobDesc: "Need Computer specialist.",
-    to: "/employerprofile/7"
+    jobDesc: 'Need Computer specialist.',
+    to: '/employerprofile/7'
   },
   {
     id: 9,
-    jobPhoto: "sport&fitness.jpg",
-    profilePic: "employer1.jpg",
-    job: "Gym Instructor",
+    jobPhoto: 'sport&fitness.jpg',
+    profilePic: 'employer1.jpg',
+    job: 'Gym Instructor',
     stars: 5,
     salary: 1500,
-    jobDesc: "Must have a valid certificate for Gym Instructions.",
-    to: "/employerprofile/7"
+    jobDesc: 'Must have a valid certificate for Gym Instructions.',
+    to: '/employerprofile/7'
   }
 ];
 
 export default {
-  name: "SearchToolbar",
+  name: 'SearchToolbar',
   components: {
     Card
   },
   data() {
     return {
-      jobTitle: "",
-      jobLocation: "",
-      jobSpecialization: "",
+      jobTitle: '',
+      jobLocation: '',
+      jobSpecialization: '',
       searchTap: true,
       cardItems: items,
       log: false,
-      type: "All",
+      type: 'All',
       page: 1,
       currentPage: 1,
       nextPage: null,
@@ -233,7 +236,7 @@ export default {
   },
   methods: {
     getData() {
-      if (this.type == "All") {
+      if (this.type == 'All') {
         if (this.$q.screen.lt.sm) {
           this.totalPages = 4;
         }
@@ -250,9 +253,8 @@ export default {
 </script>
 
 <style scoped>
-.search-pic {
-}
 .q-toolbar-desktop {
+
   background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);
   padding: 0px 100px 0px 100px;
 }
