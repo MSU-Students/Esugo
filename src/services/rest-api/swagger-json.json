@@ -1,0 +1,657 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Esusgo REST API",
+    "description": "ESUGO Online Job Listing",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [{ "name": "eSugo Online Job listing", "description": "" }],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "UserDto": { "type": "object", "properties": {} },
+      "JobDto": { "type": "object", "properties": {} },
+      "CreateJobDto": { "type": "object", "properties": {} },
+      "WorkerDto": { "type": "object", "properties": {} },
+      "CreateWorkerDto": { "type": "object", "properties": {} },
+      "EmployerDto": { "type": "object", "properties": {} },
+      "CreateEmployerDto": { "type": "object", "properties": {} },
+      "JobreportDto": { "type": "object", "properties": {} },
+      "CreateJobreportDto": { "type": "object", "properties": {} },
+      "JobworkerDto": { "type": "object", "properties": {} },
+      "CreateJobworkerDto": { "type": "object", "properties": {} }
+    }
+  },
+  "paths": {
+    "/user": {
+      "post": {
+        "operationId": "addUser",
+        "summary": "Add new user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "operationId": "getUser",
+        "summary": "get use by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Job": {
+      "post": {
+        "operationId": "addJob",
+        "summary": "Add new job",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JobDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getJobs",
+        "summary": "Get all job",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Job/{id}": {
+      "get": {
+        "operationId": "getJob",
+        "summary": "Get job by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateJob",
+        "summary": "Update job by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateJobDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteJob",
+        "summary": "Delete job by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/worker": {
+      "post": {
+        "operationId": "addWorker",
+        "summary": "Add new worker",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WorkerDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkerDto" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getWorkers",
+        "summary": "Get all worker",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkerDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/worker/{id}": {
+      "get": {
+        "operationId": "getWorker",
+        "summary": "Get worker by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkerDto" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateWorker",
+        "summary": "Update worker by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateWorkerDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkerDto" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteWorker",
+        "summary": "Delete worker by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WorkerDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employer": {
+      "post": {
+        "operationId": "addEmployer",
+        "summary": "Add new employer",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmployerDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmployerDto" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getEmployers",
+        "summary": "Get all employer",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmployerDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employer/{id}": {
+      "get": {
+        "operationId": "getEmployer",
+        "summary": "Get employer by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmployerDto" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateEmployer",
+        "summary": "Update employer by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateEmployerDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmployerDto" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteEmployer",
+        "summary": "Delete employer by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmployerDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Jobreport": {
+      "post": {
+        "operationId": "addJobreport",
+        "summary": "Add new jobreport",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JobreportDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobreportDto" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getJobreports",
+        "summary": "Get all jobreport",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobreportDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Jobreport/{id}": {
+      "get": {
+        "operationId": "getJobreport",
+        "summary": "Get jobreport by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobreportDto" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateJobreport",
+        "summary": "Update jobreport by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateJobreportDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobreportDto" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteJobreport",
+        "summary": "Delete jobreport by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobreportDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Jobworker": {
+      "post": {
+        "operationId": "addJobworker",
+        "summary": "Add new jobworker",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JobworkerDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobworkerDto" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getJobworker",
+        "summary": "Get all jobworker",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobworkerDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Jobworker/{id}": {
+      "get": {
+        "operationId": "getJobworker",
+        "summary": "get jobworker by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobworkerDto" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateJobworker",
+        "summary": "Update jobworker by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateJobworkerDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobworkerDto" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteJobworker",
+        "summary": "Delete jobworker by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobworkerDto" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
