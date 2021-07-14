@@ -14,32 +14,32 @@ const restConfig = new Configuration({
 
 const restApi = new DefaultApi(restConfig);
 
-class EmployerService extends DefaultApi {
+class JobreportService extends DefaultApi {
   async getAll() {
-    const res = await restApi.getEmployers();
+    const res = await restApi.getJobreports();
     return res;
   }
 
   async getOne(id: number) {
-    const res = await restApi.getEmployer(id);
+    const res = await restApi.getJobreport(id);
     return res;
   }
 
   async create(payload: any) {
-    const res = await restApi.addEmployer(payload);
+    const res = await restApi.addJobreport(payload);
     return res;
   }
 
   async update(id: number, payload: any) {
-    const res = await restApi.updateEmployer(id, payload);
+    const res = await restApi.updateJobreport(id, payload);
     return res;
   }
 
   async delete(id: number) {
-    const res = await restApi.deleteEmployer(id);
+    const res = await restApi.deleteJobreport(id);
     return res;
   }
 }
 
-const employerService = new EmployerService();
-export default employerService;
+const jobreportService = new JobreportService();
+export default jobreportService;
