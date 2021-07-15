@@ -105,9 +105,9 @@
                   </q-item-section>
 
                   <q-item-section>
-                     <div class="q-gutter-sm text-h7 text-weight-bold ">
-                    Private Company
-                  </div>
+                    <div class="q-gutter-sm text-h7 text-weight-bold ">
+                      Private Company
+                    </div>
                   </q-item-section>
                 </q-item>
                 <q-item>
@@ -122,11 +122,10 @@
                   </q-item-section>
 
                   <q-item-section>
-                      <div class="q-gutter-sm text-h7 text-weight-bold ">
-                    Poblacion Saguiaran Lanao del Sur
-                  </div>
-                    </q-item-section
-                  >
+                    <div class="q-gutter-sm text-h7 text-weight-bold ">
+                      Poblacion Saguiaran Lanao del Sur
+                    </div>
+                  </q-item-section>
                 </q-item>
               </q-list>
 
@@ -151,12 +150,20 @@
         </div>
         <div class="col q-pa-md">
           <q-btn
+           class="float-right"
+            color="primary"
+            icon="add"
+            icon-right="work"
+            label="Post job"
+              @click="() => (dialogOpened = true)"
+          />
+          <!-- <q-btn
             class="float-right"
             color="primary"
             icon="add"
             label="Post job"
             @click="() => (dialogOpened = true)"
-          />
+          /> -->
           <div class="q-gutter-md">
             <div class="text-h4 text-white text-weight-medium">
               Yassin B. Amjad
