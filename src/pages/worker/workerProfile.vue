@@ -45,7 +45,7 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
+                    <div class="q-gutter-sm text-h7 text-weight-bold ">
                       yassiergania09@gmail.com
                     </div>
                     </q-item-section
