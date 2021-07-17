@@ -202,6 +202,79 @@ export interface CreateJobworkerDto {
 /**
  * 
  * @export
+ * @interface CreateUserDto
+ */
+export interface CreateUserDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateUserDto
+     */
+    id: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    firstName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    middleName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    lastName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    dateofbirth: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    gender: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    email: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    acctStatus: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    acctCategory: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    username: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    password: string;
+}
+/**
+ * 
+ * @export
  * @interface CreateWorkerDto
  */
 export interface CreateWorkerDto {
@@ -213,58 +286,16 @@ export interface CreateWorkerDto {
     id: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof CreateWorkerDto
      */
-    firstName: string;
+    workerID: number;
     /**
      * 
      * @type {string}
      * @memberof CreateWorkerDto
      */
-    middleName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    lastName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    dateofbirth: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    gender: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    email: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    acctStatus: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    username: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkerDto
-     */
-    password: string;
+    aboutme: string;
 }
 /**
  * 
@@ -467,13 +498,43 @@ export interface UserDto {
      * @type {string}
      * @memberof UserDto
      */
-    midlleName: string;
+    middleName: string;
     /**
      * 
      * @type {string}
      * @memberof UserDto
      */
     lastName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDto
+     */
+    dateofbirth: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDto
+     */
+    gender: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDto
+     */
+    email: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDto
+     */
+    acctStatus: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserDto
+     */
+    acctCategory: string;
     /**
      * 
      * @type {string}
@@ -501,58 +562,16 @@ export interface WorkerDto {
     id: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof WorkerDto
      */
-    firstName: string;
+    workerID: number;
     /**
      * 
      * @type {string}
      * @memberof WorkerDto
      */
-    middleName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    lastName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    dateofbirth: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    gender: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    email: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    acctStatus: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    username: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkerDto
-     */
-    password: string;
+    aboutme: string;
 }
 
 /**
@@ -915,6 +934,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Delete user by id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteUser: async (id: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteUser', 'id', id)
+            const localVarPath = `/user/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Delete worker by id
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -1205,7 +1258,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary get use by id
+         * @summary get user by id
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1215,6 +1268,36 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('getUser', 'id', id)
             const localVarPath = `/user/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsers: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1463,6 +1546,46 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Update user by id
+         * @param {number} id 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUser: async (id: number, createUserDto: CreateUserDto, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateUser', 'id', id)
+            // verify required parameter 'createUserDto' is not null or undefined
+            assertParamExists('updateUser', 'createUserDto', createUserDto)
+            const localVarPath = `/user/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createUserDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Update worker by id
          * @param {number} id 
          * @param {CreateWorkerDto} createWorkerDto 
@@ -1623,6 +1746,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Delete user by id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteUser(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUser(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Delete worker by id
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -1718,13 +1852,23 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary get use by id
+         * @summary get user by id
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getUser(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUser(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get all user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsers(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsers(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1794,6 +1938,18 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async updateJobworker(id: number, createJobworkerDto: CreateJobworkerDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JobworkerDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateJobworker(id, createJobworkerDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update user by id
+         * @param {number} id 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateUser(id: number, createUserDto: CreateUserDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUser(id, createUserDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1920,6 +2076,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary Delete user by id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteUser(id: number, options?: any): AxiosPromise<UserDto> {
+            return localVarFp.deleteUser(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Delete worker by id
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -2006,13 +2172,22 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary get use by id
+         * @summary get user by id
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         getUser(id: number, options?: any): AxiosPromise<UserDto> {
             return localVarFp.getUser(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get all user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsers(options?: any): AxiosPromise<UserDto> {
+            return localVarFp.getUsers(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2076,6 +2251,17 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         updateJobworker(id: number, createJobworkerDto: CreateJobworkerDto, options?: any): AxiosPromise<JobworkerDto> {
             return localVarFp.updateJobworker(id, createJobworkerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update user by id
+         * @param {number} id 
+         * @param {CreateUserDto} createUserDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUser(id: number, createUserDto: CreateUserDto, options?: any): AxiosPromise<UserDto> {
+            return localVarFp.updateUser(id, createUserDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2220,6 +2406,18 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
+     * @summary Delete user by id
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public deleteUser(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).deleteUser(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Delete worker by id
      * @param {number} id 
      * @param {*} [options] Override http request option.
@@ -2324,7 +2522,7 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary get use by id
+     * @summary get user by id
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2332,6 +2530,17 @@ export class DefaultApi extends BaseAPI {
      */
     public getUser(id: number, options?: any) {
         return DefaultApiFp(this.configuration).getUser(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get all user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getUsers(options?: any) {
+        return DefaultApiFp(this.configuration).getUsers(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2407,6 +2616,19 @@ export class DefaultApi extends BaseAPI {
      */
     public updateJobworker(id: number, createJobworkerDto: CreateJobworkerDto, options?: any) {
         return DefaultApiFp(this.configuration).updateJobworker(id, createJobworkerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update user by id
+     * @param {number} id 
+     * @param {CreateUserDto} createUserDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public updateUser(id: number, createUserDto: CreateUserDto, options?: any) {
+        return DefaultApiFp(this.configuration).updateUser(id, createUserDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
