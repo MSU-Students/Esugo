@@ -22,6 +22,32 @@
                   <q-item-section>
                     <div class="q-gutter-sm text-h6 text-weight-bold ">
                       CONTACT ME
+
+                      <q-btn label=". . .">
+                        <q-menu>
+                          <q-list style="min-width: 100px">
+                            <q-item clickable v-close-popup>
+                              <q-item-section>
+                                <div
+                                  class="q-gutter-sm text-h8 text-weight-bold "
+                                 
+                                >
+                                  Edit Profile
+                                </div>
+                              </q-item-section>
+                            </q-item>
+                            <q-item clickable v-close-popup>
+                              <q-item-section>
+                                <div
+                                  class="q-gutter-sm text-h8 text-weight-bold "
+                                >
+                                  Edit Profile
+                                </div>
+                              </q-item-section>
+                            </q-item>
+                          </q-list>
+                        </q-menu>
+                      </q-btn>
                     </div>
                   </q-item-section>
                 </q-item>
@@ -100,7 +126,7 @@
                       font-size="14px"
                       color="primary"
                       text-color="white"
-                      icon="Business"
+                      icon="business"
                     />
                   </q-item-section>
 
@@ -150,12 +176,12 @@
         </div>
         <div class="col q-pa-md">
           <q-btn
-           class="float-right"
-            color="primary"
+            class="float-right"
+            color="purple"
             icon="add"
             icon-right="work"
             label="Post job"
-              @click="() => (dialogOpened = true)"
+            @click="() => (dialogOpened = true)"
           />
           <!-- <q-btn
             class="float-right"
@@ -167,6 +193,7 @@
           <div class="q-gutter-md">
             <div class="text-h4 text-white text-weight-medium">
               Yassin B. Amjad
+              <q-btn flat round color="white" icon="edit" size="8px" />
             </div>
           </div>
           <div>
