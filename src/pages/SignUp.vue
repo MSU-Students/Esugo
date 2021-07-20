@@ -6,14 +6,7 @@
         class="flex flex-center"
       >
         <div class="q-pa-md">
-          <q-btn
-            label="Reset"
-            push
-            color="white"
-            text-color="primary"
-            @click="step = 1"
-            class="q-mb-md"
-          />
+       
 
           <q-stepper
             v-model="step"
@@ -138,6 +131,23 @@
                           (val && val.length > 0) || 'Please type something'
                       ]"
                     />
+                   <q-input
+            color="blue-9"
+            outlined
+            v-model="password"
+            filled
+            :type="isPwd ? 'password' : 'text'"
+            label="Password"
+            standout="bg-white text-primary"
+          >
+          <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
+          />
+          </template>
+         </q-input>
                   </div>
                 </div>
               </div>
@@ -145,18 +155,14 @@
 
               <q-stepper-navigation>
                 <q-btn
-                  @click="
-                    () => {
-                      done1 = true;
-                      step = 2;
-                    }
-                  "
+                  
                   color="primary"
                   label="Sign-up"
                   icon="forward"
                 />
               </q-stepper-navigation>
             </q-step>
+           
 
             <!-- <q-step
               :name="2"
@@ -205,63 +211,6 @@
               </q-stepper-navigation>
             </q-step> -->
 
-            <q-step
-              :name="3"
-              title="Certification"
-              caption="license"
-              icon="badge"
-              :done="step > 3"
-              :header-nav="step > 3"
-            >
-              An ad group contains one or more ads which target a shared set of
-              keywords.
-
-              <q-stepper-navigation>
-                <q-btn
-                  @click="
-                    () => {
-                      don3 = true;
-                      step = 4;
-                    }
-                  "
-                  color="primary"
-                  label="Continue"
-                />
-                <q-btn
-                  flat
-                  @click="step = 1"
-                  color="primary"
-                  label="Back"
-                  class="q-ml-sm"
-                />
-              </q-stepper-navigation>
-            </q-step>
-
-            <q-step
-              :name="4"
-              title="Review"
-              icon="close"
-              :header-nav="step > 4"
-            >
-              The Moderator will review your account. Thank you for signing up
-              in eSugo APP
-
-              <q-stepper-navigation>
-                <q-btn
-                  color="primary"
-                  @click="done4 = true"
-                  label="Finish"
-                  to="/"
-                />
-                <q-btn
-                  flat
-                  @click="step = 3"
-                  color="primary"
-                  label="Back"
-                  class="q-ml-sm"
-                />
-              </q-stepper-navigation>
-            </q-step>
           </q-stepper>
         </div>
       </q-page>
@@ -286,10 +235,13 @@ export default class PageIndex extends Vue {
   pAddress = '';
   eAddress = '';
   number = '';
+  password = '';
+   isPwd = true;
+}
 
   //  addStudebt(): void {
   //  }
-}
+
 </script>
 
 <style></style>
