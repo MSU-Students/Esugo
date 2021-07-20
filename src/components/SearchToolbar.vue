@@ -123,6 +123,7 @@ const items = [
     stars: 5,
     salary: 100,
     jobDesc: 'Make a 5 feet tall cabinet with 2 doors and a mirror.',
+    location: 'Marawi City',
     to: '/employerprofile/1'
   },
   {
@@ -133,6 +134,7 @@ const items = [
     stars: 5,
     salary: 450,
     jobDesc: 'Looking for 2 experienced cooks.',
+    location: 'Saguiran City',
     to: '/employerprofile/2'
   },
   {
@@ -143,6 +145,7 @@ const items = [
     stars: 5,
     salary: 1500,
     jobDesc: 'Need Computer specialist.',
+    location: 'Mapandi City',
     to: '/employerprofile/7'
   },
   {
@@ -153,6 +156,7 @@ const items = [
     stars: 5,
     salary: 1500,
     jobDesc: 'Must have a valid certificate for Gym Instructions.',
+    location: 'MSU City',
     to: '/employerprofile/7'
   }
 ];
