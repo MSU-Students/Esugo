@@ -12,6 +12,7 @@ function state(): JobStateInterface {
       employerID: 0,
       jobtitle: '',
       jobdesc: '',
+      location: '',
       salary: 0,
       dateposted: '',
       jobstatus: ''

@@ -113,6 +113,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import Card from 'components/Card.vue';
+import jobService from 'src/services/job.service';
 
 const items = [
   {
@@ -134,56 +135,6 @@ const items = [
     salary: 450,
     jobDesc: 'Looking for 2 experienced cooks.',
     to: '/employerprofile/2'
-  },
-  {
-    id: 3,
-    jobPhoto: 'StudentAssistant.png',
-    profilePic: 'employer1.jpg',
-    job: 'Encoder',
-    stars: 5,
-    salary: 500,
-    jobDesc: 'Looking for Encoder.',
-    to: '/employerprofile/3'
-  },
-  {
-    id: 4,
-    jobPhoto: 'plumber.jpeg',
-    profilePic: 'employer2.jpg',
-    job: 'Plumber',
-    stars: 5,
-    salary: 1500,
-    jobDesc: 'Looking for best plumber.',
-    to: '/employerprofile/4'
-  },
-  {
-    id: 5,
-    jobPhoto: 'StudentAssistant.png',
-    profilePic: 'employer1.jpg',
-    job: 'Student Assistant',
-    stars: 5,
-    salary: 3000,
-    jobDesc: 'Looking for SA Stay-in / Stay-Out',
-    to: '/employerprofile/5'
-  },
-  {
-    id: 6,
-    jobPhoto: 'driver.jpg',
-    profilePic: 'employer2.jpg',
-    job: 'Driver',
-    stars: 5,
-    salary: 2700,
-    jobDesc: 'Must have 2 Years of driving experience.',
-    to: '/employerprofile/6'
-  },
-  {
-    id: 7,
-    jobPhoto: 'sport&fitness.jpg',
-    profilePic: 'employer1.jpg',
-    job: 'Gym Instructor',
-    stars: 5,
-    salary: 1500,
-    jobDesc: 'Must have a valid certificate for Gym Instructions.',
-    to: '/employerprofile/7'
   },
   {
     id: 8,

@@ -1,6 +1,120 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
-    <q-img
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <q-img
       :src="require(`../assets/${jobPhoto}`)"
       @mouseenter="showReport = true"
       @mouseleave="showReport = false"
@@ -16,7 +130,7 @@
           @click.prevent.stop="showReportButton = true"
         />
       </div>
-    </q-img>
+    </q-img> -->
 
     <q-card-section avatar>
       <q-btn
@@ -26,7 +140,7 @@
         :to="to"
       >
         <q-avatar size="70px">
-          <img :src="require(`../assets/${profilePic}`)" />
+          <!-- <img :src="require(`../assets/${profilePic}`)" /> -->
         </q-avatar>
       </q-btn>
 
@@ -41,14 +155,14 @@
       </div>
       <div class="text-caption text-grey">
         <q-icon name="location_on" />
-        Marantao
+       {{ location }}
       </div>
     </q-card-section>
 
     <q-card-section class="q-pt-none">
       <div class="text-subtitle1">₱・{{ salary }}</div>
       <div class="text-body2 text-grey-9">
-        {{ jobDesc }}
+        {{ jobdesc }}
       </div>
     </q-card-section>
 
@@ -126,7 +240,7 @@
 <script>
 export default {
   name: 'Card',
-  props: ['jobPhoto', 'profilePic', 'job', 'stars', 'salary', 'jobDesc', 'to'],
+  props: ['jobPhoto', 'profilePic', 'job', 'stars', 'salary', 'jobdesc', 'location','to'],
   data() {
     return {
       alerts: false,

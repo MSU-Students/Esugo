@@ -4,19 +4,19 @@ import { StateInterface } from '../index';
 import { JobStateInterface } from './state';
 
 const actions: ActionTree<JobStateInterface, StateInterface> = {
-  async getAllJobs(context): Promise<any> {
+  async getAllJob(context): Promise<any> {
     const res = await jobService.getAll();
-    context.commit('getAllJobs', res);
+    context.commit('getAllJob', res);
   },
 
-  async getOneJobs(context, id: number): Promise<any> {
+  async getOneJob(context, id: number): Promise<any> {
     const res = await jobService.getOne(id);
-    context.commit('getOneJobs', res);
+    context.commit('getOneJob', res);
   },
 
-  async createJobs(context, payload: any): Promise<any> {
+  async createJob(context, payload: any): Promise<any> {
     const res = await jobService.create(payload);
-    context.commit('createJobs', res);
+    context.commit('createJob', res);
   },
 
   async updateJob(context, payload: any): Promise<any> {
