@@ -1,119 +1,5 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- <q-img
       :src="require(`../assets/${jobPhoto}`)"
       @mouseenter="showReport = true"
@@ -146,16 +32,14 @@
 
       <div class="row no-wrap items-center">
         <div class="col text-h6 ellipsis">{{ job }}</div>
-        <div
-          class="col-auto text-grey text-caption q-pt-md row no-wrap items-center"
-        >
+        <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
           <q-icon name="person" />
           Employer
         </div>
       </div>
       <div class="text-caption text-grey">
         <q-icon name="location_on" />
-       {{ location }}
+        {{ location }}
       </div>
     </q-card-section>
 
@@ -206,8 +90,7 @@
             </q-avatar>
 
             <q-toolbar-title
-              ><span class="text-weight-bold">Report</span>
-              Reason</q-toolbar-title
+              ><span class="text-weight-bold">Report</span> Reason</q-toolbar-title
             >
 
             <q-btn flat round dense icon="close" v-close-popup />
@@ -237,21 +120,27 @@
   </q-card>
 </template>
 
-<script>
-export default {
-  name: 'Card',
-  props: ['jobPhoto', 'profilePic', 'job', 'stars', 'salary', 'jobdesc', 'location','to'],
-  data() {
-    return {
-      alerts: false,
-      confirm: false,
-      showReport: false,
-      showReportButton: false,
-      confirmReport: false,
-      shape: 'line'
-    };
-  }
-};
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator';
+
+@Component({})
+export default class Card extends Vue {
+  @Prop({type: String, required: false}) readonly jobPhoto!: string;
+  @Prop({type: String, required: false}) readonly profilePic!: string;
+  @Prop({type: String, required: true}) readonly job!: string;
+  @Prop({type: Number, required: true}) readonly stars!: number;
+  @Prop({type: Number, required: true}) readonly salary!: number;
+  @Prop({type: String, required: true}) readonly jobdesc!: string;
+  @Prop({type: String, required: true}) readonly location!: string;
+  @Prop({type: String, required: true}) readonly to!: string;
+
+  alerts = false;
+  confirm = false;
+  showReport = false;
+  showReportButton = false;
+  confirmReport = false;
+  shape = 'line';
+}
 </script>
 
 <style scoped>

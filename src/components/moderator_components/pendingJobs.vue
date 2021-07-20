@@ -111,71 +111,72 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      tab: 'mails',
-      greenModel: 'Pending',
-      selectedIndex: null,
-      columns: [
-        {
-          name: 'name',
-          required: true,
-          label: 'Description',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        {
-          name: 'Date Posted',
-          align: 'left',
-          label: 'Date Posted',
-          field: 'dateposted',
-          sortable: true
-        },
-        {
-          name: 'Account Name',
-          label: 'Account Name',
-          field: 'accountname',
-          sortable: true,
-          align: 'left'
-        }
-      ],
-      data: [
-        {
-          name: 'Capentry',
-          dateposted: '03-16-2021',
-          accountname: 'Yasser Gania Bashier'
-        },
-        {
-          name: 'Cook',
-          dateposted: '03-22-2021',
-          accountname: 'Yasser Gania Bashier'
-        },
-        {
-          name: 'Encoder',
-          dateposted: '03-05-2021',
-          accountname: 'Yasser Gania Bashier'
-        }
-      ]
-    };
-  },
-  methods: {
-    approveAccount(id) {
-      console.log(id);
-      this.data[id].acctStatus = 'Approved';
-      this.greenModel = 'Approved';
-      this.selectedIndex = id;
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component({})
+export default class PendingJobs extends Vue {
+  tab = 'mails';
+  greenModel = 'Pending';
+  selectedIndex = 0;
+  columns = [
+    {
+      name: 'name',
+      required: true,
+      label: 'Description',
+      align: 'left',
+      field: (row: any) => row.name,
+      format: (val: any) => `${val}`,
+      sortable: true
     },
-    disapproveAccount(id) {
-      this.data[id].acctStatus = 'Disapproved';
-      this.greenModel = 'Disapproved';
-      this.selectedIndex = id;
+    {
+      name: 'Date Posted',
+      align: 'left',
+      label: 'Date Posted',
+      field: 'dateposted',
+      sortable: true
+    },
+    {
+      name: 'Account Name',
+      label: 'Account Name',
+      field: 'accountname',
+      sortable: true,
+      align: 'left'
     }
+  ];
+  data = [
+    {
+      name: 'Capentry',
+      dateposted: '03-16-2021',
+      accountname: 'Yasser Gania Bashier',
+      jobStatus: 'Pending'
+    },
+    {
+      name: 'Cook',
+      dateposted: '03-22-2021',
+      accountname: 'Yasser Gania Bashier',
+      jobStatus: 'Pending'
+    },
+    {
+      name: 'Encoder',
+      dateposted: '03-05-2021',
+      accountname: 'Yasser Gania Bashier',
+      jobStatus: 'Pending'
+    }
+  ];
+
+  approveAccount(id: number) {
+    console.log(id);
+    this.data[id].jobStatus = 'Approved';
+    this.greenModel = 'Approved';
+    this.selectedIndex = id;
   }
-};
+  disapproveAccount(id: number) {
+    this.data[id].jobStatus = 'Disapproved';
+    this.greenModel = 'Disapproved';
+    this.selectedIndex = id;
+  }
+}
 </script>
 
 <style></style>

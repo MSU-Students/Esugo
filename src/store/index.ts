@@ -1,4 +1,3 @@
-import { componentsStateInterface } from './components-module/worker-module/state';
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 import job from './job-module';
@@ -11,6 +10,7 @@ import { WorkerStateInterface } from './worker-module/state';
 import { EmployerStateInterface } from './employer-module/state';
 import { JobworkerStateInterface } from './jobworker-module/state';
 import { JobreportStateInterface } from './jobreport-module/state';
+import { componentsStateInterface } from './components-module/state';
 
 
 /*

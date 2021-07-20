@@ -4,15 +4,16 @@
   </q-page>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import SearchToolbar from 'components/SearchToolbar.vue';
 
-export default {
-  name: 'LandingPage',
+@Component({
   components: {
-    SearchToolbar,
-  },
-};
+    SearchToolbar
+  }
+})
+export default class LandingPage extends Vue {}
 </script>
 
 <style scoped>

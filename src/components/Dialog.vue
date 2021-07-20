@@ -81,47 +81,45 @@
   </q-dialog>
 </template>
 
-<script>
-export default {
-  name: 'Dialog',
-  props: ['dialogOpened'],
-  data() {
-    return {
-      jobTitle: '',
-      salary: '',
-      jobDesc: '',
-      location: '',
-      hire: '',
-      alert: false,
-      dialogValue: true,
-      model: null,
+<script lang="ts">
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
-      jobs: [
-        'Plumber',
-        'Construction Site',
-        'Production Line',
-        'Driving',
-        'Machine Operator'
-      ],
-      locate: ['Marantao', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'],
-      quantity: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-    };
-  },
-  watch: {
-    dialogOpened(value) {
-      console.log(value);
-      this.dialogValue = value;
-    }
-  },
+@Component({})
+export default class Dialog extends Vue {
+  @Prop({ type: Boolean, required: true }) readonly dialogOpened!: boolean;
+  @Watch('dialogOpened')
+  onChange(val: boolean, oldVal: string) {
+    console.log(val, oldVal);
+    this.dialogValue = val;
+  }
+
+  jobTitle = '';
+  salary = '';
+  jobDesc = '';
+  location = '';
+  hire = '';
+  alert = false;
+  dialogValue = true;
+  model = null;
+
+  jobs = [
+    'Plumber',
+    'Construction Site',
+    'Production Line',
+    'Driving',
+    'Machine Operator'
+  ];
+  locate = ['Marantao', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
+  quantity = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
   mounted() {
     this.dialogValue = this.dialogOpened;
-  },
-  methods: {
-    hideDialog() {
-      this.$emit('hideDialog', false);
-    }
   }
-};
+
+  hideDialog() {
+    this.$emit('hideDialog', false);
+  }
+}
 </script>
 
 <style></style>

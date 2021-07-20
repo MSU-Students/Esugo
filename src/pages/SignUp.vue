@@ -166,7 +166,7 @@
               :done="step > 2"
               :header-nav="step > 2"
             > -->
-              <!-- <q-item>
+            <!-- <q-item>
                 <q-item-section avatar>
                   <q-avatar
                     size="100x"
@@ -184,7 +184,7 @@
                 </q-item-section>
               </q-item> -->
 
-              <!-- <q-stepper-navigation>
+            <!-- <q-stepper-navigation>
                 <q-btn
                   @click="
                     () => {
@@ -286,9 +286,6 @@ export default class PageIndex extends Vue {
   pAddress = '';
   eAddress = '';
   number = '';
-
-  //  addStudebt(): void {
-  //  }
 }
 </script>
 
