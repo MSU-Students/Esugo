@@ -6,7 +6,7 @@
         class="flex flex-center"
       >
         <div class="q-pa-md">
-       
+
 
           <q-stepper
             v-model="step"
@@ -155,14 +155,14 @@
 
               <q-stepper-navigation>
                 <q-btn
-                  
+
                   color="primary"
                   label="Sign-up"
                   icon="forward"
                 />
               </q-stepper-navigation>
             </q-step>
-           
+
 
             <!-- <q-step
               :name="2"
@@ -172,7 +172,7 @@
               :done="step > 2"
               :header-nav="step > 2"
             > -->
-              <!-- <q-item>
+            <!-- <q-item>
                 <q-item-section avatar>
                   <q-avatar
                     size="100x"
@@ -190,7 +190,7 @@
                 </q-item-section>
               </q-item> -->
 
-              <!-- <q-stepper-navigation>
+            <!-- <q-stepper-navigation>
                 <q-btn
                   @click="
                     () => {
@@ -235,13 +235,7 @@ export default class PageIndex extends Vue {
   pAddress = '';
   eAddress = '';
   number = '';
-  password = '';
-   isPwd = true;
 }
-
-  //  addStudebt(): void {
-  //  }
-
 </script>
 
 <style></style>

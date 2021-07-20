@@ -48,8 +48,7 @@
                     <div class="q-gutter-sm text-h7 text-weight-bold ">
                       yassiergania09@gmail.com
                     </div>
-                    </q-item-section
-                  >
+                  </q-item-section>
                 </q-item>
 
                 <q-item>
@@ -82,13 +81,10 @@
                   </q-item-section>
 
                   <q-item-section>
-                     <div class="q-gutter-sm text-h9 text-weight-bold ">
-                       0072 Tubacan Pumping St. Marawi City Lanao Del
-                    Sur
+                    <div class="q-gutter-sm text-h9 text-weight-bold ">
+                      0072 Tubacan Pumping St. Marawi City Lanao Del Sur
                     </div>
-                   
-                    </q-item-section
-                  >
+                  </q-item-section>
                 </q-item>
               </q-list>
             </q-card-section>
@@ -134,7 +130,7 @@
                   </q-item-section>
 
                   <q-item-section>
-                     <div class="q-gutter-sm text-h6 text-weight-bold ">
+                    <div class="q-gutter-sm text-h6 text-weight-bold ">
                       Programmer
                     </div>
                   </q-item-section>
@@ -152,7 +148,7 @@
                   </q-item-section>
 
                   <q-item-section>
-                     <div class="q-gutter-sm text-h6 text-weight-bold ">
+                    <div class="q-gutter-sm text-h6 text-weight-bold ">
                       Trouble Shooter
                     </div>
                   </q-item-section>
@@ -183,14 +179,16 @@
   </q-page>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import TabPanels from 'components/TabPanels.vue';
-export default {
-  name: 'EmpolerProfile',
+
+@Component({
   components: {
     TabPanels
   }
-};
+})
+export default class WorkerProfile extends Vue {}
 </script>
 <style scoped>
 .pic-text {

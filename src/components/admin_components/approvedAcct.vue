@@ -92,49 +92,47 @@
     </q-table>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      tab: 'mails',
-      columns: [
-        {
-          name: 'name',
-          required: true,
-          label: 'Accout Name',
-          align: 'left',
-          field: (row) => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        {
-          name: 'Date Joined',
-          align: 'left',
-          label: 'Date Joined',
-          field: 'datejoined',
-          sortable: true
-        },
-        {
-          name: 'Account Category',
-          label: 'Account Category',
-          field: 'acctCategory',
-          sortable: true,
-          align: 'left'
-        }
-      ],
-      data: [
-        {
-          name: 'Yasser Gania Bashier',
-          datejoined: '03-16-2020',
-          acctCategory: 'worker'
-        },
-        {
-          name: 'Yassin B. Amjad',
-          datejoined: '03-22-2020',
-          acctCategory: 'employer'
-        }
-      ]
-    };
-  }
-};
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+@Component({})
+export default class ApprovedAccount extends Vue {
+  tab = 'mails';
+  columns = [
+    {
+      name: 'name',
+      required: true,
+      label: 'Accout Name',
+      align: 'left',
+      field: (row: any) => row.name,
+      format: (val: any) => `${val}`,
+      sortable: true
+    },
+    {
+      name: 'Date Joined',
+      align: 'left',
+      label: 'Date Joined',
+      field: 'datejoined',
+      sortable: true
+    },
+    {
+      name: 'Account Category',
+      label: 'Account Category',
+      field: 'acctCategory',
+      sortable: true,
+      align: 'left'
+    }
+  ];
+  data = [
+    {
+      name: 'Yasser Gania Bashier',
+      datejoined: '03-16-2020',
+      acctCategory: 'worker'
+    },
+    {
+      name: 'Yassin B. Amjad',
+      datejoined: '03-22-2020',
+      acctCategory: 'employer'
+    }
+  ];
+}
 </script>

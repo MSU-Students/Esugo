@@ -10,26 +10,26 @@ const routes: RouteConfig[] = [
       { path: '/signup', component: () => import('pages/SignUp.vue') },
       
       { path: '/beforesignup', component: () => import('pages/Sign.vue') },
-      { path: '/login', component: () => import('pages/loginPage.vue') },
-      { path: '/workerProfile', component: () => import('pages/worker/workerProfile.vue') },
-      { path: '/employerProfile', component: () => import('pages/employer/employerProfile.vue') } 
+      { path: '/login', component: () => import('src/pages/LoginPage.vue') },
+      { path: '/workerProfile', component: () => import('src/pages/worker/WorkerProfile.vue') },
+      { path: '/employerProfile', component: () => import('src/pages/employer/EmployerProfile.vue') }
     ]
   },
   {
     path: '/admin/',
     component: () =>
-        import ('src/layouts/adminLayout.vue'),
+        import ('src/layouts/AdminLayout.vue'),
     children: [
-      { path: 'accounts', component: () => import ('../pages/admin/adminPage.vue') },
+      { path: 'accounts', component: () => import ('../pages/admin/AdminPage.vue') },
       { path: 'home', component: () => import('pages/LandingPage.vue') },
     ]
 },
 {
   path: '/moderator/',
   component: () =>
-      import ('src/layouts/adminLayout.vue'),
+      import ('src/layouts/AdminLayout.vue'),
   children: [
-    { path: 'jobs', component: () => import ('../pages/moderator/moderatorPage.vue') },
+    { path: 'jobs', component: () => import ('../pages/moderator/ModeratorPage.vue') },
     { path: 'home', component: () => import('pages/LandingPage.vue') },
 
   ]

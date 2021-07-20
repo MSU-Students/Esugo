@@ -21,7 +21,7 @@
       </q-tr>
     </template>
 
-    <template v-slot:top="props">
+    <template v-slot:top>
       <div class="col q-table__title q-mr-lg">{{ title }}</div>
       <div class="row q-gutter-sm q-mb-md">
         <div>
@@ -93,52 +93,50 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options, prop } from "vue-class-component";
-import { mapState, mapActions } from "vuex";
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { mapState, mapActions } from 'vuex';
 
-class Props {
-  readonly isBtnShow!: boolean;
-  readonly title!: string;
-  readonly rowKey!: string;
-  readonly buttonName!: string;
-  readonly options!: string[];
-  readonly columns!: any[];
-  readonly data!: any[];
-}
-
-@Options({
+@Component({
   computed: {
-    ...mapState("ui", [
-      "showBulletin",
-      "showArchived",
-      "showAttendance",
-      "showClearance",
-      "showRecords",
-      "showUser",
-    ]),
+    ...mapState('ui', [
+      'showBulletin',
+      'showArchived',
+      'showAttendance',
+      'showClearance',
+      'showRecords',
+      'showUser'
+    ])
   },
   methods: {
-    ...mapActions("ui", [
-      "showBulletinDialog",
-      "showArchivedDialog",
-      "showAttendanceDialog",
-      "showClearanceDialog",
-      "showRecordsDialog",
-      "showUserDialog",
-    ]),
-  },
+    ...mapActions('ui', [
+      'showBulletinDialog',
+      'showArchivedDialog',
+      'showAttendanceDialog',
+      'showClearanceDialog',
+      'showRecordsDialog',
+      'showUserDialog'
+    ])
+  }
 })
-export default class Table extends Vue.with(Props) {
-  filter = "";
+export default class Table extends Vue {
+  @Prop({ type: Boolean, required: false }) readonly isBtnShow!: boolean;
+  @Prop({ type: String, required: false }) readonly title!: string;
+  @Prop({ type: String, required: false }) readonly rowKey!: string;
+  @Prop({ type: String, required: false }) readonly buttonName!: string;
+  @Prop({ type: Array, required: false }) readonly options!: string[];
+  @Prop({ type: Array, required: false }) readonly columns!: any[];
+  @Prop({ type: Array, required: false }) readonly data!: any[];
+
+  filter = '';
   dialog = false;
   loading = false;
   newData: any[] = [];
   pagination = {
-    sortBy: "desc",
+    sortBy: 'desc',
     descending: false,
     page: 1,
     rowsPerPage: 15,
-    rowsNumber: 10,
+    rowsNumber: 10
   };
 
   showBulletin!: boolean;
@@ -157,22 +155,22 @@ export default class Table extends Vue.with(Props) {
   mounted() {
     this.onRequest({
       pagination: this.pagination,
-      filter: undefined,
+      filter: undefined
     });
   }
 
   showDialog() {
-    if (this.$route.name == "admin-bulletin") {
+    if (this.$route.name == 'admin-bulletin') {
       this.showBulletinDialog(true);
-    } else if (this.$route.name == "admin-archived") {
+    } else if (this.$route.name == 'admin-archived') {
       this.showArchivedDialog(true);
-    } else if (this.$route.name == "admin-attendance") {
+    } else if (this.$route.name == 'admin-attendance') {
       this.showAttendanceDialog(true);
-    } else if (this.$route.name == "admin-clearance") {
+    } else if (this.$route.name == 'admin-clearance') {
       this.showClearanceDialog(true);
-    } else if (this.$route.name == "admin-records") {
+    } else if (this.$route.name == 'admin-records') {
       this.showRecordsDialog(true);
-    } else if (this.$route.name == "admin-user") {
+    } else if (this.$route.name == 'admin-user') {
       this.showUserDialog(true);
     }
   }

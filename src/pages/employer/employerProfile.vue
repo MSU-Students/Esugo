@@ -30,7 +30,6 @@
                               <q-item-section>
                                 <div
                                   class="q-gutter-sm text-h8 text-weight-bold "
-                                 
                                 >
                                   Edit Profile
                                 </div>
@@ -211,28 +210,24 @@
   </q-page>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import TabPanels from 'components/TabPanels.vue';
 import Dialog from 'src/components//Dialog.vue';
 
-export default {
-  name: 'EmployerProfile',
+@Component({
   components: {
     TabPanels,
     Dialog
-  },
-  data() {
-    return {
-      dialogOpened: false
-    };
-  },
-  methods: {
-    hideDialog(value) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      this.dialogOpened = value;
-    }
   }
-};
+})
+export default class EmployerProfile extends Vue {
+  dialogOpened = false;
+
+  hideDialog(value: boolean) {
+    this.dialogOpened = value;
+  }
+}
 </script>
 
 <style lang="sass" scoped>

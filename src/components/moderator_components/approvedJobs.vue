@@ -85,54 +85,53 @@
     </q-table>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      tab: 'mails',
-      columns: [
-        {
-          name: 'name',
-          required: true,
-          label: 'Description',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        {
-          name: 'Date Posted',
-          align: 'left',
-          label: 'Date Posted',
-          field: 'dateposted',
-          sortable: true
-        },
-        {
-          name: 'Account Name',
-          label: 'Account Name',
-          field: 'accountname',
-          sortable: true,
-          align: 'left'
-        }
-      ],
-      data: [
-        {
-          name: 'Capentry',
-          dateposted: '03-16-2021',
-          accountname: 'Yasser Gania Bashier'
-        },
-        {
-          name: 'Cook',
-          dateposted: '03-22-2021',
-          accountname: 'Yasser Gania Bashier'
-        },
-        {
-          name: 'Encoder',
-          dateposted: '03-05-2021',
-          accountname: 'Yasser Gania Bashier'
-        }
-      ]
-    };
-  }
-};
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component({})
+export default class ApprovedJobs extends Vue {
+  tab = 'mails';
+  columns = [
+    {
+      name: 'name',
+      required: true,
+      label: 'Description',
+      align: 'left',
+      field: (row: any) => row.name,
+      format: (val: any) => `${val}`,
+      sortable: true
+    },
+    {
+      name: 'Date Posted',
+      align: 'left',
+      label: 'Date Posted',
+      field: 'dateposted',
+      sortable: true
+    },
+    {
+      name: 'Account Name',
+      label: 'Account Name',
+      field: 'accountname',
+      sortable: true,
+      align: 'left'
+    }
+  ];
+  data = [
+    {
+      name: 'Capentry',
+      dateposted: '03-16-2021',
+      accountname: 'Yasser Gania Bashier',
+    },
+    {
+      name: 'Cook',
+      dateposted: '03-22-2021',
+      accountname: 'Yasser Gania Bashier',
+    },
+    {
+      name: 'Encoder',
+      dateposted: '03-05-2021',
+      accountname: 'Yasser Gania Bashier',
+    }
+  ];
+}
 </script>

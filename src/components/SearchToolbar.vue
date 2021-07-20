@@ -113,7 +113,6 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import Card from 'components/Card.vue';
-import jobService from 'src/services/job.service';
 
 const items = [
   {

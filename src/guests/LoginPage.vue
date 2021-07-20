@@ -82,17 +82,14 @@
   </q-page>
 </template>
 
-<script>
+<script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component({})
-export default class PageIndex extends Vue {
-  // name: 'Login',
-
+export default class LoginPage extends Vue {
   username = '';
   password = '';
   signup = false;
-
   async login() {
     if (this.username == 'worker' && this.password == 'worker') {
       await this.$router.replace('/worker');
