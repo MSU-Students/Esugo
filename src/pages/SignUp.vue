@@ -152,7 +152,7 @@
                     }
                   "
                   color="primary"
-                  label="Submit"
+                  label="Sign-up"
                   icon="forward"
                 />
               </q-stepper-navigation>
