@@ -10,7 +10,34 @@
        <div v-if="$route.path == '/'" class="q-gutter-x-md">
         <q-btn flat color="white" 
         icon = person
-        label="Sign-up" to="/signup" />
+        label="Sign-up" @click="signup = true" />
+         <q-dialog v-model="signup">
+            <q-card>
+              <q-card-section>
+                
+                <div class="text-center text-h6">Sign in as</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none q-gutter-md">
+                <q-btn
+                  color="primary"
+                  icon="engineering"
+                  label="WORKER"
+                  to="/signup"
+                />
+                <q-btn
+                  color="secondary"
+                  icon-right="people"
+                  label="EMPLOYER"
+                  to="/registeremployer"
+                />
+              </q-card-section>
+
+              <!-- <q-card-actions align="right">
+                <q-btn flat label="OK" color="primary" v-close-popup />
+              </q-card-actions> -->
+            </q-card>
+          </q-dialog>
         <span>|</span>
         <q-btn flat color="white" 
         icon = person
@@ -38,5 +65,6 @@ import { Vue, Component } from 'vue-property-decorator';
 })
 export default class MainLayout extends Vue {
   leftDrawerOpen = false;
+  signup = false;
 }
 </script>
