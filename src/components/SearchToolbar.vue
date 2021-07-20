@@ -110,7 +110,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import Card from 'components/Card.vue';
 
 const items = [
@@ -206,55 +207,50 @@ const items = [
   }
 ];
 
-export default {
-  name: 'SearchToolbar',
+@Component({
   components: {
     Card
   },
-  data() {
-    return {
-      jobTitle: '',
-      jobLocation: '',
-      jobSpecialization: '',
-      searchTap: true,
-      cardItems: items,
-      log: false,
-      type: 'All',
-      page: 1,
-      currentPage: 1,
-      nextPage: null,
-      totalPages: 6
-    };
-  },
-  computed: {
-    getData2() {
-      return this.getData().slice(
-        (this.page - 1) * this.totalPages,
-        (this.page - 1) * this.totalPages + this.totalPages
-      );
-    }
-  },
-  methods: {
-    getData() {
-      if (this.type == 'All') {
-        if (this.$q.screen.lt.sm) {
-          this.totalPages = 4;
-        }
-        return items;
-      } else {
-        let self = this;
-        return items.filter(function(item) {
-          return item.type.toLowerCase() == self.type.toLowerCase();
-        });
+  computed: {}
+})
+export default class SearchToolbar extends Vue {
+  jobTitle = '';
+  jobLocation = '';
+  jobSpecialization = '';
+  searchTap = true;
+  cardItems = items;
+  log = false;
+  type = 'All';
+  page = 1;
+  currentPage = 1;
+  nextPage = null;
+  totalPages = 6;
+
+  get getData2() {
+    return this.getData().slice(
+      (this.page - 1) * this.totalPages,
+      (this.page - 1) * this.totalPages + this.totalPages
+    );
+  }
+
+  getData() {
+    if (this.type == 'All') {
+      if (this.$q.screen.lt.sm) {
+        this.totalPages = 4;
       }
+      return items;
+    } else {
+      let self = this;
+      return items.filter(function(item: any) {
+        return item.type.toLowerCase() == self.type.toLowerCase();
+      });
     }
   }
-};
+}
 </script>
 
 <style scoped>
 .q-toolbar-desktop {
-
   background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);
   padding: 0px 100px 0px 100px;
 }

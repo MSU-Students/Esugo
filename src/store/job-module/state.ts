@@ -1,4 +1,4 @@
-import { IJob } from "src/interfaces/job.interface";
+import { IJob } from 'src/interfaces/job.interface';
 
 export interface JobStateInterface {
   createJob: IJob;
