@@ -5,14 +5,14 @@ import worker from './worker-module';
 import employer from './employer-module';
 import jobworker from './jobworker-module';
 import jobreport from './jobreport-module';
+import user from './user-module';
 import { JobStateInterface } from './job-module/state';
 import { WorkerStateInterface } from './worker-module/state';
 import { EmployerStateInterface } from './employer-module/state';
 import { JobworkerStateInterface } from './jobworker-module/state';
 import { JobreportStateInterface } from './jobreport-module/state';
+import { UserStateInterface } from './user-module/state';
 import { componentsStateInterface } from './components-module/state';
-
-
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation
@@ -28,6 +28,7 @@ export interface StateInterface {
   IWorker: WorkerStateInterface;
   IJobworker: JobworkerStateInterface;
   IJobreport: JobreportStateInterface;
+  IUser: UserStateInterface;
 }
 
 export default store(function({ Vue }) {
@@ -41,6 +42,7 @@ export default store(function({ Vue }) {
       employer,
       jobworker,
       jobreport,
+      user
     },
 
     // enable strict mode (adds overhead!)

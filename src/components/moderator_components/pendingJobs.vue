@@ -9,7 +9,7 @@
       >
         <template v-slot:header="props">
           <q-tr :props="props">
-            <q-th auto-width>Status</q-th>
+            <q-th auto-width>Job Status</q-th>
             <q-th v-for="col in props.cols" :key="col.name" :props="props">
               {{ col.label }}
             </q-th>
@@ -18,21 +18,22 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td auto-width class="text-center">
+            <q-td
+              v-if="props.row.jobstatus == 'pending'"      
+              auto-width
+              class="text-center"
+            >
               <q-btn
-                v-if="
-                  greenModel == 'Approved' && props.rowIndex == selectedIndex
-                "
+                :text-color="colorManipulation(props.row.jobstatus)"
                 color="white"
-                label="Approved"
-                text-color="green"
+                :label="labelManipulation(props.row.jobstatus)"
               >
                 <q-menu anchor="center middle" self="center middle">
                   <q-list class="text-center" style="min-width: 50px">
                     <q-item
                       class="text-green"
                       clickable
-                      @click="approveAccount(props.rowIndex)"
+                      @click="approve(props.rowIndex)"
                       v-close-popup
                     >
                       <q-item-section>Approve</q-item-section>
@@ -40,58 +41,7 @@
                     <q-item
                       class="text-red"
                       clickable
-                      @click="disapproveAccount(props.rowIndex)"
-                      v-close-popup
-                    >
-                      <q-item-section>Disapprove</q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-menu>
-              </q-btn>
-              <q-btn
-                v-else-if="
-                  greenModel == 'Disapproved' && props.rowIndex == selectedIndex
-                "
-                color="white"
-                label="Disapproved"
-                text-color="red"
-              >
-                <q-menu anchor="center middle" self="center middle">
-                  <q-list class="text-center" style="min-width: 50px">
-                    <q-item
-                      class="text-green"
-                      clickable
-                      @click="approveAccount(props.rowIndex)"
-                      v-close-popup
-                    >
-                      <q-item-section>Approve</q-item-section>
-                    </q-item>
-                    <q-item
-                      class="text-red"
-                      clickable
-                      @click="disapproveAccount(props.rowIndex)"
-                      v-close-popup
-                    >
-                      <q-item-section>Disapprove</q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-menu>
-              </q-btn>
-              <q-btn v-else color="white" label="Pending" text-color="black">
-                <q-menu anchor="center middle" self="center middle">
-                  <q-list class="text-center" style="min-width: 50px">
-                    <q-item
-                      class="text-green"
-                      clickable
-                      @click="approveAccount(props.rowIndex)"
-                      v-close-popup
-                    >
-                      <q-item-section>Approve</q-item-section>
-                    </q-item>
-                    <q-item
-                      class="text-red"
-                      clickable
-                      @click="disapproveAccount(props.rowIndex)"
+                      @click="disapprove(props.rowIndex)"
                       v-close-popup
                     >
                       <q-item-section>Disapprove</q-item-section>
@@ -101,9 +51,11 @@
               </q-btn>
             </q-td>
 
-            <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              {{ col.value }}
-            </q-td>
+            <template v-if="props.row.jobstatus == 'pending'">
+              <q-td v-for="col in props.cols" :key="col.name" :props="props">
+                {{ col.value }}
+              </q-td>
+            </template>
           </q-tr>
         </template>
       </q-table>
@@ -113,68 +65,98 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { mapActions, mapState } from 'vuex';
+import { IJob } from 'src/interfaces/job.interface';
 
-@Component({})
-export default class PendingJobs extends Vue {
-  tab = 'mails';
-  greenModel = 'Pending';
-  selectedIndex = 0;
+@Component({
+  computed: {
+    ...mapState('job', ['jobs'])
+  },
+  methods: {
+    ...mapActions('job', ['getAllJob', 'updateJob'])
+  }
+})
+export default class pendingJob extends Vue {
+  selectedIndex = null;
   columns = [
     {
       name: 'name',
       required: true,
-      label: 'Description',
+      label: 'Job Title',
       align: 'left',
-      field: (row: any) => row.name,
+      field: (row: IJob) => row.jobtitle,
       format: (val: any) => `${val}`,
       sortable: true
     },
     {
-      name: 'Date Posted',
+      name: 'jobdesc',
       align: 'left',
-      label: 'Date Posted',
-      field: 'dateposted',
+      label: 'Job Description',
+      field: 'jobdesc',
       sortable: true
     },
     {
-      name: 'Account Name',
-      label: 'Account Name',
-      field: 'accountname',
+      name: 'location',
+      label: 'Location',
+      field: 'location',
       sortable: true,
       align: 'left'
-    }
-  ];
-  data = [
-    {
-      name: 'Capentry',
-      dateposted: '03-16-2021',
-      accountname: 'Yasser Gania Bashier',
-      jobStatus: 'Pending'
     },
     {
-      name: 'Cook',
-      dateposted: '03-22-2021',
-      accountname: 'Yasser Gania Bashier',
-      jobStatus: 'Pending'
+      name: 'dateposted',
+      label: 'Date Posted',
+      field: 'dateposted',
+      sortable: true,
+      align: 'left'
     },
-    {
-      name: 'Encoder',
-      dateposted: '03-05-2021',
-      accountname: 'Yasser Gania Bashier',
-      jobStatus: 'Pending'
-    }
   ];
+  jobs!: IJob[];
+  data: IJob[] = [];
+  status = '';
+  getAllJob!: () => Promise<void>;
+  updateJob!: (payload: any) => Promise<void>;
 
-  approveAccount(id: number) {
-    console.log(id);
-    this.data[id].jobStatus = 'Approved';
-    this.greenModel = 'Approved';
-    this.selectedIndex = id;
+  async mounted() {
+    await this.getAllJob();
+    console.log(this.jobs);
+    this.data = this.jobs;
   }
-  disapproveAccount(id: number) {
-    this.data[id].jobStatus = 'Disapproved';
-    this.greenModel = 'Disapproved';
-    this.selectedIndex = id;
+
+  async approve(id: number) {
+    console.log(id);
+    await this.updateJob({
+      ...this.jobs[id],
+      jobstatus: 'approved'
+    });
+    this.data = this.jobs;
+  }
+
+  async disapprove(id: any) {
+    await this.updateJob({
+      ...this.jobs[id],
+      jobstatus:'disapproved'
+    });
+    this.data = this.jobs;
+   }
+
+  colorManipulation(status: string) {
+    if (status == 'pending') {
+      return 'orange';
+    } else if (status == 'disapproved') {
+      return 'red';
+    } else {
+      return 'green';
+    }
+  }
+
+  labelManipulation(status: string) {
+    if (status == 'pending') {
+      return 'Pending';
+    } else if (status == 'disapproved') {
+      return 'Disapproved';
+    } else {
+      return 'Approved';
+    }
   }
 }
 </script>

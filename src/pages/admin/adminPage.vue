@@ -9,34 +9,22 @@
           inline-label
           class=" text-primary shadow-2"
         >
-          <q-tab
-            name="Approved Accounts"
-            icon="person"
-            label="Approved Accounts"
-          />
-          <q-tab
-            name="Pending Accounts"
-            icon="person"
-            label="Pending Accounts"
-          />
-          <q-tab
-            name="Reported Accounts"
-            icon="warning"
-            label="Reported Accounts"
-          />
+          <q-tab name="approve" icon="person" label="Approved Accounts" />
+          <q-tab name="pending" icon="person" label="Pending Accounts" />
+          <q-tab name="reported" icon="warning" label="Reported Accounts" />
         </q-tabs>
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="Approved Accounts">
+          <q-tab-panel name="approve">
             <Table1 />
           </q-tab-panel>
 
-          <q-tab-panel name="Pending Accounts">
+          <q-tab-panel name="pending">
             <Table2 />
           </q-tab-panel>
 
-          <q-tab-panel name="Reported Accounts">
+          <q-tab-panel name="reported">
             <Table3 />
           </q-tab-panel>
         </q-tab-panels>
@@ -45,19 +33,20 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import Table1 from 'src/components/admin_components/ApprovedAcct.vue';
-import Table2 from 'src/components/admin_components/PendingAcct.vue';
-import Table3 from 'src/components/admin_components/ReportedAcct.vue';
-
-@Component({
-  components: { Table1, Table2, Table3 }
-})
-export default class AdminPage extends Vue {
-  tab = [];
-  selected = [];
-}
+<script>
+import Table1 from 'components/admin_components/approvedAcct.vue';
+import Table2 from 'components/admin_components/pendingAcct.vue';
+import Table3 from 'components/admin_components/reportedAcct.vue';
+export default {
+  name: 'adminLayout',
+  components: { Table1, Table2, Table3 },
+  data() {
+    return {
+      tab: 'approve',
+      selected: []
+    };
+  }
+};
 </script>
 
 <style></style>

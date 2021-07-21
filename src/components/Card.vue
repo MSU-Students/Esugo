@@ -1,5 +1,6 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
+
     <q-img
       :src="require(`../assets/${jobPhoto}`)"
       @mouseenter="showReport = true"
@@ -52,8 +53,9 @@
 
     <q-separator />
 
-    <q-card-actions align="center">
-      <!-- <q-btn color="light-blue-10" icon="send" label="Send Application" /> -->
+    
+       <!-- <q-btn color="light-blue-10" icon="send" label="Send Application" />  -->
+      <q-card-actions align="center">
       <q-btn
         label="Send Application"
         color="primary"
