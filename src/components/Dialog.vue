@@ -42,7 +42,7 @@
             <q-icon name="paid" />
           </template>
         </q-input>
-        <q-select
+        <!-- <q-select
           outlined
           dense
           v-model="hire"
@@ -52,7 +52,7 @@
           <template v-slot:prepend>
             <q-icon name="attribution" />
           </template>
-        </q-select>
+        </q-select> -->
       </q-card-section>
 
       <q-card-actions align="center">
