@@ -61,7 +61,7 @@
         <q-dialog v-model="alert">
           <q-card>
             <q-card-section>
-              <div class="text-h6">Job Posted Successfully</div>
+              <div class="text-h6">Job is waiting to be approved by the moderator</div>
             </q-card-section>
 
             <!-- <q-card-section class="q-pt-none">
