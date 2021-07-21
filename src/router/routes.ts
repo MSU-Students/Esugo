@@ -32,7 +32,7 @@ const routes: RouteConfig[] = [
     { path: 'jobs', component: () => import ('../pages/moderator/ModeratorPage.vue') },
     { path: 'home', component: () => import('pages/LandingPage.vue') },
 
-  ]
+   ]
 },
 
   // Always leave this as last one,
