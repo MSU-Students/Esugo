@@ -4,29 +4,29 @@ import { StateInterface } from '../index';
 import { WorkerStateInterface } from './state';
 
 const actions: ActionTree<WorkerStateInterface, StateInterface> = {
-  async getAllworker(context): Promise<any> {
+  async getAllWorker(context): Promise<any> {
     const res = await workerService.getAll();
-    context.commit('getAllworker', res);
+    context.commit('getAllWorker', res);
   },
 
-  async getOneworker(context, id: number): Promise<any> {
+  async getOneWorker(context, id: number): Promise<any> {
     const res = await workerService.getOne(id);
-    context.commit('getOneworker', res);
+    context.commit('getOneWorker', res);
   },
 
-  async createworker(context, payload: any): Promise<any> {
+  async createWorker(context, payload: any): Promise<any> {
     const res = await workerService.create(payload);
-    context.commit('createworker', res);
+    context.commit('createWorker', res);
   },
 
-  async updateworker(context, payload: any): Promise<any> {
+  async updateWorker(context, payload: any): Promise<any> {
     const res = await workerService.update(payload.id, payload.payload);
-    context.commit('updateworker', res);
+    context.commit('updateWorker', res);
   },
 
-  async deleteworker(context, id: number): Promise<any> {
+  async deleteWorker(context, id: number): Promise<any> {
     const res = await workerService.delete(id);
-    context.commit('deleteworker', res);
+    context.commit('deleteWorker', res);
   }
 };
 

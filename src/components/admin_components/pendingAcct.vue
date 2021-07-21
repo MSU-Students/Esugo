@@ -19,13 +19,13 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-if="props.row.acctStatus == 'pending'"
+              v-if="props.row.acctStatus == 'pending'"      
               auto-width
               class="text-center"
             >
               <q-btn
-                text-color="white"
-                :color="colorManipulation(props.row.acctStatus)"
+                :text-color="colorManipulation(props.row.acctStatus)"
+                color="white"
                 :label="labelManipulation(props.row.acctStatus)"
               >
                 <q-menu anchor="center middle" self="center middle">
@@ -77,7 +77,6 @@ import { IUser } from 'src/interfaces/user.interface';
   }
 })
 export default class pendingAcct extends Vue {
-  greenModel = 'Pending';
   selectedIndex = null;
   columns = [
     {
@@ -110,13 +109,6 @@ export default class pendingAcct extends Vue {
       sortable: true,
       align: 'left'
     },
-    {
-      name: 'acctStatus',
-      label: 'Account Status',
-      field: 'acctStatus',
-      sortable: true,
-      align: 'left'
-    }
   ];
   users!: IUser[];
   data: IUser[] = [];
@@ -130,6 +122,7 @@ export default class pendingAcct extends Vue {
   }
 
   async approveAccount(id: number) {
+    console.log(id);
     await this.updateUser({
       ...this.users[id],
       acctStatus: 'approved'

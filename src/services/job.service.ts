@@ -17,12 +17,12 @@ const restApi = new DefaultApi(restConfig);
 class JobService extends DefaultApi {
   async getAll() {
     const res = await restApi.getJobs();
-    return res;
+    return res.data;
   }
 
   async getOne(id: number) {
     const res = await restApi.getJob(id);
-    return res;
+    return res.data;
   }
 
   async create(payload: any) {

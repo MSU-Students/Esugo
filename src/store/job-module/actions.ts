@@ -20,8 +20,8 @@ const actions: ActionTree<JobStateInterface, StateInterface> = {
   },
 
   async updateJob(context, payload: any): Promise<any> {
-    const res = await jobService.update(payload.id, payload.payload);
-    context.commit('updateJob', res);
+    await jobService.update(payload.jobID, payload);
+    await context.dispatch('getAllJob');
   },
 
   async deleteJob(context, id: number): Promise<any> {

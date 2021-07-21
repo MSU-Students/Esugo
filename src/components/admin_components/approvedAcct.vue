@@ -24,8 +24,8 @@
               class="text-center"
             >
               <q-btn
-                text-color="white"
-                :color="colorManipulation(props.row.acctStatus)"
+                :text-color="colorManipulation(props.row.acctStatus)"
+                color="white"
                 :label="labelManipulation(props.row.acctStatus)"
               >
                 <q-menu anchor="center middle" self="center middle">
@@ -36,7 +36,7 @@
                       @click="approveAccount(props.rowIndex)"
                       v-close-popup
                     >
-                      <q-item-section>able</q-item-section>
+                      <q-item-section>Able</q-item-section>
                     </q-item>
                     <q-item
                       class="text-red"
@@ -44,7 +44,7 @@
                       @click="disapproveAccount(props.rowIndex)"
                       v-close-popup
                     >
-                      <q-item-section>disable</q-item-section>
+                      <q-item-section>Disable</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>

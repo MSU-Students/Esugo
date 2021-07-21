@@ -626,7 +626,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         addJob: async (jobDto: JobDto, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'jobDto' is not null or undefined
             assertParamExists('addJob', 'jobDto', jobDto)
-            const localVarPath = `/Job`;
+            const localVarPath = `/job`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -840,7 +840,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         deleteJob: async (id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteJob', 'id', id)
-            const localVarPath = `/Job/{id}`
+            const localVarPath = `/job/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1074,7 +1074,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         getJob: async (id: number, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getJob', 'id', id)
-            const localVarPath = `/Job/{id}`
+            const localVarPath = `/job/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1169,7 +1169,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         getJobs: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/Job`;
+            const localVarPath = `/job`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1437,7 +1437,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('updateJob', 'id', id)
             // verify required parameter 'createJobDto' is not null or undefined
             assertParamExists('updateJob', 'createJobDto', createJobDto)
-            const localVarPath = `/Job/{id}`
+            const localVarPath = `/job/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

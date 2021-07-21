@@ -2,15 +2,16 @@ import { MutationTree } from 'vuex';
 import { JobStateInterface } from './state';
 
 const mutation: MutationTree<JobStateInterface> = {
-  getAllJobs(state, payload: any) {
+  getAllJob(state, payload: any) {
+    state.jobs = [];
     state.jobs.push(...payload);
   },
 
-  getOneJobs(state, payload) {
+  getOneJob(state, payload) {
     state.jobs.push(payload);
   },
 
-  createJobs(state, payload) {
+  createJob(state, payload) {
     state.jobs.push(payload);
   },
 
