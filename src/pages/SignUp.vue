@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <q-page
-        style="background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);"
+        :style="colorManipulation(tab)"
         class="flex flex-center"
       >
         <div class="q-pa-md">
@@ -297,7 +297,17 @@ export default class PageIndex extends Vue {
   password = '';
   isPwd = '';
   tab = 'SignupWorker';
+
+    colorManipulation(tab:string) {
+    if (tab == 'SignupWorker') {
+      return 'background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);';
+
+    } else {
+      return 'background: linear-gradient(to bottom, #e01327 29%, #ffffff 100%);';
+    }
+  }
 }
+
 </script>
 
 <style></style>
