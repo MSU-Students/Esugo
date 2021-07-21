@@ -79,87 +79,88 @@
     </q-card>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      tab: 1,
-      btnAccount: false,
-      selectedIndex: null,
-      columns: [
-        {
-          name: 'Priority level',
-          label: 'Priority Level',
-          field: 'prioritylevel',
-          align: 'left',
-          width: 100,
-          sortable: true
-        },
-        {
-          name: 'name',
-          required: true,
-          label: 'Description',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        {
-          name: 'Date Posted',
-          align: 'left',
-          label: 'Date Posted',
-          field: 'dateposted',
-          sortable: true
-        },
-        {
-          name: 'Date Reported',
-          label: 'Date Reported',
-          field: 'datereported',
-          sortable: true,
-          align: 'left'
-        },
-        { name: 'Remark', label: 'Remark', field: 'remark', align: 'left' }
-      ],
-      data: [
-        {
-          name: 'Capentry',
-          dateposted: '03-16-2021',
-          datereported: '03-17-2021',
-          remark: 'Scam',
-          prioritylevel: 'low',
-          Action: ''
-        },
-        {
-          name: 'Cook',
-          dateposted: '03-22-2021',
-          datereported: '03-27-2021',
-          remark: 'Scam',
-          prioritylevel: 'moderate',
-          Action: ''
-        },
-        {
-          name: 'Encoder',
-          dateposted: '03-05-2021',
-          datereported: '03-08-2021',
-          remark: 'Scam',
-          prioritylevel: 'high',
-          Action: ''
-        }
-      ]
-    };
-  },
-  methods: {
-    activeAccount(id) {
-      this.data[id].accountStatus = false;
-      this.btnAccount = false;
-      this.selectedIndex = id;
-    },
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 
-    deactiveAccount(id) {
-      this.data[id].accountStatus = true;
-      this.btnAccount = true;
-      this.selectedIndex = id;
+@Component({})
+export default class ReportedJobs extends Vue {
+  tab = 1;
+  btnAccount = false;
+  selectedIndex = null;
+  columns = [
+    {
+      name: 'Priority level',
+      label: 'Priority Level',
+      field: 'prioritylevel',
+      align: 'left',
+      width: 100,
+      sortable: true
+    },
+    {
+      name: 'name',
+      required: true,
+      label: 'Description',
+      align: 'left',
+      field: (row: any) => row.name,
+      format: (val: any) => `${val}`,
+      sortable: true
+    },
+    {
+      name: 'Date Posted',
+      align: 'left',
+      label: 'Date Posted',
+      field: 'dateposted',
+      sortable: true
+    },
+    {
+      name: 'Date Reported',
+      label: 'Date Reported',
+      field: 'datereported',
+      sortable: true,
+      align: 'left'
+    },
+    { name: 'Remark', label: 'Remark', field: 'remark', align: 'left' }
+  ];
+  data = [
+    {
+      name: 'Capentry',
+      dateposted: '03-16-2021',
+      datereported: '03-17-2021',
+      remark: 'Scam',
+      prioritylevel: 'low',
+      Action: '',
+      status: false
+    },
+    {
+      name: 'Cook',
+      dateposted: '03-22-2021',
+      datereported: '03-27-2021',
+      remark: 'Scam',
+      prioritylevel: 'moderate',
+      Action: '',
+      status: false
+    },
+    {
+      name: 'Encoder',
+      dateposted: '03-05-2021',
+      datereported: '03-08-2021',
+      remark: 'Scam',
+      prioritylevel: 'high',
+      Action: '',
+      status: false
     }
+  ];
+
+  activeAccount(id: any) {
+    this.data[id].status = false;
+    this.btnAccount = false;
+    this.selectedIndex = id;
   }
-};
+
+  deactiveAccount(id: any) {
+    this.data[id].status = true;
+    this.btnAccount = true;
+    this.selectedIndex = id;
+  }
+}
 </script>

@@ -1,4 +1,3 @@
-
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 import job from './job-module';

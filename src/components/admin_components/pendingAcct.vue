@@ -147,7 +147,6 @@ export default class pendingAcct extends Vue {
       return 'green';
     }
   }
-
   labelManipulation(status: string) {
     if (status == 'pending') {
       return 'Pending';

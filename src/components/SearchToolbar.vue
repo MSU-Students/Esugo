@@ -110,58 +110,97 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import Card from 'components/Card.vue';
-import jobService from 'src/services/job.service';
 
-export default {
-  name: 'SearchToolbar',
+const items = [
+  {
+    id: 1,
+    jobPhoto: 'carpentry.jpg',
+    profilePic: 'employer1.jpg',
+    job: 'Carpentry',
+    stars: 5,
+    salary: 100,
+    jobDesc: 'Make a 5 feet tall cabinet with 2 doors and a mirror.',
+    location: 'Marawi City',
+    to: '/employerprofile/1'
+  },
+  {
+    id: 2,
+    jobPhoto: 'cook.jpg',
+    profilePic: 'employer2.jpg',
+    job: 'Cook',
+    stars: 5,
+    salary: 450,
+    jobDesc: 'Looking for 2 experienced cooks.',
+    location: 'Saguiran City',
+    to: '/employerprofile/2'
+  },
+  {
+    id: 8,
+    jobPhoto: 'ITspecialist.jpg',
+    profilePic: 'employer2.jpg',
+    job: 'Computer Technician',
+    stars: 5,
+    salary: 1500,
+    jobDesc: 'Need Computer specialist.',
+    location: 'Mapandi City',
+    to: '/employerprofile/7'
+  },
+  {
+    id: 9,
+    jobPhoto: 'sport&fitness.jpg',
+    profilePic: 'employer1.jpg',
+    job: 'Gym Instructor',
+    stars: 5,
+    salary: 1500,
+    jobDesc: 'Must have a valid certificate for Gym Instructions.',
+    location: 'MSU City',
+    to: '/employerprofile/7'
+  }
+];
+
+@Component({
   components: {
     Card
   },
-  data() {
-    return {
-      jobTitle: '',
-      jobLocation: '',
-      jobSpecialization: '',
-      searchTap: true,
-      items: [],
-      log: false,
-      type: 'All',
-      page: 1,
-      currentPage: 1,
-      nextPage: null,
-      totalPages: 6
-    };
-  },
-  async created() {
-    const res = await jobService.getAll();
-    this.items.push(...res.data);
-  },
-  computed: {
-    getData2() {
-      return this.getData().slice(
-        (this.page - 1) * this.totalPages,
-        (this.page - 1) * this.totalPages + this.totalPages
-      );
-    }
-  },
-  methods: {
-    getData() {
-      if (this.type == 'All') {
-        if (this.$q.screen.lt.sm) {
-          this.totalPages = 4;
-        }
-        return this.items;
-      } else {
-        let self = this;
-        return this.items.filter(function(item) {
-          return item.type.toLowerCase() == self.type.toLowerCase();
-        });
+  computed: {}
+})
+export default class SearchToolbar extends Vue {
+  jobTitle = '';
+  jobLocation = '';
+  jobSpecialization = '';
+  searchTap = true;
+  cardItems = items;
+  log = false;
+  type = 'All';
+  page = 1;
+  currentPage = 1;
+  nextPage = null;
+  totalPages = 6;
+
+  get getData2() {
+    return this.getData().slice(
+      (this.page - 1) * this.totalPages,
+      (this.page - 1) * this.totalPages + this.totalPages
+    );
+  }
+
+  getData() {
+    if (this.type == 'All') {
+      if (this.$q.screen.lt.sm) {
+        this.totalPages = 4;
       }
+      return items;
+    } else {
+      let self = this;
+      return items.filter(function(item: any) {
+        return item.type.toLowerCase() == self.type.toLowerCase();
+      });
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <div class="q-gutter-y-md">
-      <q-card> 
+      <q-card>
         <q-tabs
         v-model="tab"
         dense
@@ -29,8 +29,7 @@
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
-
-      </div>
+    </div>
   </div>
 </template>
 
@@ -51,6 +50,4 @@ data () {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

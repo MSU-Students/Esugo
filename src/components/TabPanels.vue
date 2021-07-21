@@ -227,13 +227,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'TabPanels',
-  data() {
-    return {
-      tab: 'notif'
-    };
-  }
-};
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component({})
+export default class TabPanels extends Vue {
+  tab = 'notif';
+}
 </script>
