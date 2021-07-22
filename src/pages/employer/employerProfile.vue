@@ -23,30 +23,7 @@
                     <div class="q-gutter-sm text-h6 text-weight-bold ">
                       CONTACT ME
 
-                      <q-btn label=". . .">
-                        <q-menu>
-                          <q-list style="min-width: 100px">
-                            <q-item clickable v-close-popup>
-                              <q-item-section>
-                                <div
-                                  class="q-gutter-sm text-h8 text-weight-bold "
-                                >
-                                  Edit Profile
-                                </div>
-                              </q-item-section>
-                            </q-item>
-                            <q-item clickable v-close-popup>
-                              <q-item-section>
-                                <div
-                                  class="q-gutter-sm text-h8 text-weight-bold "
-                                >
-                                  Edit Profile
-                                </div>
-                              </q-item-section>
-                            </q-item>
-                          </q-list>
-                        </q-menu>
-                      </q-btn>
+                    
                     </div>
                   </q-item-section>
                 </q-item>
