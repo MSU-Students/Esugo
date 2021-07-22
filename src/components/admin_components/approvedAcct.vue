@@ -36,6 +36,7 @@
                       @click="approveAccount(props.rowIndex)"
                       v-close-popup
                     >
+                    
                       <q-item-section>Able</q-item-section>
                     </q-item>
                     <q-item

@@ -23,30 +23,7 @@
                     <div class="q-gutter-sm text-h6 text-weight-bold ">
                       CONTACT ME
 
-                      <q-btn label=". . .">
-                        <q-menu>
-                          <q-list style="min-width: 100px">
-                            <q-item clickable v-close-popup>
-                              <q-item-section>
-                                <div
-                                  class="q-gutter-sm text-h8 text-weight-bold "
-                                >
-                                  Edit Profile
-                                </div>
-                              </q-item-section>
-                            </q-item>
-                            <q-item clickable v-close-popup>
-                              <q-item-section>
-                                <div
-                                  class="q-gutter-sm text-h8 text-weight-bold "
-                                >
-                                  Edit Profile
-                                </div>
-                              </q-item-section>
-                            </q-item>
-                          </q-list>
-                        </q-menu>
-                      </q-btn>
+                    
                     </div>
                   </q-item-section>
                 </q-item>
@@ -212,8 +189,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TabPanels from 'components/TabPanels.vue';
-import Dialog from 'src/components//Dialog.vue';
+import TabPanels from 'components/employer_components/TabPanels.vue';
+import Dialog from 'src/components/Dialog.vue';
 
 @Component({
   components: {

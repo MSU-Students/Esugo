@@ -52,9 +52,8 @@
 
     <q-separator />
 
-    
-       <!-- <q-btn color="light-blue-10" icon="send" label="Send Application" />  -->
-      <q-card-actions align="center">
+    <!-- <q-btn color="light-blue-10" icon="send" label="Send Application" />  -->
+    <q-card-actions align="center">
       <q-btn
         label="Send Application"
         color="primary"
@@ -86,12 +85,9 @@
       <q-dialog v-model="showReportButton">
         <q-card>
           <q-toolbar>
-            <q-avatar>
-              <img src="" />
-            </q-avatar>
-
             <q-toolbar-title
-              ><span class="text-weight-bold">Report</span> Reason</q-toolbar-title
+              ><span class="text-weight-bold">Report</span>
+              Reason</q-toolbar-title
             >
 
             <q-btn flat round dense icon="close" v-close-popup />
@@ -100,20 +96,47 @@
           <q-card-section class="q-pt-none">
             <div class="q-pa-md">
               <div class="q-gutter-sm">
-                <q-radio v-model="shape" val="line" label="Line" />
-                <q-radio v-model="shape" val="rectangle" label="Rectangle" />
-                <q-radio v-model="shape" val="ellipse" label="Ellipse" />
-                <q-radio v-model="shape" val="polygon" label="Polygon" />
+                <q-radio v-model="status" val="Nudity" label="Nudity" />
+                <q-radio v-model="status" val="Offensive" label="Offensive" />
+                <q-radio
+                  v-model="status"
+                  val="Discriminatory"
+                  label="Discriminatory"
+                />
+                <q-radio v-model="status" val="misleading" label="misleading" />
               </div>
 
               <div class="q-px-sm">
-                Your selection is: <strong>{{ shape }}</strong>
+                <h5>
+                  Your selection is: <strong>{{ status }}</strong>
+                </h5>
               </div>
             </div>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="OK" color="primary" v-close-popup />
+            <q-btn
+              flat
+              label="SUBMIT"
+              color="primary"
+              @click="alert = true"
+             
+            />
+            <q-dialog v-model="alert">
+              <q-card>
+                <q-card-section>
+                  <div class="text-h6">Alert</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                  Your report has been sent to the Moderator!
+                </q-card-section>
+
+                <q-card-actions align="right">
+                  <q-btn flat label="OK" color="primary" v-close-popup />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -122,7 +145,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component({})
 export default class Card extends Vue {
@@ -139,7 +162,8 @@ export default class Card extends Vue {
   showReport = false;
   showReportButton = false;
   confirmReport = false;
-  shape = 'line';
+  status = '';
+  alert = false;
 }
 </script>
 
