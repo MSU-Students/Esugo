@@ -8,7 +8,7 @@ const mutation: MutationTree<UserStateInterface> = {
   },
 
   getOneUser(state, payload) {
-    state.users.push(payload);
+    state.user = payload;
   },
 
   createUser(state, payload) {

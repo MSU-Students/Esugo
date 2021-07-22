@@ -112,60 +112,22 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { mapState, mapActions } from 'vuex';
 import Card from 'components/Card.vue';
+import { JobDto } from 'src/services/rest-api';
 
-const items = [
-  {
-    id: 1,
-    jobPhoto: 'carpentry.jpg',
-    profilePic: 'employer1.jpg',
-    job: 'Carpentry',
-    stars: 5,
-    salary: 100,
-    jobDesc: 'Make a 5 feet tall cabinet with 2 doors and a mirror.',
-    location: 'Marawi City',
-    to: '/employerprofile/1'
-  },
-  {
-    id: 2,
-    jobPhoto: 'cook.jpg',
-    profilePic: 'employer2.jpg',
-    job: 'Cook',
-    stars: 5,
-    salary: 450,
-    jobDesc: 'Looking for 2 experienced cooks.',
-    location: 'Saguiran City',
-    to: '/employerprofile/2'
-  },
-  {
-    id: 8,
-    jobPhoto: 'ITspecialist.jpg',
-    profilePic: 'employer2.jpg',
-    job: 'Computer Technician',
-    stars: 5,
-    salary: 1500,
-    jobDesc: 'Need Computer specialist.',
-    location: 'Mapandi City',
-    to: '/employerprofile/7'
-  },
-  {
-    id: 9,
-    jobPhoto: 'sport&fitness.jpg',
-    profilePic: 'employer1.jpg',
-    job: 'Gym Instructor',
-    stars: 5,
-    salary: 1500,
-    jobDesc: 'Must have a valid certificate for Gym Instructions.',
-    location: 'MSU City',
-    to: '/employerprofile/7'
-  }
-];
+let items: JobDto[] = [];
 
 @Component({
   components: {
     Card
   },
-  computed: {}
+  computed: {
+    ...mapState('job', ['jobs'])
+  },
+  methods: {
+    ...mapActions('job', ['getAllJob', 'updateJob'])
+  }
 })
 export default class SearchToolbar extends Vue {
   jobTitle = '';
@@ -179,6 +141,15 @@ export default class SearchToolbar extends Vue {
   currentPage = 1;
   nextPage = null;
   totalPages = 6;
+  jobs!: JobDto[];
+  getAllJob!: () => Promise<JobDto>;
+
+  async created() {
+    await this.getAllJob();
+    const newJob = this.jobs;
+    console.log(newJob);
+    // items = this.jobs;
+  }
 
   get getData2() {
     return this.getData().slice(

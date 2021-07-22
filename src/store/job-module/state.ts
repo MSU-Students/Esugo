@@ -1,23 +1,39 @@
-import { IJob } from 'src/interfaces/job.interface';
+import { JobDto, UserDto } from 'src/services/rest-api';
 
 export interface JobStateInterface {
-  createJob: IJob;
-  jobs: IJob[];
+  job: JobDto;
+  jobs: JobDto[];
+  user: UserDto;
 }
 
 function state(): JobStateInterface {
   return {
-    createJob: {
-      jobID: 0,
-      employerID: 0,
-      jobtitle: '',
-      jobdesc: '',
-      location: '',
+    job: {
+      title: '',
+      description: 'string',
+      location: 'string',
       salary: 0,
-      dateposted: '',
-      jobstatus: ''
+      status: 'pending',
+      datePosted: Date(),
+      userId: 0
     },
-    jobs: []
+    jobs: [],
+    user: {
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      birthdate: '',
+      gender: '',
+      address: '',
+      contact: '',
+      email: '',
+      company: '',
+      location: '',
+      type: 'worker',
+      status: 'available',
+      username: '',
+      password: ''
+    }
   };
 }
 

@@ -1,7 +1,7 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
 
-    <q-img
+    <!-- <q-img
       :src="require(`../assets/${jobPhoto}`)"
       @mouseenter="showReport = true"
       @mouseleave="showReport = false"
@@ -17,25 +17,24 @@
           @click.prevent.stop="showReportButton = true"
         />
       </div>
-    </q-img>
+    </q-img> -->
 
     <q-card-section avatar>
       <q-btn
         round
         class="absolute"
         style="top: 0; right: 12px; transform: translateY(-50%)"
-        :to="to"
       >
         <q-avatar size="70px">
-          <img :src="require(`../assets/${profilePic}`)" />
+          <!-- <img :src="require(`../assets/${profilePic}`)" /> -->
         </q-avatar>
       </q-btn>
 
       <div class="row no-wrap items-center">
-        <div class="col text-h6 ellipsis">{{ job }}</div>
+        <div class="col text-h6 ellipsis">{{ title }}</div>
         <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
           <q-icon name="person" />
-          Employer
+          {{ user.firstName + ' ' + user.lastName }}
         </div>
       </div>
       <div class="text-caption text-grey">
@@ -47,7 +46,7 @@
     <q-card-section class="q-pt-none">
       <div class="text-subtitle1">₱・{{ salary }}</div>
       <div class="text-body2 text-grey-9">
-        {{ jobDesc }}
+        {{ description }}
       </div>
     </q-card-section>
 
@@ -127,14 +126,13 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 
 @Component({})
 export default class Card extends Vue {
-  @Prop({type: String, required: false}) readonly jobPhoto!: string;
-  @Prop({type: String, required: false}) readonly profilePic!: string;
-  @Prop({type: String, required: true}) readonly job!: string;
-  @Prop({type: Number, required: true}) readonly stars!: number;
+  // @Prop({type: String, required: false}) readonly jobPhoto!: string;
+  // @Prop({type: String, required: false}) readonly profilePic!: string;
+  @Prop({type: String, required: true}) readonly title!: string;
+  @Prop({type: Object, required: true}) readonly user!: any;
   @Prop({type: Number, required: true}) readonly salary!: number;
-  @Prop({type: String, required: true}) readonly jobDesc!: string;
+  @Prop({type: String, required: true}) readonly description!: string;
   @Prop({type: String, required: true}) readonly location!: string;
-  @Prop({type: String, required: true}) readonly to!: string;
 
   alerts = false;
   confirm = false;

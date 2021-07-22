@@ -31,6 +31,7 @@ class JobService extends DefaultApi {
   }
 
   async update(id: number, payload: any) {
+    console.log(payload);
     const res = await restApi.updateJob(id, payload);
     return res;
   }

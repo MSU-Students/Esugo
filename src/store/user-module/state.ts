@@ -1,26 +1,33 @@
-import { IUser } from 'src/interfaces/user.interface';
+import { IJob } from 'src/interfaces/job.interface2';
+import { IUser } from 'src/interfaces/user.interface2';
 
 export interface UserStateInterface {
-  createUser: IUser;
+  user: IUser;
   users: IUser[];
+  jobs: IJob[];
 }
 
 function state(): UserStateInterface {
   return {
-    createUser: {
-      id: 0,
+    user: {
       firstName: '',
       middleName: '',
       lastName: '',
-      dateofbirth: '',
+      birthdate: '',
       gender: '',
+      address: '',
+      contact: '',
       email: '',
-      acctStatus: '',
-      acctCategory: '',
+      company: '',
+      location: '',
+      type: 'worker',
+      status: 'available',
       username: '',
-      password: ''
+      password: '',
+      jobs: [],
     },
     users: [],
+    jobs: []
   };
 }
 
