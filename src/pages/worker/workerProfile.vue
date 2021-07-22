@@ -181,7 +181,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TabPanels from 'components/TabPanels.vue';
+import TabPanels from 'components/worker_components/TabPanels.vue';
 
 @Component({
   components: {

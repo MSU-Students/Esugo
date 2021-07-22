@@ -212,8 +212,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import TabPanels from 'components/TabPanels.vue';
-import Dialog from 'src/components//Dialog.vue';
+import TabPanels from 'components/employer_components/TabPanels.vue';
+import Dialog from 'src/components/Dialog.vue';
 
 @Component({
   components: {
