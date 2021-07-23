@@ -10,12 +10,13 @@ function state(): JobStateInterface {
   return {
     job: {
       title: '',
-      description: 'string',
-      location: 'string',
-      salary: 0,
+      description: '',
+      location: '',
+      salary: '',
       status: 'pending',
-      datePosted: Date(),
-      userId: 0
+      coverPhoto: '',
+      datePosted: '',
+      employerID: 1,
     },
     jobs: [],
     user: {
@@ -30,7 +31,7 @@ function state(): JobStateInterface {
       company: '',
       location: '',
       type: 'worker',
-      status: 'available',
+      status: 'pending',
       username: '',
       password: ''
     }

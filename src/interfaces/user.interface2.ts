@@ -13,7 +13,7 @@ export interface IUser {
   company?: string;
   location?: string;
   type: 'worker' | 'employer' | 'moderator' | 'admin';
-  status: 'available' | 'suspended' | 'banned';
+  status: 'available' | 'suspended' | 'banned' | 'pending';
   username: string;
   password: string;
   jobs: IJob[]

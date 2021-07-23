@@ -5,7 +5,7 @@ export interface IJob {
   title: string;
   description?: string;
   location: string;
-  salary: number;
+  salary: string;
   datePosted?: Date;
   status: 'pending' | 'approved' | 'disapproved' | 'taken' | 'done' | 'canceled';
   user: IUser;

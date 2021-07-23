@@ -148,7 +148,7 @@ export default class SearchToolbar extends Vue {
     await this.getAllJob();
     const newJob = this.jobs;
     console.log(newJob);
-    // items = this.jobs;
+    items = this.jobs;
   }
 
   get getData2() {

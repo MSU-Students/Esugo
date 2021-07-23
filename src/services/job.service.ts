@@ -26,6 +26,7 @@ class JobService extends DefaultApi {
   }
 
   async create(payload: any) {
+    console.log(payload)
     const res = await restApi.addJob(payload);
     return res;
   }

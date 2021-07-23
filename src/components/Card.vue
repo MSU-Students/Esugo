@@ -1,8 +1,8 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
 
-    <!-- <q-img
-      :src="require(`../assets/${jobPhoto}`)"
+    <q-img
+      :src="require(`../assets/${coverPhoto}`)"
       @mouseenter="showReport = true"
       @mouseleave="showReport = false"
     >
@@ -17,7 +17,7 @@
           @click.prevent.stop="showReportButton = true"
         />
       </div>
-    </q-img> -->
+    </q-img>
 
     <q-card-section avatar>
       <q-btn
@@ -149,11 +149,11 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component({})
 export default class Card extends Vue {
-  // @Prop({type: String, required: false}) readonly jobPhoto!: string;
+  @Prop({type: String, required: false}) readonly coverPhoto!: string;
   // @Prop({type: String, required: false}) readonly profilePic!: string;
   @Prop({type: String, required: true}) readonly title!: string;
   @Prop({type: Object, required: true}) readonly user!: any;
-  @Prop({type: Number, required: true}) readonly salary!: number;
+  @Prop({type: String, required: true}) readonly salary!: string;
   @Prop({type: String, required: true}) readonly description!: string;
   @Prop({type: String, required: true}) readonly location!: string;
 
