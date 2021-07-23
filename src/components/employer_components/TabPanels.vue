@@ -223,7 +223,7 @@
             </q-item>
           </q-list>
         </q-tab-panel>
-      </q-tab-panels>z
+      </q-tab-panels>
       
     </q-card>
   </div>
