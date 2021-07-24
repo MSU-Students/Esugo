@@ -19,7 +19,6 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-if="props.row.status != 'pending'"
               auto-width
               class="text-center"
             >
@@ -51,7 +50,7 @@
               </q-btn>
             </q-td>
 
-            <template v-if="props.row.status != 'pending'">
+            <template>
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -135,7 +134,7 @@ export default class pendingJob extends Vue {
 
   async getAllJobs() {
     await this.getAllJob();
-    const jobs = this.jobs;
+    const jobs = this.jobs.filter(i => i.status != 'pending');
     const newJob = jobs.map((i: any) => {
       return {
         ...i,
@@ -146,6 +145,7 @@ export default class pendingJob extends Vue {
   }
 
   async approve(id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { user, employer, ...newJob } = this.data.find((i: any) => i.id == id);
     console.log(newJob);
     await this.updateJob({

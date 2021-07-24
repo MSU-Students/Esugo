@@ -4,6 +4,8 @@ import job from './job-module';
 import user from './user-module';
 import { JobStateInterface } from './job-module/state';
 import { UserStateInterface } from './user-module/state';
+import auth from './auth';
+import { IAuthState } from './auth/state';
 
 /*
  * If not building with SSR mode, you can
@@ -17,6 +19,7 @@ export interface StateInterface {
  
   IJob: JobStateInterface;
   IUser: UserStateInterface;
+  auth: IAuthState;
 }
 
 export default store(function({ Vue }) {
@@ -26,7 +29,8 @@ export default store(function({ Vue }) {
     modules: {
       // example
       job,
-      user
+      user,
+      auth
     },
 
     // enable strict mode (adds overhead!)

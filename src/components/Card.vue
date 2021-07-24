@@ -58,7 +58,8 @@
         label="Send Application"
         color="primary"
         icon="send"
-        @click="alerts = true"
+        clickable 
+        @click="addApplication()"
       />
 
       <q-dialog v-model="alerts" persistent>
@@ -144,11 +145,16 @@
   </q-card>
 </template>
 
-<script lang="ts">
+<script lang="ts">  
+import { ApplicationDto } from 'src/services/rest-api';
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 
-@Component({})
+@Component({methods: {
+    ...mapActions('application', ['createApplication'])
+  }})
 export default class Card extends Vue {
+  @Prop({type: Number, required: true}) readonly id!: number;
   @Prop({type: String, required: false}) readonly coverPhoto!: string;
   // @Prop({type: String, required: false}) readonly profilePic!: string;
   @Prop({type: String, required: true}) readonly title!: string;
@@ -157,6 +163,7 @@ export default class Card extends Vue {
   @Prop({type: String, required: true}) readonly description!: string;
   @Prop({type: String, required: true}) readonly location!: string;
 
+  createApplication!: (payload: ApplicationDto) => Promise<void>;
   alerts = false;
   confirm = false;
   showReport = false;
@@ -164,6 +171,16 @@ export default class Card extends Vue {
   confirmReport = false;
   status = '';
   alert = false;
+  application: ApplicationDto = {
+    workerID: 4,
+    jobID: this.id,
+    status: 'pending',
+  }
+
+  async addApplication() {
+    console.log(this.application);  
+    await this.createApplication(this.application);
+  }
 }
 </script>
 

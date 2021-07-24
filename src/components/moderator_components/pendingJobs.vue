@@ -19,7 +19,6 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-if="props.row.status == 'pending'"
               auto-width
               class="text-center"
             >
@@ -41,7 +40,7 @@
                     <q-item
                       class="text-red"
                       clickable
-                      @click="disapprove(props.rowIndex)"
+                      @click="disapprove(props.row.id)"
                       v-close-popup
                     >
                       <q-item-section>Disapprove</q-item-section>
@@ -51,7 +50,7 @@
               </q-btn>
             </q-td>
 
-            <template v-if="props.row.status == 'pending'">
+            <template>
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -68,7 +67,7 @@ import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
 import { IJob } from 'src/interfaces/job.interface2';
 import { IUser } from 'src/interfaces/user.interface2';
-import { JobDto, UserDto } from 'src/services/rest-api';
+import { JobDto } from 'src/services/rest-api';
 
 @Component({
   computed: {
@@ -131,7 +130,7 @@ export default class pendingJob extends Vue {
 
   async mounted() {
     await this.getAllJob();
-    const jobs = this.jobs;
+    const jobs = this.jobs.filter(i => i.status == 'pending');
     const newJob = jobs.map((i) => {
       return {
         ...i,
@@ -142,23 +141,25 @@ export default class pendingJob extends Vue {
   }
 
   async approve(id: number) {
-    const { user, employer,  ...newJob } = this.data.find(i => i.id == id);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { user, employer,  ...newJob } = this.data.find((i: any) => i.id == id);
     console.log(newJob)
     await this.updateJob({
       ...newJob,
       status: 'approved'
     });
-    this.data = this.jobs;
+    this.data = this.jobs.filter(i => i.status == 'pending');
   }
 
   async disapprove(id: number) {
-     const { user, employer,  ...newJob } = this.data.find(i => i.id == id);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+     const { user, employer,  ...newJob } = this.data.find((i: any) => i.id == id);
     console.log(newJob)
     await this.updateJob({
       ...newJob,
       status: 'disapproved'
     });
-    this.data = this.jobs;
+    this.data = this.jobs.filter(i => i.status == 'pending');
   }
 
   colorManipulation(status: string) {

@@ -115,6 +115,8 @@ import { Vue, Component } from 'vue-property-decorator';
 import { mapState, mapActions } from 'vuex';
 import Card from 'components/Card.vue';
 import { JobDto } from 'src/services/rest-api';
+import loginService from 'src/services/login.service';
+import jobService from 'src/services/job.service';
 
 let items: JobDto[] = [];
 
@@ -146,9 +148,7 @@ export default class SearchToolbar extends Vue {
 
   async created() {
     await this.getAllJob();
-    const newJob = this.jobs;
-    console.log(newJob);
-    items = this.jobs;
+    items = this.jobs.filter(i => i.status == 'approved');
   }
 
   get getData2() {

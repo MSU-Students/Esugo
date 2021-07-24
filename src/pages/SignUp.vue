@@ -10,19 +10,19 @@
             inline-label
             class=" text-primary bg-white shadow-2"
           >
-            <q-tab name="SignupWorker" icon="person" label="Signup as Worker" />
+            <q-tab name="worker" icon="person" label="Signup as Worker" />
             <q-tab
-              name="SignupEmployer"
+              name="employer"
               icon="person"
               label="Signup as Employer"
             />
           </q-tabs>
           <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="SignupWorker">
-              <Card />
+            <q-tab-panel name="worker">
+              <Card name="worker" />
             </q-tab-panel>  
-            <q-tab-panel name="SignupEmployer">
-              <Card />
+            <q-tab-panel name="employer">
+              <Card name="employer" />
             </q-tab-panel>
           </q-tab-panels>
         </div>
@@ -53,17 +53,17 @@ export default class PageIndex extends Vue {
   number = '';
   password = '';
   isPwd = '';
-  tab = 'SignupWorker';
+  tab = 'worker';
 
   colorManipulation(tab: string) {
-    if (tab == 'SignupWorker') {
+    if (tab == 'worker') {
       return 'background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);';
     } else {
       return 'background: linear-gradient(to bottom, #e01327 29%, #ffffff 100%);';
     }
   }
    imageManipulation(tab: string) {
-    if (tab == 'SignupWorker') {
+    if (tab == 'worker') {
       return '~assets/bg2.jpg';
     } else {
       return '~assets/bg.jpg';

@@ -61,7 +61,7 @@
       </q-card-section>
 
       <q-card-actions align="center">
-        <q-btn label="Post Job" color="primary" @click="alert = true" />
+        <q-btn label="Post Job" color="primary" @click="addJob()" />
 
         <q-dialog v-model="alert">
           <q-card>
@@ -79,7 +79,7 @@
             </q-card-section> -->
 
             <q-card-actions align="right">
-              <q-btn flat label="OK" color="primary" @click="addJob()" />
+              <q-btn flat label="OK" color="primary"   />
             </q-card-actions>
           </q-card>
         </q-dialog>
@@ -131,7 +131,7 @@ export default class Dialog extends Vue {
     'Driving',
     'Machine Operator'
   ];
-  locate = ['Marantao', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
+  locate = ['Marantao',, 'Marawi', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
   quantity = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
   mounted() {

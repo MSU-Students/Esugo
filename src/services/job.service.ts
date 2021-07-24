@@ -17,6 +17,7 @@ const restApi = new DefaultApi(restConfig);
 class JobService extends DefaultApi {
   async getAll() {
     const res = await restApi.getJobs();
+    console.log(res);
     return res.data;
   }
 
@@ -26,7 +27,7 @@ class JobService extends DefaultApi {
   }
 
   async create(payload: any) {
-    console.log(payload)
+    console.log(payload);
     const res = await restApi.addJob(payload);
     return res;
   }

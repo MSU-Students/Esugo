@@ -19,7 +19,6 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-if="props.row.status != 'suspended'"
               auto-width
               class="text-center"
             >
@@ -36,8 +35,15 @@
                       @click="approveAccount(props.rowIndex)"
                       v-close-popup
                     >
-                    
                       <q-item-section>Able</q-item-section>
+                    </q-item>
+                    <q-item
+                      class="text-orange"
+                      clickable
+                      @click="suspendAccount(props.rowIndex)"
+                      v-close-popup
+                    >
+                      <q-item-section>Suspend</q-item-section>
                     </q-item>
                     <q-item
                       class="text-red"
@@ -45,14 +51,14 @@
                       @click="disapproveAccount(props.rowIndex)"
                       v-close-popup
                     >
-                      <q-item-section>Disable</q-item-section>
+                      <q-item-section>Ban</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
               </q-btn>
             </q-td>
 
-            <template v-if="props.row.status != 'suspended'">
+            <template >
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -120,7 +126,7 @@ export default class approvedAcct extends Vue {
 
   async mounted() {
     await this.getAllUser();
-    this.data = this.users;
+    this.data = this.users.filter(i => i.status != 'pending');
   }
 
   async approveAccount(id: number) {
@@ -128,7 +134,15 @@ export default class approvedAcct extends Vue {
       ...this.users[id],
       status: 'available'
     });
-    this.data = this.users;
+    this.data = this.users.filter(i => i.status != 'pending');
+  }
+async suspendAccount(id: number) {
+    console.log(this.users[id]);
+    await this.updateUser({
+      ...this.users[id],
+      status: 'suspended'
+    });
+    this.data = this.users.filter(i => i.status != 'pending');
   }
 
   async disapproveAccount(id: number) {
@@ -137,7 +151,7 @@ export default class approvedAcct extends Vue {
       ...this.users[id],
       status: 'banned'
     });
-    this.data = this.users;
+    this.data = this.users.filter(i => i.status != 'pending');
   }
 
   colorManipulation(status: string) {
@@ -154,9 +168,9 @@ export default class approvedAcct extends Vue {
     if (status == 'suspended') {
       return 'suspended';
     } else if (status == 'banned') {
-      return 'disable';
+      return 'Banned';
     } else {
-      return 'able';
+      return 'abled';
     }
   }
 }
