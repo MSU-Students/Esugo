@@ -52,6 +52,34 @@
           </q-btn>
           
         </div>
+
+          <div v-if="$route.path == '/workerProfile'" class="q-gutter-x-md">
+          <q-btn flat round dense icon="logout">
+            <q-menu>
+              <div class="row no-wrap q-pa-md">
+                <!-- <div class="column">
+                 <q-btn color="primary" label="Logout" size="m" to="/" />
+                  <q-btn class="p-b-xl"  color="primary" label="Profile" size="m" to="/" />
+                </div> -->
+
+                <!-- <q-separator vertical inset class="q-mx-lg" /> -->
+
+                <div class="column items-center">
+                  <q-avatar size="72px">
+                    <img src="~/assets/profilepic.jpg/" />
+                  </q-avatar>
+
+                  <div class="text-subtitle1 q-mt-md q-mb-xs">Yassier</div>
+                  <q-btn color="primary" label="Logout" size="m" to="/" />
+                 
+
+                 
+                </div>
+              </div>
+            </q-menu>
+          </q-btn>   
+        </div>
+
       </q-toolbar>
     </q-header>
     <q-page-container
