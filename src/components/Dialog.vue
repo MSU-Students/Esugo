@@ -61,26 +61,32 @@
       </q-card-section>
 
       <q-card-actions align="center">
-        <q-btn label="Post Job" color="primary" @click="addJob()" />
+        <!-- <q-btn label="Post Job" color="primary" @click="addJob()" /> -->
+        <q-btn label="Post Job" color="primary" @click="confirm = true" />
 
-        <q-dialog v-model="alert">
-          <q-card>
-            <q-card-section>
-              <div class="text-h6">
-                Job is waiting to be approved by the moderator
-              </div>
-            </q-card-section>
+      <q-dialog v-model="confirm" persistent>
+      <q-card>
+        <q-card-section class="row items-center">
+          <q-avatar icon="caution
+          " color="primary" text-color="white" />
+          <span class="q-ml-sm">Confirm Posting Job?</span>
+        </q-card-section>
 
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="red" v-close-popup />
+          <q-btn flat label="Post" color="blue" @click="addJob()" v-close-popup />
+        </q-card-actions>
+    
             <!-- <q-card-section class="q-pt-none">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
               repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
               perferendis totam, ea at omnis vel numquam exercitationem aut,
               natus minima, porro labore.
             </q-card-section> -->
-
+<!-- 
             <q-card-actions align="right">
               <q-btn flat label="OK" color="primary"   />
-            </q-card-actions>
+            </q-card-actions> -->
           </q-card>
         </q-dialog>
       </q-card-actions>
@@ -118,6 +124,7 @@ export default class Dialog extends Vue {
     datePosted: '2021-07-22',
    employerID: 1
   };
+  confirm = false;
 
   alert = false;
   dialogValue = true;
