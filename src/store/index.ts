@@ -2,10 +2,13 @@ import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 import job from './job-module';
 import user from './user-module';
+import application from './application-module';
 import { JobStateInterface } from './job-module/state';
 import { UserStateInterface } from './user-module/state';
 import auth from './auth';
 import { IAuthState } from './auth/state';
+import { ApplicationStateInterface } from './application-module/state';
+
 
 /*
  * If not building with SSR mode, you can
@@ -17,6 +20,7 @@ export interface StateInterface {
   // example: ExampleStateInterface;
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
  
+  IApplication: ApplicationStateInterface
   IJob: JobStateInterface;
   IUser: UserStateInterface;
   auth: IAuthState;
@@ -30,7 +34,8 @@ export default store(function({ Vue }) {
       // example
       job,
       user,
-      auth
+      auth,
+      application
     },
 
     // enable strict mode (adds overhead!)
