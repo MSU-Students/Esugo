@@ -19,21 +19,20 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-if="props.row.jobstatus == 'pending'"      
               auto-width
               class="text-center"
             >
               <q-btn
-                :text-color="colorManipulation(props.row.jobstatus)"
+                :text-color="colorManipulation(props.row.status)"
                 color="white"
-                :label="labelManipulation(props.row.jobstatus)"
+                :label="labelManipulation(props.row.status)"
               >
                 <q-menu anchor="center middle" self="center middle">
                   <q-list class="text-center" style="min-width: 50px">
                     <q-item
                       class="text-green"
                       clickable
-                      @click="approve(props.rowIndex)"
+                      @click="approve(props.row.id)"
                       v-close-popup
                     >
                       <q-item-section>Approve</q-item-section>
@@ -41,7 +40,7 @@
                     <q-item
                       class="text-red"
                       clickable
-                      @click="disapprove(props.rowIndex)"
+                      @click="disapprove(props.row.id)"
                       v-close-popup
                     >
                       <q-item-section>Disapprove</q-item-section>
@@ -51,7 +50,7 @@
               </q-btn>
             </q-td>
 
-            <template v-if="props.row.jobstatus == 'pending'">
+            <template>
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -66,14 +65,18 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
-import { IJob } from 'src/interfaces/job.interface';
+import { IJob } from 'src/interfaces/job.interface2';
+import { IUser } from 'src/interfaces/user.interface2';
+import { JobDto } from 'src/services/rest-api';
 
 @Component({
   computed: {
-    ...mapState('job', ['jobs'])
+    ...mapState('job', ['jobs']),
+    ...mapState('user', ['user'])
   },
   methods: {
-    ...mapActions('job', ['getAllJob', 'updateJob'])
+    ...mapActions('job', ['getAllJob', 'updateJob']),
+    ...mapActions('user', ['getOneUser'])
   }
 })
 export default class pendingJob extends Vue {
@@ -84,7 +87,7 @@ export default class pendingJob extends Vue {
       required: true,
       label: 'Job Title',
       align: 'left',
-      field: (row: IJob) => row.jobtitle,
+      field: (row: IJob) => row.title,
       format: (val: any) => `${val}`,
       sortable: true
     },
@@ -92,7 +95,7 @@ export default class pendingJob extends Vue {
       name: 'jobdesc',
       align: 'left',
       label: 'Job Description',
-      field: 'jobdesc',
+      field: 'description',
       sortable: true
     },
     {
@@ -105,39 +108,59 @@ export default class pendingJob extends Vue {
     {
       name: 'dateposted',
       label: 'Date Posted',
-      field: 'dateposted',
+      field: 'datePosted',
       sortable: true,
       align: 'left'
     },
+    {
+      name: 'employer',
+      label: 'Employer',
+      field: 'employer',
+      sortable: true,
+      align: 'left'
+    }
   ];
   jobs!: IJob[];
-  data: IJob[] = [];
+  data: any = [];
+  user!: IUser;
   status = '';
-  getAllJob!: () => Promise<void>;
+  getAllJob!: () => Promise<JobDto>;
+  getOneUser!: (id: number) => Promise<void>;
   updateJob!: (payload: any) => Promise<void>;
 
   async mounted() {
     await this.getAllJob();
-    console.log(this.jobs);
-    this.data = this.jobs;
+    const jobs = this.jobs.filter(i => i.status == 'pending');
+    const newJob = jobs.map((i) => {
+      return {
+        ...i,
+        employer: i.user.firstName + ' ' + i.user.lastName
+      };
+    });
+    this.data = newJob;
   }
 
   async approve(id: number) {
-    console.log(id);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { user, employer,  ...newJob } = this.data.find((i: any) => i.id == id);
+    console.log(newJob)
     await this.updateJob({
-      ...this.jobs[id],
-      jobstatus: 'approved'
+      ...newJob,
+      status: 'approved'
     });
-    this.data = this.jobs;
+    this.data = this.jobs.filter(i => i.status == 'pending');
   }
 
-  async disapprove(id: any) {
+  async disapprove(id: number) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+     const { user, employer,  ...newJob } = this.data.find((i: any) => i.id == id);
+    console.log(newJob)
     await this.updateJob({
-      ...this.jobs[id],
-      jobstatus:'disapproved'
+      ...newJob,
+      status: 'disapproved'
     });
-    this.data = this.jobs;
-   }
+    this.data = this.jobs.filter(i => i.status == 'pending');
+  }
 
   colorManipulation(status: string) {
     if (status == 'pending') {

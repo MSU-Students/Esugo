@@ -1,7 +1,8 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
+
     <q-img
-      :src="require(`../assets/${jobPhoto}`)"
+      :src="require(`../assets/${coverPhoto}`)"
       @mouseenter="showReport = true"
       @mouseleave="showReport = false"
     >
@@ -23,20 +24,17 @@
         round
         class="absolute"
         style="top: 0; right: 12px; transform: translateY(-50%)"
-        :to="to"
       >
         <q-avatar size="70px">
-          <img :src="require(`../assets/${profilePic}`)" />
+          <!-- <img :src="require(`../assets/${profilePic}`)" /> -->
         </q-avatar>
       </q-btn>
 
       <div class="row no-wrap items-center">
-        <div class="col text-h6 ellipsis">{{ job }}</div>
-        <div
-          class="col-auto text-grey text-caption q-pt-md row no-wrap items-center"
-        >
+        <div class="col text-h6 ellipsis">{{ title }}</div>
+        <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
           <q-icon name="person" />
-          Employer
+          {{ user.firstName + ' ' + user.lastName }}
         </div>
       </div>
       <div class="text-caption text-grey">
@@ -48,7 +46,7 @@
     <q-card-section class="q-pt-none">
       <div class="text-subtitle1">₱・{{ salary }}</div>
       <div class="text-body2 text-grey-9">
-        {{ jobDesc }}
+        {{ description }}
       </div>
     </q-card-section>
 
@@ -60,7 +58,8 @@
         label="Send Application"
         color="primary"
         icon="send"
-        @click="alerts = true"
+        clickable 
+        @click="addApplication()"
       />
 
       <q-dialog v-model="alerts" persistent>
@@ -146,20 +145,25 @@
   </q-card>
 </template>
 
-<script lang="ts">
+<script lang="ts">  
+import { ApplicationDto } from 'src/services/rest-api';
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 
-@Component({})
+@Component({methods: {
+    ...mapActions('application', ['createApplication'])
+  }})
 export default class Card extends Vue {
-  @Prop({ type: String, required: false }) readonly jobPhoto!: string;
-  @Prop({ type: String, required: false }) readonly profilePic!: string;
-  @Prop({ type: String, required: true }) readonly job!: string;
-  @Prop({ type: Number, required: true }) readonly stars!: number;
-  @Prop({ type: Number, required: true }) readonly salary!: number;
-  @Prop({ type: String, required: true }) readonly jobDesc!: string;
-  @Prop({ type: String, required: true }) readonly location!: string;
-  @Prop({ type: String, required: true }) readonly to!: string;
+  @Prop({type: Number, required: true}) readonly id!: number;
+  @Prop({type: String, required: false}) readonly coverPhoto!: string;
+  // @Prop({type: String, required: false}) readonly profilePic!: string;
+  @Prop({type: String, required: true}) readonly title!: string;
+  @Prop({type: Object, required: true}) readonly user!: any;
+  @Prop({type: String, required: true}) readonly salary!: string;
+  @Prop({type: String, required: true}) readonly description!: string;
+  @Prop({type: String, required: true}) readonly location!: string;
 
+  createApplication!: (payload: ApplicationDto) => Promise<void>;
   alerts = false;
   confirm = false;
   showReport = false;
@@ -167,6 +171,16 @@ export default class Card extends Vue {
   confirmReport = false;
   status = '';
   alert = false;
+  application: ApplicationDto = {
+    workerID: 4,
+    jobID: this.id,
+    status: 'pending',
+  }
+
+  async addApplication() {
+    console.log(this.application);  
+    await this.createApplication(this.application);
+  }
 }
 </script>
 

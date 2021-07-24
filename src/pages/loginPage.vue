@@ -36,7 +36,7 @@
           </template>
          </q-input>
             <q-checkbox size="xs" v-model="val" label = " I have read and accepted the User Notice and Privacy"/>
-          <q-btn class="full-width" color="primary" label="Login" to = "/home" />
+          <q-btn class="full-width" color="primary" label="Login" @click="loginUser()" />
         </div>
       </q-card-section>
     </div>
@@ -45,13 +45,52 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-@Component({})
-export default class PageIndex extends Vue {
+import { AUser } from 'src/store/auth/state';
+import { mapActions } from 'vuex';
+
+@Component({
+  methods: {
+    ...mapActions('auth', ['login']),
+  },
+})
+export default class Login extends Vue {
   val = false; 
   username = '';
   password = '';
   signup = '';
   isPwd = true;
+  type = '';
+
+  login!: (auth: {
+    username: string;
+    password: string;
+    type: string;
+  }) => Promise<AUser>;
+  
+  async loginUser() {
+    try {
+      const res = await this.login({
+        username: this.username,
+        password: this.password,
+        type: this.type,
+      });
+      if (res.type == 'admin' ) {
+        await this.$router.replace('/admin/home');
+      } else if (res.type == 'moderator' ){
+        await this.$router.replace('/moderator/home');
+      } else if (res.type == 'worker' ){
+        await this.$router.replace('/home');
+      } else if (res.type == 'employer' ){
+        await this.$router.replace('/home');
+      }
+    } catch (error) {
+      this.$q.notify({
+        type: 'negative',
+        message: 'Wrong Username or Password!',
+        caption: `${error.message}`,
+      });
+    }
+  }
 }
 </script>
 <style scoped>

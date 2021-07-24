@@ -20,7 +20,8 @@ const actions: ActionTree<JobStateInterface, StateInterface> = {
   },
 
   async updateJob(context, payload: any): Promise<any> {
-    await jobService.update(payload.jobID, payload);
+    console.log(payload)
+    await jobService.update(payload.id, payload);
     await context.dispatch('getAllJob');
   },
 

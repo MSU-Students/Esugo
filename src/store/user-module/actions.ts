@@ -27,6 +27,10 @@ const actions: ActionTree<UserStateInterface, StateInterface> = {
   async deleteUser(context, id: number): Promise<any> {
     const res = await userService.delete(id);
     context.commit('deleteUser', res);
+  },
+  async getProfile(context): Promise<any> {
+    const res = await userService.getProfile()
+    context.commit('getProfile',res)
   }
 };
 

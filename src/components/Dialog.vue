@@ -13,15 +13,20 @@
         <q-select
           outlined
           dense
-          v-model="jobTitle"
-          :options="jobs"
+          v-model="job.title"
+          :options="jobOptions"
           label="Job Title"
         >
           <template v-slot:prepend>
             <q-icon name="work" />
           </template>
         </q-select>
-        <q-input outlined dense v-model="jobDesc" label="Job Description">
+        <q-input
+          outlined
+          dense
+          v-model="job.description"
+          label="Job Description"
+        >
           <template v-slot:prepend>
             <q-icon name="description" />
           </template>
@@ -29,7 +34,7 @@
         <q-select
           outlined
           dense
-          v-model="location"
+          v-model="job.location"
           :options="locate"
           label="Job Location"
         >
@@ -37,7 +42,7 @@
             <q-icon name="location_on" />
           </template>
         </q-select>
-        <q-input outlined dense v-model="salary" label="Salary">
+        <q-input outlined dense v-model="job.salary" label="Salary">
           <template v-slot:prepend>
             <q-icon name="paid" />
           </template>
@@ -56,18 +61,43 @@
       </q-card-section>
 
       <q-card-actions align="center">
-        <q-btn label="Post Job" color="primary" v-close-popup />
+        <q-btn label="Post Job" color="primary" @click="addJob()" />
 
-       
+        <q-dialog v-model="alert">
+          <q-card>
+            <q-card-section>
+              <div class="text-h6">
+                Job is waiting to be approved by the moderator
+              </div>
+            </q-card-section>
+
+            <!-- <q-card-section class="q-pt-none">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+              repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
+              perferendis totam, ea at omnis vel numquam exercitationem aut,
+              natus minima, porro labore.
+            </q-card-section> -->
+
+            <q-card-actions align="right">
+              <q-btn flat label="OK" color="primary"   />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
 
 <script lang="ts">
+import { JobDto } from 'src/services/rest-api';
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 
-@Component({})
+@Component({
+  methods: {
+    ...mapActions('job', ['createJob'])
+  }
+})
 export default class Dialog extends Vue {
   @Prop({ type: Boolean, required: true }) readonly dialogOpened!: boolean;
   @Watch('dialogOpened')
@@ -76,27 +106,47 @@ export default class Dialog extends Vue {
     this.dialogValue = val;
   }
 
-  jobTitle = '';
-  salary = '';
-  jobDesc = '';
-  location = '';
-  hire = '';
+  createJob!: (payload: JobDto) => Promise<void>;
+
+  job: JobDto = {
+    title: '',
+    description: '',
+    location: '',
+    salary: '',
+    status: 'pending',
+    coverPhoto: '',
+    datePosted: '2021-07-22',
+   employerID: 1
+  };
+
   alert = false;
   dialogValue = true;
   model = null;
 
-  jobs = [
+  jobOptions = [
+    'Carpentry',
     'Plumber',
     'Construction Site',
     'Production Line',
     'Driving',
     'Machine Operator'
   ];
-  locate = ['Marantao', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
+  locate = ['Marantao',, 'Marawi', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
   quantity = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
   mounted() {
-    this.dialogValue = this.dialogOpened;
+    // this.dialogValue = this.dialogOpened;
+  }
+
+  async addJob() {
+    if (this.job.title == 'Carpentry') {
+      this.job = {
+        ...this.job,
+        coverPhoto: 'carpentry.jpg'
+      };
+    }
+    await this.createJob(this.job);
+    this.alert = false;
   }
 
   hideDialog() {

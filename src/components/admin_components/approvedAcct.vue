@@ -19,14 +19,13 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td
-              v-if="props.row.acctStatus != 'pending'"
               auto-width
               class="text-center"
             >
               <q-btn
-                :text-color="colorManipulation(props.row.acctStatus)"
+                :text-color="colorManipulation(props.row.status)"
                 color="white"
-                :label="labelManipulation(props.row.acctStatus)"
+                :label="labelManipulation(props.row.status)"
               >
                 <q-menu anchor="center middle" self="center middle">
                   <q-list class="text-center" style="min-width: 50px">
@@ -36,8 +35,15 @@
                       @click="approveAccount(props.rowIndex)"
                       v-close-popup
                     >
-                    
                       <q-item-section>Able</q-item-section>
+                    </q-item>
+                    <q-item
+                      class="text-orange"
+                      clickable
+                      @click="suspendAccount(props.rowIndex)"
+                      v-close-popup
+                    >
+                      <q-item-section>Suspend</q-item-section>
                     </q-item>
                     <q-item
                       class="text-red"
@@ -45,14 +51,14 @@
                       @click="disapproveAccount(props.rowIndex)"
                       v-close-popup
                     >
-                      <q-item-section>Disable</q-item-section>
+                      <q-item-section>Ban</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
               </q-btn>
             </q-td>
 
-            <template v-if="props.row.acctStatus != 'pending'">
+            <template >
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -67,7 +73,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
-import { IUser } from 'src/interfaces/user.interface';
+import { IUser } from 'src/interfaces/user.interface2';
 
 @Component({
   computed: {
@@ -77,8 +83,8 @@ import { IUser } from 'src/interfaces/user.interface';
     ...mapActions('user', ['getAllUser', 'updateUser'])
   }
 })
-export default class pendingAcct extends Vue {
-  greenModel = 'Pending';
+export default class approvedAcct extends Vue {
+  greenModel = 'suspended';
   selectedIndex = null;
   columns = [
     {
@@ -107,7 +113,7 @@ export default class pendingAcct extends Vue {
     {
       name: 'acctCategory',
       label: 'Account Category',
-      field: 'acctCategory',
+      field: 'type',
       sortable: true,
       align: 'left'
     },
@@ -120,29 +126,38 @@ export default class pendingAcct extends Vue {
 
   async mounted() {
     await this.getAllUser();
-    this.data = this.users;
+    this.data = this.users.filter(i => i.status != 'pending');
   }
 
   async approveAccount(id: number) {
     await this.updateUser({
       ...this.users[id],
-      acctStatus: 'approved'
+      status: 'available'
     });
-    this.data = this.users;
+    this.data = this.users.filter(i => i.status != 'pending');
   }
-
-  async disapproveAccount(id: any) {
+async suspendAccount(id: number) {
+    console.log(this.users[id]);
     await this.updateUser({
       ...this.users[id],
-      acctStatus: 'disapproved'
+      status: 'suspended'
     });
-    this.data = this.users;
+    this.data = this.users.filter(i => i.status != 'pending');
+  }
+
+  async disapproveAccount(id: number) {
+    console.log(this.users[id]);
+    await this.updateUser({
+      ...this.users[id],
+      status: 'banned'
+    });
+    this.data = this.users.filter(i => i.status != 'pending');
   }
 
   colorManipulation(status: string) {
-    if (status == 'pending') {
+    if (status == 'suspended') {
       return 'orange';
-    } else if (status == 'disapproved') {
+    } else if (status == 'banned') {
       return 'red';
     } else {
       return 'green';
@@ -150,12 +165,12 @@ export default class pendingAcct extends Vue {
   }
 
   labelManipulation(status: string) {
-    if (status == 'pending') {
-      return 'Pending';
-    } else if (status == 'disapproved') {
-      return 'disable';
+    if (status == 'suspended') {
+      return 'suspended';
+    } else if (status == 'banned') {
+      return 'Banned';
     } else {
-      return 'able';
+      return 'abled';
     }
   }
 }
