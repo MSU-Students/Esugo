@@ -22,8 +22,6 @@
                   <q-item-section>
                     <div class="q-gutter-sm text-h6 text-weight-bold ">
                       CONTACT ME
-
-                    
                     </div>
                   </q-item-section>
                 </q-item>
@@ -159,13 +157,6 @@
             label="Post job"
             @click="() => (dialogOpened = true)"
           />
-          <!-- <q-btn
-            class="float-right"
-            color="primary"
-            icon="add"
-            label="Post job"
-            @click="() => (dialogOpened = true)"
-          /> -->
           <div class="q-gutter-md">
             <div class="text-h4 text-white text-weight-medium">
               Yassin B. Amjad
@@ -191,6 +182,8 @@
 import { Vue, Component } from 'vue-property-decorator';
 import TabPanels from 'components/employer_components/TabPanels.vue';
 import Dialog from 'src/components/Dialog.vue';
+import userService from 'src/services/user.service';
+import { UserDto } from 'src/services/rest-api';
 
 @Component({
   components: {
@@ -200,9 +193,32 @@ import Dialog from 'src/components/Dialog.vue';
 })
 export default class EmployerProfile extends Vue {
   dialogOpened = false;
+  user: UserDto = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    birthdate: '',
+    gender: '',
+    address: '',
+    contact: '',
+    email: '',
+    company: '',
+    location: '',
+    type: '',
+    status: '',
+    username: '',
+    password: '',
+    refreshToken: ''
+  };
 
   hideDialog(value: boolean) {
     this.dialogOpened = value;
+  }
+
+  async created() {
+    const res: any = await userService.getUserProfile();
+    this.user = res;
+    console.log(this.user);
   }
 }
 </script>

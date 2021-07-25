@@ -39,6 +39,11 @@ class UserService extends DefaultApi {
     const res = await restApi.deleteUser(id);
     return res;
   }
+
+  async getUserProfile() {
+    const res = await restApi.getProfile();
+    return res;
+  }
 }
 
 const userService = new UserService();

@@ -102,7 +102,14 @@
         </template>
       </q-input>
     </div>
-    <q-btn class="full-width" color="primary" label="sign-up" @click="addUser()" />
+    <q-btn
+      class="full-width"
+      color="primary"
+      label="sign-up"
+      :loading="loading"
+      :disabl="loading"
+      @click="addUser()"
+    />
   </q-card>
 </template>
 
@@ -110,6 +117,7 @@
 import { UserDto } from 'src/services/rest-api';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { mapActions } from 'vuex';
+import helperService from '../services/helper.service';
 
 @Component({
   methods: {
@@ -119,7 +127,7 @@ import { mapActions } from 'vuex';
 export default class singupCard extends Vue {
   @Prop({ type: String, required: true }) readonly name!: string;
 
- isPwd = '';
+  isPwd = '';
   createUser!: (payload: UserDto) => Promise<void>;
   user: UserDto = {
     firstName: 'Pandi',
@@ -137,10 +145,28 @@ export default class singupCard extends Vue {
     username: 'worker',
     password: 'password',
     refreshToken: ''
-  };  
+  };
+
+  loading = false;
+
   async addUser() {
-    console.log(this.user )
-    await this.createUser(this.user);
+    try {
+      this.loading = true;
+      await this.createUser(this.user);
+      await this.$router.replace('/login');
+      this.loading = false;
+      helperService.notify({
+        type: 'positive',
+        message: 'Successfully registered!'
+      });
+    } catch (error) {
+      helperService.notify({
+        type: 'negative',
+        message: error.response.data.message,
+        caption: error.message
+      });
+      this.loading = false;
+    }
   }
-  }
+}
 </script>
