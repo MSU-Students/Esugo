@@ -134,6 +134,11 @@ export default class Dialog extends Vue {
         ...this.job,
         coverPhoto: 'carpentry.jpg',
       };
+    } else if (this.job.title == 'Plumber') {
+      this.job = {
+        ...this.job,
+        coverPhoto: 'plumber.jpeg',
+      };
     }
     const res: any = await this.getProfile();
     await this.createJob({...this.job, employerID: res.id});

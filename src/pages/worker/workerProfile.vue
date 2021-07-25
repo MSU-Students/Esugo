@@ -2,7 +2,7 @@
   <q-page
     class="flex flex-center"
     padding
-    style="background: linear-gradient(to top right, #0066eb 0%, #71f4e4 100%);"
+    style="background: linear-gradient(to top right, #0066eb 0%, #71f4e4 100%)"
   >
     <!-- <q-btn
       class="float-right"
@@ -11,9 +11,9 @@
       label="add job"
       @click="() => (dialogOpened = true)"
     /> -->
-    <div class="q-pa-md ">
+    <div class="q-pa-md">
       <div class="row">
-        <div class="col-4 ">
+        <div class="col-4">
           <q-card bordered class="my-card" style="height: 700px">
             <q-card-section class="flex flex-center">
               <q-avatar size="230px">
@@ -27,9 +27,7 @@
               <q-list>
                 <q-item dense>
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
-                      CONTACT ME
-                    </div>
+                    <div class="q-gutter-sm text-h6 text-weight-bold">CONTACT ME</div>
                   </q-item-section>
                 </q-item>
 
@@ -45,8 +43,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h7 text-weight-bold ">
-                      yassiergania09@gmail.com
+                    <div class="q-gutter-sm text-h7 text-weight-bold">
+                      {{ user.email }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -63,8 +61,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
-                      +63 963 820 8955
+                    <div class="q-gutter-sm text-h6 text-weight-bold">
+                      {{ user.contact }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -81,8 +79,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h9 text-weight-bold ">
-                      0072 Tubacan Pumping St. Marawi City Lanao Del Sur
+                    <div class="q-gutter-sm text-h9 text-weight-bold">
+                      {{ user.address }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -94,9 +92,7 @@
               <q-list>
                 <q-item dense>
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold">
-                      SKILLS
-                    </div>
+                    <div class="q-gutter-sm text-h6 text-weight-bold">SKILLS</div>
                   </q-item-section>
                 </q-item>
 
@@ -112,9 +108,7 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
-                      Editor
-                    </div>
+                    <div class="q-gutter-sm text-h6 text-weight-bold">Editor</div>
                   </q-item-section>
                 </q-item>
 
@@ -130,9 +124,7 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
-                      Programmer
-                    </div>
+                    <div class="q-gutter-sm text-h6 text-weight-bold">Programmer</div>
                   </q-item-section>
                 </q-item>
 
@@ -148,7 +140,7 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
+                    <div class="q-gutter-sm text-h6 text-weight-bold">
                       Trouble Shooter
                     </div>
                   </q-item-section>
@@ -161,7 +153,7 @@
         <div class="col q-pa-md">
           <div class="q-gutter-md">
             <div class="text-h4 text-white text-weight-medium">
-              Yassier Gania Bashier
+              {{ user.firstName + ' ' + user.lastName }}
             </div>
           </div>
 
@@ -180,15 +172,41 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import {Vue, Component} from 'vue-property-decorator';
 import TabPanels from 'components/worker_components/TabPanels.vue';
+import userService from 'src/services/user.service';
+import {UserDto} from 'src/services/rest-api';
 
 @Component({
   components: {
-    TabPanels
-  }
+    TabPanels,
+  },
 })
-export default class WorkerProfile extends Vue {}
+export default class WorkerProfile extends Vue {
+  user: UserDto = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    birthdate: '',
+    gender: '',
+    address: '',
+    contact: '',
+    email: '',
+    company: '',
+    location: '',
+    type: '',
+    status: '',
+    username: '',
+    password: '',
+    refreshToken: '',
+  };
+
+  async created() {
+    const res: any = await userService.getUserProfile();
+    this.user = res;
+    console.log(this.user);
+  }
+}
 </script>
 <style scoped>
 .pic-text {

@@ -7,7 +7,7 @@
       <q-toolbar-title :class="$q.screen.lt.md ? 'text-caption' : 'text-h4'">
         <div>Find the <strong>jobs </strong> that matter to you</div>
         <div
-          class="row q-col-gutter-x-md items-center q-pt-sm"
+          class="row q-col-gutter-x-md justify-between items-center q-pt-sm"
           :style="$q.screen.lt.md ? 'width: 95%' : ''"
         >
           <div class="col-11">
@@ -15,7 +15,7 @@
               class="justify-between q-col-gutter-x-md q-pt-none"
               :class="!$q.screen.lt.md ? 'row' : 'q-gutter-y-sm'"
             >
-              <div class="col-4">
+              <div class="col">
                 <q-input
                   outlined
                   v-model="jobTitle"
@@ -28,18 +28,11 @@
                   </template>
                 </q-input>
               </div>
-              <div class="col-4">
+              <div class="col">
                 <q-select
                   outlined
                   v-model="jobLocation"
-                  :options="[
-                    'Malutlut',
-                    'Sarimanok',
-                    'Lancaf',
-                    'Brgy.Green',
-                    'Datu Saber',
-                    'Matampay',
-                  ]"
+                  :options="locationOption"
                   bg-color="white"
                   type="text"
                   label="Area, city or town"
@@ -48,36 +41,23 @@
                   </template>
                 </q-select>
               </div>
-              <div class="col-4">
-                <q-select
-                  outlined
-                  v-model="jobSpecialization"
-                  :options="['Carpentry', 'Driver', 'Cooker']"
-                  bg-color="white"
-                  type="text"
-                  label="All Job Specialization"
-                  ><template v-slot:prepend>
-                    <q-icon name="work_outline" />
-                  </template>
-                </q-select>
-              </div>
             </div>
           </div>
-          <div class="col-1">
-            <q-btn
-              round
-              color="primary"
-              icon="search"
-              size="md"
-              @click="searchTap = !searchTap"
-            />
+          <div class="col text-center">
+            <q-btn round color="primary" icon="search" size="md" @click="searchJob()" />
           </div>
         </div>
       </q-toolbar-title>
     </q-toolbar>
-    <div v-if="searchTap" class="search-img text-center text-primary">
+    <div
+      v-if="!searchTap || cardItems.length != 0"
+      class="search-img text-center text-primary"
+    >
       <img height="250px" src="..\..\src\assets\searchjobs.png" />
       <div class="text-h5">Search Jobs!</div>
+    </div>
+    <div v-else-if="cardItems.length == 0" class="text-center q-pa-xl">
+      <div class="text-h4 q-pb-lg text-primary">No Content!</div>
     </div>
     <div v-else class="text-center q-pa-xl">
       <div class="text-h4 q-pb-lg text-primary">Job Results!</div>
@@ -131,11 +111,12 @@ let items: JobDto[] = [];
 export default class SearchToolbar extends Vue {
   jobTitle = '';
   jobLocation = '';
+  locationOption: any = [];
   jobSpecialization = '';
-  searchTap = true;
+  searchTap = false;
+  type = 'All';
   cardItems = items;
   log = false;
-  type = 'All';
   page = 1;
   currentPage = 1;
   nextPage = null;
@@ -146,7 +127,11 @@ export default class SearchToolbar extends Vue {
   async created() {
     await this.getAllJob();
     items = this.jobs.filter((i) => i.status == 'approved');
-    console.log(items);
+    this.locationOption = items.map((i) => {
+      if (i.status == 'approved') {
+        return i.location;
+      }
+    });
   }
 
   get getData2() {
@@ -157,23 +142,29 @@ export default class SearchToolbar extends Vue {
   }
 
   getData() {
-    if (this.type == 'All') {
-      if (this.$q.screen.lt.sm) {
-        this.totalPages = 4;
-      }
-      return items;
-    } else {
-      let self = this;
-      return items.filter(function (item: any) {
-        return item.type.toLowerCase() == self.type.toLowerCase();
-      });
-    }
+    const result = (items = this.jobs.filter(
+      (i) =>
+        (i.location == this.jobLocation &&
+          i.title.toLowerCase() == this.jobTitle.toLowerCase()) ||
+        (i.location == this.jobLocation && this.jobTitle == '') ||
+        (i.title.toLowerCase() == this.jobTitle.toLowerCase() &&
+          this.jobLocation == '') ||
+        (this.jobTitle == '' && this.jobLocation == '')
+    ));
+    this.cardItems = result;
+    return result;
+  }
+
+  searchJob() {
+    //
+    this.searchTap = true;
+    this.getData2;
   }
 }
 </script>
 
 <style scoped>
-.q-toolbar-desktop {
+.q-toolbar-d esktop {
   background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);
   padding: 0px 100px 0px 100px;
 }

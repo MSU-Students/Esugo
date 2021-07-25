@@ -10,18 +10,13 @@
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
         <q-btn flat color="white " icon="person" label="Profile" to="/employerProfile" />
-        <q-btn flat color="white " icon="logout" label="Log-out" to="/" />
+        <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
-    <ADrawer
+    <AdminDrawer
       v-if="$route.path == '/admin/' || $route.path == '/admin/accounts'"
       :drawerOpen="drawerOpen"
     />
-    <MDrawer
-      v-if="$route.path == '/moderator/' || $route.path == '/moderator/home'"
-      :drawerOpen="drawerOpen"
-    />
-
     <q-page-container
       :style="$route.path == '/login' ? 'padding-top: 0 !important;' : ''"
     >
@@ -32,11 +27,11 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import ADrawer from 'src/components/admin_components/drawer.vue';
-import MDrawer from 'src/components/moderator_components/drawer.vue';
+import AdminDrawer from 'src/components/admin_components/drawer.vue';
+import loginService from 'src/services/login.service';
 
 @Component({
-  components: {MDrawer, ADrawer},
+  components: {AdminDrawer},
 })
 export default class AdminLayout extends Vue {
   drawerOpen = true;
@@ -44,6 +39,11 @@ export default class AdminLayout extends Vue {
   onDrawerEvent() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.drawerOpen = !this.drawerOpen;
+  }
+
+  async logout() {
+    await loginService.logoutUser();
+    await this.$router.replace('/');
   }
 }
 </script>

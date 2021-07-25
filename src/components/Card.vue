@@ -134,6 +134,7 @@
 </template>
 
 <script lang="ts">
+import helperService from 'src/services/helper.service';
 import {ApplicationDto, UserDto} from 'src/services/rest-api';
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import {mapActions, mapState} from 'vuex';
@@ -171,12 +172,29 @@ export default class Card extends Vue {
     status: 'pending',
   };
 
+  async created() {
+    // know that user already applied for the job
+  }
+
+  jobsAvailable() {
+    //
+  }
+
   async addApplication() {
-    const currentProfile: any = await this.getProfile();
-    await this.createApplication({
-      ...this.application,
-      workerID: currentProfile.id,
-    });
+    try {
+      const currentProfile: any = await this.getProfile();
+      await this.createApplication({
+        ...this.application,
+        workerID: currentProfile.id,
+      });
+      helperService.notify({
+        type: 'positive',
+        message: 'Successfully Applied!',
+        caption: 'Employer will contact you soon.',
+      });
+    } catch (error) {
+      await this.$router.replace('/login');
+    }
   }
 }
 </script>
