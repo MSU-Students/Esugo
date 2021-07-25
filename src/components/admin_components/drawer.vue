@@ -11,28 +11,24 @@
   >
     <q-scroll-area class="fit">
       <q-list padding>
-        <q-item clickable to="/admin/home" v-ripple>
+        <q-item clickable to="/admin/" v-ripple>
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
-          <q-item-section>
-            Home
-          </q-item-section>
+          <q-item-section> Home </q-item-section>
         </q-item>
         <q-item clickable to="/admin/accounts" v-ripple>
           <q-item-section avatar>
             <q-icon name="person" />
           </q-item-section>
-          <q-item-section>
-            Accounts
-          </q-item-section>
+          <q-item-section> Accounts </q-item-section>
         </q-item>
       </q-list>
     </q-scroll-area>
   </q-drawer>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import {Vue, Component} from 'vue-property-decorator';
 @Component({})
 export default class MainLayout extends Vue {
   drawer = false;

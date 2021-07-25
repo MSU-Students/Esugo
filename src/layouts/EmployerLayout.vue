@@ -9,12 +9,12 @@
         >
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
-        <q-btn flat color="white " icon="person" label="Profile" to="/employerProfile" />
+        <q-btn flat color="white " icon="person" label="Profile" to="/employer/profile" />
         <q-btn flat color="white " icon="logout" label="Log-out" to="/" />
       </q-toolbar>
     </q-header>
     <ADrawer
-      v-if="$route.path == '/admin/' || $route.path == '/admin/accounts'"
+      v-if="$route.path == '/employer/' || $route.path == '/employer/accounts'"
       :drawerOpen="drawerOpen"
     />
     <MDrawer
@@ -32,13 +32,13 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import ADrawer from 'src/components/admin_components/drawer.vue';
-import MDrawer from 'src/components/moderator_components/drawer.vue';
+import ADrawer from 'src/components/employer_components/drawer.vue';
+// import MDrawer from 'src/components/moderator_components/drawer.vue';
 
 @Component({
-  components: {MDrawer, ADrawer},
+  components: {ADrawer},
 })
-export default class AdminLayout extends Vue {
+export default class EmployerLayout extends Vue {
   drawerOpen = true;
 
   onDrawerEvent() {
