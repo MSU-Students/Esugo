@@ -47,17 +47,6 @@
             <q-icon name="paid" />
           </template>
         </q-input>
-        <!-- <q-select
-          outlined
-          dense
-          v-model="hire"
-          :options="quantity"
-          label="How many hires?"
-        >
-          <template v-slot:prepend>
-            <q-icon name="attribution" />
-          </template>
-        </q-select> -->
       </q-card-section>
 
       <q-card-actions align="center">
@@ -71,15 +60,8 @@
               </div>
             </q-card-section>
 
-            <!-- <q-card-section class="q-pt-none">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-              repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis
-              perferendis totam, ea at omnis vel numquam exercitationem aut,
-              natus minima, porro labore.
-            </q-card-section> -->
-
             <q-card-actions align="right">
-              <q-btn flat label="OK" color="primary"   />
+              <q-btn flat label="OK" color="primary" />
             </q-card-actions>
           </q-card>
         </q-dialog>
@@ -99,7 +81,7 @@ import { mapActions } from 'vuex';
   }
 })
 export default class Dialog extends Vue {
-  @Prop({ type: Boolean, required: true }) readonly dialogOpened!: boolean;
+  @Prop({ type: Boolean, required: false }) readonly dialogOpened!: boolean;
   @Watch('dialogOpened')
   onChange(val: boolean, oldVal: string) {
     console.log(val, oldVal);
@@ -116,11 +98,11 @@ export default class Dialog extends Vue {
     status: 'pending',
     coverPhoto: '',
     datePosted: '2021-07-22',
-   employerID: 1
+    employerID: 1
   };
 
   alert = false;
-  dialogValue = true;
+  dialogValue = false;
   model = null;
 
   jobOptions = [
@@ -131,7 +113,15 @@ export default class Dialog extends Vue {
     'Driving',
     'Machine Operator'
   ];
-  locate = ['Marantao',, 'Marawi', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
+  locate = [
+    'Marantao',
+    ,
+    'Marawi',
+    'Saguiran',
+    'Wato',
+    'Malutlut',
+    'Bario Green'
+  ];
   quantity = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
   mounted() {

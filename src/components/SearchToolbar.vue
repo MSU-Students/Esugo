@@ -117,6 +117,7 @@ import Card from 'components/Card.vue';
 import { JobDto } from 'src/services/rest-api';
 import loginService from 'src/services/login.service';
 import jobService from 'src/services/job.service';
+import userService from 'src/services/user.service';
 
 let items: JobDto[] = [];
 
@@ -147,6 +148,7 @@ export default class SearchToolbar extends Vue {
   getAllJob!: () => Promise<JobDto>;
 
   async created() {
+
     await this.getAllJob();
     items = this.jobs.filter(i => i.status == 'approved');
   }

@@ -25,7 +25,8 @@
           v-if="$route.path == '/review' || $route.path == '/home'"
           class="q-gutter-x-md"
         >
-          <q-btn flat color="white " icon="person" label="Log-out" to="/" />
+          <q-btn flat color="white " icon="person" label="Profile" to="/employerProfile" />
+          <q-btn flat color="white " icon="logout" label="Log-out" to="/" />
         </div>
 
         <div v-if="$route.path == '/employerProfile'" class="q-gutter-x-md">
@@ -50,7 +51,7 @@
               </div>
             </q-menu>
           </q-btn>
-          
+
         </div>
       </q-toolbar>
     </q-header>
