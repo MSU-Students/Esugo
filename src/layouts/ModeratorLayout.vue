@@ -14,7 +14,7 @@
       </q-toolbar>
     </q-header>
     <ADrawer
-      v-if="$route.path == '/admin/' || $route.path == '/admin/accounts'"
+      v-if="$route.path == '/moderator/' || $route.path == '/moderator/accounts'"
       :drawerOpen="drawerOpen"
     />
     <MDrawer
@@ -32,13 +32,13 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import ADrawer from 'src/components/admin_components/drawer.vue';
+import ADrawer from 'src/components/moderator_components/drawer.vue';
 import MDrawer from 'src/components/moderator_components/drawer.vue';
 
 @Component({
   components: {MDrawer, ADrawer},
 })
-export default class AdminLayout extends Vue {
+export default class ModeratorLayout extends Vue {
   drawerOpen = true;
 
   onDrawerEvent() {

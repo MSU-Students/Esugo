@@ -14,13 +14,17 @@ const mutation: MutationTree<UserStateInterface> = {
   createUser(state, payload) {
     state.users.push(payload);
   },
-  
+
   updateUser(state, payload) {
     state.users.push(payload);
   },
 
   deleteUser(state, payload) {
     state.users.push(payload);
+  },
+
+  getProfile(state, payload) {
+    state.user = payload;
   }
 };
 

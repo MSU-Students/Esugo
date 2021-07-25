@@ -1,6 +1,8 @@
 <template>
-  <q-page   style="background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);" 
-  class="flex flex-center">
+  <q-page
+    style="background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%)"
+    class="flex flex-center"
+  >
     <div>
       <q-card class="my-card no-shadow">
         <div class="pic-text absolute-bottom-left text-white q-gutter-xl"></div>
@@ -8,15 +10,18 @@
     </div>
 
     <div class="col-4">
-      <q-card-section class="q-pa-xl  " >
+      <q-card-section class="q-pa-xl">
         <div class="text-center">
           <img src="~/assets/ESUGO.png" width="370px" />
         </div>
-        <h5 class="text-weight-bolder text-center text-white" >
-          Sign in to your account
-        </h5>
+        <h5 class="text-weight-bolder text-center text-white">Sign in to your account</h5>
         <div class="q-gutter-md">
-          <q-input outlined v-model="username" label="Username" standout="bg-white text-primary"/>
+          <q-input
+            outlined
+            v-model="username"
+            label="Username"
+            standout="bg-white text-primary"
+          />
 
           <q-input
             color="blue-9"
@@ -27,15 +32,19 @@
             label="Password"
             standout="bg-white text-primary"
           >
-          <template v-slot:append>
-          <q-icon
-            :name="isPwd ? 'visibility_off' : 'visibility'"
-            class="cursor-pointer"
-            @click="isPwd = !isPwd"
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+          <q-checkbox
+            size="xs"
+            v-model="val"
+            label=" I have read and accepted the User Notice and Privacy"
           />
-          </template>
-         </q-input>
-            <q-checkbox size="xs" v-model="val" label = " I have read and accepted the User Notice and Privacy"/>
           <q-btn class="full-width" color="primary" label="Login" @click="loginUser()" />
         </div>
       </q-card-section>
@@ -44,9 +53,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { AUser } from 'src/store/auth/state';
-import { mapActions } from 'vuex';
+import {Vue, Component} from 'vue-property-decorator';
+import {AUser} from 'src/store/auth/state';
+import {mapActions} from 'vuex';
+import helperService from 'src/services/helper.service';
+import userService from 'src/services/user.service';
+import loginService from 'src/services/login.service';
 
 @Component({
   methods: {
@@ -54,40 +66,43 @@ import { mapActions } from 'vuex';
   },
 })
 export default class Login extends Vue {
-  val = false; 
+  val = false;
   username = '';
   password = '';
   signup = '';
   isPwd = true;
   type = '';
 
-  login!: (auth: {
-    username: string;
-    password: string;
-    type: string;
-  }) => Promise<AUser>;
-  
+  login!: (auth: {username: string; password: string; type: string}) => Promise<AUser>;
+
   async loginUser() {
     try {
-      const res = await this.login({
+      const res: any = await this.login({
         username: this.username,
         password: this.password,
         type: this.type,
       });
-      if (res.type == 'admin' ) {
-        await this.$router.replace('/admin/home');
-      } else if (res.type == 'moderator' ){
-        await this.$router.replace('/moderator/home');
-      } else if (res.type == 'worker' ){
-        await this.$router.replace('/home');
-      } else if (res.type == 'employer' ){
-        await this.$router.replace('/home');
+      if (res.type == 'admin') {
+        await this.$router.replace('/admin/');
+      } else if (res.type == 'moderator') {
+        await this.$router.replace('/moderator/');
+      } else if (res.type == 'worker') {
+        await this.$router.replace('/worker/');
+      } else if (res.type == 'employer') {
+        await this.$router.replace('/employer/');
       }
+      helperService.notify({
+        type: 'positive',
+        message: `Welcome ${res.firstName} ${res.lastName}`,
+      });
     } catch (error) {
-      this.$q.notify({
+      helperService.notify({
         type: 'negative',
-        message: 'Wrong Username or Password!',
-        caption: `${error.message}`,
+        message:
+          error.response.data.message == 'Unauthorized'
+            ? 'Wrong username or password'
+            : 'Something went wrong!',
+        caption: error.message,
       });
     }
   }

@@ -1,18 +1,6 @@
 import { DefaultApi } from './rest-api/api';
-import { Configuration, UserDto } from './rest-api';
-
-const dev = 'http://localhost:3000';
-
-const restConfig = new Configuration({
-  basePath: dev,
-  baseOptions: {
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }
-});
-
-const restApi = new DefaultApi(restConfig);
+import { UserDto } from './rest-api';
+import { restApi } from './rest-api.service';
 
 class UserService extends DefaultApi {
   async getAll(): Promise<UserDto> {
@@ -32,12 +20,17 @@ class UserService extends DefaultApi {
 
   async update(id: number, payload: any) {
     const res = await restApi.updateUser(id, payload);
-    return res;
+    return res.data;
   }
 
   async delete(id: number) {
     const res = await restApi.deleteUser(id);
-    return res;
+    return res.data;
+  }
+
+  async getUserProfile() {
+    const res = await restApi.getProfile();
+    return res.data;
   }
 }
 

@@ -13,6 +13,7 @@ function state(): ApplicationStateInterface {
       id: 0,
       jobID: 0,
       workerID: 0,
+      employerID: 0,
       status: 'pending',
     },
     applications: [],

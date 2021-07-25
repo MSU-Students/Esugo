@@ -1,8 +1,8 @@
 <template>
   <div>
     <q-toolbar
-      class="text-white "
-      style="background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);"
+      class="text-white"
+      style="background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%)"
     >
       <q-toolbar-title :class="$q.screen.lt.md ? 'text-caption' : 'text-h4'">
         <div>Find the <strong>jobs </strong> that matter to you</div>
@@ -12,7 +12,7 @@
         >
           <div class="col-11">
             <div
-              class=" justify-between q-col-gutter-x-md q-pt-none"
+              class="justify-between q-col-gutter-x-md q-pt-none"
               :class="!$q.screen.lt.md ? 'row' : 'q-gutter-y-sm'"
             >
               <div class="col-4">
@@ -38,7 +38,7 @@
                     'Lancaf',
                     'Brgy.Green',
                     'Datu Saber',
-                    'Matampay'
+                    'Matampay',
                   ]"
                   bg-color="white"
                   type="text"
@@ -84,11 +84,7 @@
 
       <div>
         <div class="row q-gutter-md flex flex-center">
-          <Card
-            v-for="(items, index) in getData2"
-            :key="index"
-            v-bind="items"
-          />
+          <Card v-for="(items, index) in getData2" :key="index" v-bind="items" />
         </div>
         <div class="flex flex-center q-pt-lg">
           <q-pagination
@@ -111,25 +107,26 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { mapState, mapActions } from 'vuex';
+import {Vue, Component} from 'vue-property-decorator';
+import {mapState, mapActions} from 'vuex';
 import Card from 'components/Card.vue';
-import { JobDto } from 'src/services/rest-api';
+import {JobDto} from 'src/services/rest-api';
 import loginService from 'src/services/login.service';
 import jobService from 'src/services/job.service';
+import userService from 'src/services/user.service';
 
 let items: JobDto[] = [];
 
 @Component({
   components: {
-    Card
+    Card,
   },
   computed: {
-    ...mapState('job', ['jobs'])
+    ...mapState('job', ['jobs']),
   },
   methods: {
-    ...mapActions('job', ['getAllJob', 'updateJob'])
-  }
+    ...mapActions('job', ['getAllJob', 'updateJob']),
+  },
 })
 export default class SearchToolbar extends Vue {
   jobTitle = '';
@@ -148,7 +145,8 @@ export default class SearchToolbar extends Vue {
 
   async created() {
     await this.getAllJob();
-    items = this.jobs.filter(i => i.status == 'approved');
+    items = this.jobs.filter((i) => i.status == 'approved');
+    console.log(items);
   }
 
   get getData2() {
@@ -166,7 +164,7 @@ export default class SearchToolbar extends Vue {
       return items;
     } else {
       let self = this;
-      return items.filter(function(item: any) {
+      return items.filter(function (item: any) {
         return item.type.toLowerCase() == self.type.toLowerCase();
       });
     }

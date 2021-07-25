@@ -2,7 +2,7 @@
   <q-page
     class="flex flex-center"
     padding
-    style="background: linear-gradient(to bottom left,  #0066eb 0%, #ff8ab3 100%  );"
+    style="background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%)"
   >
     <div class="q-pa-md q-gutter-sm">
       <div class="row">
@@ -20,11 +20,7 @@
               <q-list>
                 <q-item dense>
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
-                      CONTACT ME
-
-                    
-                    </div>
+                    <div class="q-gutter-sm text-h6 text-weight-bold">CONTACT ME</div>
                   </q-item-section>
                 </q-item>
 
@@ -40,8 +36,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h7 text-weight-bold ">
-                      Amjad_Yasin010109@gmail.com
+                    <div class="q-gutter-sm text-h7 text-weight-bold">
+                      {{ user.email }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -58,8 +54,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h6 text-weight-bold ">
-                      +63 963 820 8955
+                    <div class="q-gutter-sm text-h6 text-weight-bold">
+                      {{ user.contact }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -76,8 +72,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h9 text-weight-bold ">
-                      Poblacion Saguiaran Lanao del Sur
+                    <div class="q-gutter-sm text-h9 text-weight-bold">
+                      {{ user.address }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -107,8 +103,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h7 text-weight-bold ">
-                      Private Company
+                    <div class="q-gutter-sm text-h7 text-weight-bold">
+                      {{ user.company }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -124,8 +120,8 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <div class="q-gutter-sm text-h7 text-weight-bold ">
-                      Poblacion Saguiaran Lanao del Sur
+                    <div class="q-gutter-sm text-h7 text-weight-bold">
+                      {{ user.location }}
                     </div>
                   </q-item-section>
                 </q-item>
@@ -142,8 +138,8 @@
                   />
                 </q-item-section>
                 <q-item-section>
-                  <div class="q-gutter-sm text-h7 text-weight-bold ">
-                    yassinCompany@gmail.com
+                  <div class="q-gutter-sm text-h7 text-weight-bold">
+                    {{ user.email }}
                   </div>
                 </q-item-section>
               </q-item>
@@ -159,23 +155,14 @@
             label="Post job"
             @click="() => (dialogOpened = true)"
           />
-          <!-- <q-btn
-            class="float-right"
-            color="primary"
-            icon="add"
-            label="Post job"
-            @click="() => (dialogOpened = true)"
-          /> -->
           <div class="q-gutter-md">
             <div class="text-h4 text-white text-weight-medium">
-              Yassin B. Amjad
+              {{ user.firstName + ' ' + user.lastName }}
               <q-btn flat round color="white" icon="edit" size="8px" />
             </div>
           </div>
           <div>
-            <q-chip color="blue-5" text-color="white">
-              Private Company
-            </q-chip>
+            <q-chip color="blue-5" text-color="white"> Private Company </q-chip>
           </div>
           <div class="q-pt-md">
             <TabPanels />
@@ -188,21 +175,46 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import {Vue, Component} from 'vue-property-decorator';
 import TabPanels from 'components/employer_components/TabPanels.vue';
 import Dialog from 'src/components/Dialog.vue';
+import userService from 'src/services/user.service';
+import {UserDto} from 'src/services/rest-api';
 
 @Component({
   components: {
     TabPanels,
-    Dialog
-  }
+    Dialog,
+  },
 })
 export default class EmployerProfile extends Vue {
   dialogOpened = false;
+  user: UserDto = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    birthdate: '',
+    gender: '',
+    address: '',
+    contact: '',
+    email: '',
+    company: '',
+    location: '',
+    type: '',
+    status: '',
+    username: '',
+    password: '',
+    refreshToken: '',
+  };
 
   hideDialog(value: boolean) {
     this.dialogOpened = value;
+  }
+
+  async created() {
+    const res: any = await userService.getUserProfile();
+    this.user = res;
+    console.log(this.user);
   }
 }
 </script>

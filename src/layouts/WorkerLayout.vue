@@ -1,30 +1,32 @@
 <template>
   <q-layout view="hhh LpR lFf">
-    <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
+    <q-header elevated>
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
-        <q-toolbar-title
-          class="row items-center cursor-pointer"
-          @click="$router.replace('/')"
-        >
+        <q-toolbar-title class="row items-center cursor-pointer">
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
-        <q-btn flat color="white " icon="person" label="Profile" to="/employerProfile" />
-        <q-btn flat color="white " icon="logout" label="Log-out" to="/" />
+        <div class="q-gutter-x-md">
+          <q-btn
+            flat
+            color="white "
+            icon="person"
+            label="Profile"
+            to="/employerProfile"
+          />
+          <q-btn flat color="white " icon="person" label="Log-out" to="/" />
+        </div>
       </q-toolbar>
     </q-header>
     <ADrawer
-      v-if="$route.path == '/admin/' || $route.path == '/admin/accounts'"
+      v-if="$route.path == '/admin/home' || $route.path == '/admin/accounts'"
       :drawerOpen="drawerOpen"
     />
     <MDrawer
-      v-if="$route.path == '/moderator/' || $route.path == '/moderator/home'"
+      v-if="$route.path == '/moderator/jobs' || $route.path == '/moderator/home'"
       :drawerOpen="drawerOpen"
     />
-
-    <q-page-container
-      :style="$route.path == '/login' ? 'padding-top: 0 !important;' : ''"
-    >
+    <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
