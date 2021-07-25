@@ -126,7 +126,7 @@ export default class approvedAcct extends Vue {
 
   async mounted() {
     await this.getAllUser();
-    this.data = this.users.filter(i => i.status != 'pending');
+    this.data = this.users.filter(i => i.status != 'pending' && i.type != 'admin' && i.type != 'moderator');
   }
 
   async approveAccount(id: number) {

@@ -13,7 +13,7 @@
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
-    <ADrawer
+    <EmployerDrawer
       v-if="$route.path == '/employer/' || $route.path == '/employer/profile' || $route.path == '/employer/applicants'"
       :drawerOpen="drawerOpen"
     />
