@@ -14,7 +14,7 @@
       </q-toolbar>
     </q-header>
     <ADrawer
-      v-if="$route.path == '/employer/' || $route.path == '/employer/accounts'"
+      v-if="$route.path == '/employer/' || $route.path == '/employer/profile' || $route.path == '/employer/applicants'"
       :drawerOpen="drawerOpen"
     />
     <MDrawer
@@ -42,7 +42,6 @@ export default class EmployerLayout extends Vue {
   drawerOpen = true;
 
   onDrawerEvent() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.drawerOpen = !this.drawerOpen;
   }
 }

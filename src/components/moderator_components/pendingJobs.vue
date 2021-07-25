@@ -138,6 +138,7 @@ export default class pendingJob extends Vue {
       };
     });
     this.data = newJob;
+    console.log(this.data);
   }
 
   async approve(id: number) {

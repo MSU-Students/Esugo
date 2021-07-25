@@ -15,11 +15,11 @@
     </q-header>
     <ADrawer
       v-if="$route.path == '/admin/' || $route.path == '/admin/accounts'"
-      :drawerOpen="drawerOpen"
+      :drawerOpen="true"
     />
     <MDrawer
       v-if="$route.path == '/moderator/' || $route.path == '/moderator/home'"
-      :drawerOpen="drawerOpen"
+      :drawerOpen="true"
     />
 
     <q-page-container

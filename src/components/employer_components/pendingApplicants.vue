@@ -1,7 +1,12 @@
 <template>
   <div class="q-pa-md">
     <q-card bg-blue>
-      <q-table title="Pending Applicant" :data="data" :columns="columns" row-key="name">
+      <q-table
+        title="Pending Applicant"
+        :data="data"
+        :columns="columns"
+        row-key="name"
+      >
         <template v-slot:header="props">
           <q-tr :props="props">
             <q-th auto-width>Applicant Status</q-th>
@@ -55,16 +60,16 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
-import {mapActions, mapState} from 'vuex';
+import { Vue, Component } from 'vue-property-decorator';
+import { mapActions, mapState } from 'vuex';
 
 @Component({
   computed: {
-    ...mapState('application', ['applications']),
+    ...mapState('application', ['applications'])
   },
   methods: {
-    ...mapActions('application', ['getAllApplication', 'updateUser']),
-  },
+    ...mapActions('application', ['getAllApplication', 'updateApplication'])
+  }
 })
 export default class pendingApplicants extends Vue {
   selectedIndex = null;
@@ -76,69 +81,72 @@ export default class pendingApplicants extends Vue {
       align: 'left',
       field: (row: any) => row.name,
       format: (val: any) => `${val}`,
-      sortable: true,
+      sortable: true
     },
     {
       name: 'email',
       label: 'Email',
       field: 'email',
       sortable: true,
-      align: 'left',
+      align: 'left'
     },
     {
       name: 'contact',
       label: 'Contact Number',
       field: 'contact',
       sortable: true,
-      align: 'left',
+      align: 'left'
     },
     {
       name: 'title',
       label: 'Job Title',
       field: 'title',
       sortable: true,
-      align: 'left',
-    },
+      align: 'left'
+    }
   ];
   applications!: any[];
   data: any = [];
   status = '';
   getAllApplication!: () => Promise<void>;
-  updateUser!: (payload: any) => Promise<void>;
+  updateApplication!: (payload: any) => Promise<void>;
 
   async mounted() {
     await this.getAllApplication();
     this.data = this.applications
-      .filter((i) => i.status == 'pending')
+      .filter(i => i.status == 'pending')
       .map((a: any) => {
         return {
+          id: a.id,
           name: a.worker.firstName + ' ' + a.worker.lastName,
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
+          status: a.status
         };
       });
     console.log(this.data);
   }
-  // async approveApplicant(id: number) {
-  //   console.log(id);
-  //   await this.updateUser({
-  //     id,
-  //     status: 'available',
-  //   });
-  //   this.data = this.users.filter((i) => i.status == 'pending');
-  // }
+  async approveApplicant(id: number) {
+    console.log(id);
+    await this.updateApplication({
+      id,
+      status: 'accepted'
+    });
+    this.data = this.applications.filter(i => i.status == 'pending');
+  }
 
-  // async disapproveApplicant(id: number) {
-  //   console.log(this.users[id]);
-  //   await this.updateUser({
-  //     id,
-  //     status: 'banned',
-  //   });
-  //   this.data = this.users.filter((i) => i.status == 'pending');
-  // }
+  async disapproveApplicant(id: number) {
+    console.log(this.applications[id]);
+    await this.updateApplication({
+      id,
+      status: 'rejected'
+    });
+    this.data = this.applications.filter(i => i.status == 'pending');
+  }
 
   colorManipulation(status: string) {
+    console.log(status);
     if (status == 'pending') {
       return 'orange';
     } else if (status == 'banned') {

@@ -1,10 +1,15 @@
 <template>
   <div class="q-pa-md">
     <q-card bg-blue>
-      <q-table title="List of Accounts" :data="data" :columns="columns" row-key="name">
+      <q-table
+        title="Job Applied"
+        :data="data"
+        :columns="columns"
+        row-key="name"
+      >
         <template v-slot:header="props">
           <q-tr :props="props">
-            <q-th auto-width>Account Status</q-th>
+            <q-th auto-width>Job status</q-th>
             <q-th v-for="col in props.cols" :key="col.name" :props="props">
               {{ col.label }}
             </q-th>
@@ -24,26 +29,18 @@
                     <q-item
                       class="text-green"
                       clickable
-                      @click="approveAccount(props.rowIndex)"
+                      @click="complete(props.row.id)"
                       v-close-popup
                     >
-                      <q-item-section>Able</q-item-section>
-                    </q-item>
-                    <q-item
-                      class="text-orange"
-                      clickable
-                      @click="suspendAccount(props.rowIndex)"
-                      v-close-popup
-                    >
-                      <q-item-section>Suspend</q-item-section>
+                      <q-item-section>Done</q-item-section>
                     </q-item>
                     <q-item
                       class="text-red"
                       clickable
-                      @click="disapproveAccount(props.rowIndex)"
+                      @click="cancelled(props.row.id)"
                       v-close-popup
                     >
-                      <q-item-section>Ban</q-item-section>
+                      <q-item-section>Cancel</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -63,106 +60,112 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
-import {mapActions, mapState} from 'vuex';
-import {IUser} from 'src/interfaces/user.interface2';
+import { Vue, Component } from 'vue-property-decorator';
+import { mapActions, mapState } from 'vuex';
 
 @Component({
   computed: {
-    ...mapState('user', ['users']),
+    ...mapState('application', ['applications'])
   },
   methods: {
-    ...mapActions('user', ['getAllUser', 'updateUser']),
-  },
+    ...mapActions('application', ['getAllApplication', 'updateApplication'])
+  }
 })
-export default class approvedAcct extends Vue {
-  greenModel = 'suspended';
+export default class pendingApplicants extends Vue {
   selectedIndex = null;
   columns = [
     {
       name: 'name',
       required: true,
-      label: 'Account Name',
+      label: 'Applicant Name',
       align: 'left',
-      field: (row: IUser) => row.firstName,
+      field: (row: any) => row.name,
       format: (val: any) => `${val}`,
-      sortable: true,
-    },
-    {
-      name: 'gender',
-      align: 'left',
-      label: 'Gender',
-      field: 'gender',
-      sortable: true,
+      sortable: true
     },
     {
       name: 'email',
       label: 'Email',
       field: 'email',
       sortable: true,
-      align: 'left',
+      align: 'left'
     },
     {
-      name: 'acctCategory',
-      label: 'Account Category',
-      field: 'type',
+      name: 'contact',
+      label: 'Contact Number',
+      field: 'contact',
       sortable: true,
-      align: 'left',
+      align: 'left'
     },
+    {
+      name: 'title',
+      label: 'Job Title',
+      field: 'title',
+      sortable: true,
+      align: 'left'
+    }
   ];
-  users!: IUser[];
-  data: IUser[] = [];
+  applications!: any[];
+  data: any = [];
   status = '';
-  getAllUser!: () => Promise<void>;
-  updateUser!: (payload: any) => Promise<void>;
-
-  async mounted() {
-    await this.getAllUser();
-    this.data = this.users.filter((i) => i.status != 'pending');
+  getAllApplication!: () => Promise<void>;
+  updateApplication!: (payload: any) => Promise<void>;
+async mounted() {
+    this.data = await this.getAllApplications();
+    console.log(this.data);
   }
 
-  async approveAccount(id: number) {
-    await this.updateUser({
-      ...this.users[id],
-      status: 'available',
-    });
-    this.data = this.users.filter((i) => i.status != 'pending');
+  async getAllApplications() {
+    await this.getAllApplication();
+    this.data = this.applications
+      .filter(i => i.status != 'pending')
+      .map((a: any) => {
+        return {
+          id: a.id,
+          name: a.worker.firstName + ' ' + a.worker.lastName,
+          email: a.worker.email,
+          contact: a.worker.contact,
+          title: a.job.title,
+          status: a.status
+        };
+      });
+    console.log(this.data);
   }
-  async suspendAccount(id: number) {
-    console.log(this.users[id]);
-    await this.updateUser({
-      ...this.users[id],
-      status: 'suspended',
+  async complete(id: number) {
+    console.log(id);
+    await this.updateApplication({
+      id,
+      status: 'completed'
     });
-    this.data = this.users.filter((i) => i.status != 'pending');
+    this.data = await this.getAllApplications();
   }
 
-  async disapproveAccount(id: number) {
-    console.log(this.users[id]);
-    await this.updateUser({
-      ...this.users[id],
-      status: 'banned',
+  async cancelled(id: number) {
+    console.log(this.applications[id]);
+    await this.updateApplication({
+      id,
+      status: 'cancelled'
     });
-    this.data = this.users.filter((i) => i.status != 'pending');
+    this.data = await this.getAllApplications();
   }
 
   colorManipulation(status: string) {
-    if (status == 'suspended') {
+    console.log(status);
+    if (status == 'accepted') {
       return 'orange';
-    } else if (status == 'banned') {
+    } else if (status == 'cancelled') {
       return 'red';
-    } else {
+    } else if (status == 'completed') {
       return 'green';
     }
   }
-
   labelManipulation(status: string) {
-    if (status == 'suspended') {
-      return 'suspended';
-    } else if (status == 'banned') {
-      return 'Banned';
-    } else {
-      return 'abled';
+    if (status == 'accepted') {
+      return 'In progress';
+    } else if (status == 'cancelled') {
+      return 'Cancelled';
+    } else if (status == 'completed') {
+      return 'Done';
     }
   }
 }
