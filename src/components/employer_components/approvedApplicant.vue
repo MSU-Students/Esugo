@@ -110,7 +110,8 @@ export default class pendingApplicants extends Vue {
   status = '';
   getAllApplication!: () => Promise<void>;
   updateApplication!: (payload: any) => Promise<void>;
-async mounted() {
+
+  async mounted() {
     this.data = await this.getAllApplications();
     console.log(this.data);
   }
@@ -129,7 +130,7 @@ async mounted() {
           status: a.status
         };
       });
-    console.log(this.data);
+    return this.data;
   }
   async complete(id: number) {
     console.log(id);
@@ -150,7 +151,6 @@ async mounted() {
   }
 
   colorManipulation(status: string) {
-    console.log(status);
     if (status == 'accepted') {
       return 'orange';
     } else if (status == 'cancelled') {
