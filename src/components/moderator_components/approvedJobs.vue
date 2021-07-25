@@ -1,12 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-card bg-blue>
-      <q-table
-        title="List of Jobs"
-        :data="data"
-        :columns="columns"
-        row-key="name"
-      >
+      <q-table title="List of Jobs" :data="data" :columns="columns" row-key="name">
         <template v-slot:header="props">
           <q-tr :props="props">
             <q-th auto-width>Job Status</q-th>
@@ -18,10 +13,7 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td
-              auto-width
-              class="text-center"
-            >
+            <q-td auto-width class="text-center">
               <q-btn
                 :text-color="colorManipulation(props.row.status)"
                 color="white"
@@ -63,21 +55,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { mapActions, mapState } from 'vuex';
-import { IJob } from 'src/interfaces/job.interface2';
-import { IUser } from 'src/interfaces/user.interface2';
-import { JobDto } from 'src/services/rest-api';
+import {Vue, Component} from 'vue-property-decorator';
+import {mapActions, mapState} from 'vuex';
+import {IJob} from 'src/interfaces/job.interface2';
+import {IUser} from 'src/interfaces/user.interface2';
+import {JobDto} from 'src/services/rest-api';
 
 @Component({
   computed: {
     ...mapState('job', ['jobs']),
-    ...mapState('user', ['user'])
+    ...mapState('user', ['user']),
   },
   methods: {
     ...mapActions('job', ['getAllJob', 'updateJob']),
-    ...mapActions('user', ['getOneUser'])
-  }
+    ...mapActions('user', ['getOneUser']),
+  },
 })
 export default class pendingJob extends Vue {
   selectedIndex = null;
@@ -89,36 +81,36 @@ export default class pendingJob extends Vue {
       align: 'left',
       field: (row: IJob) => row.title,
       format: (val: any) => `${val}`,
-      sortable: true
+      sortable: true,
     },
     {
       name: 'jobdesc',
       align: 'left',
       label: 'Job Description',
       field: 'description',
-      sortable: true
+      sortable: true,
     },
     {
       name: 'location',
       label: 'Location',
       field: 'location',
       sortable: true,
-      align: 'left'
+      align: 'left',
     },
     {
       name: 'dateposted',
       label: 'Date Posted',
       field: 'datePosted',
       sortable: true,
-      align: 'left'
+      align: 'left',
     },
     {
       name: 'employer',
       label: 'Employer',
       field: 'employer',
       sortable: true,
-      align: 'left'
-    }
+      align: 'left',
+    },
   ];
   jobs!: IJob[];
   data: any = [];
@@ -130,15 +122,16 @@ export default class pendingJob extends Vue {
 
   async mounted() {
     this.data = await this.getAllJobs();
+    console.log(this.data);
   }
 
   async getAllJobs() {
     await this.getAllJob();
-    const jobs = this.jobs.filter(i => i.status != 'pending');
+    const jobs = this.jobs.filter((i) => i.status != 'pending');
     const newJob = jobs.map((i: any) => {
       return {
         ...i,
-        employer: i.user.firstName + ' ' + i.user.lastName
+        employer: i.user.firstName + ' ' + i.user.lastName,
       };
     });
     return newJob;
@@ -146,22 +139,22 @@ export default class pendingJob extends Vue {
 
   async approve(id: number) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { user, employer, ...newJob } = this.data.find((i: any) => i.id == id);
+    const {user, employer, ...newJob} = this.data.find((i: any) => i.id == id);
     console.log(newJob);
     await this.updateJob({
       ...newJob,
-      status: 'approved'
+      status: 'approved',
     });
     this.data = await this.getAllJobs();
   }
 
   async disapprove(id: number) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { user, employer, ...newJob } = this.data.find((i: any) => i.id == id);
+    const {user, employer, ...newJob} = this.data.find((i: any) => i.id == id);
     console.log(newJob);
     await this.updateJob({
       ...newJob,
-      status: 'disapproved'
+      status: 'disapproved',
     });
     this.data = await this.getAllJobs();
   }

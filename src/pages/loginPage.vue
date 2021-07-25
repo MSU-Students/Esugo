@@ -1,6 +1,6 @@
 <template>
   <q-page
-    style="background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);"
+    style="background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%)"
     class="flex flex-center"
   >
     <div>
@@ -10,13 +10,11 @@
     </div>
 
     <div class="col-4">
-      <q-card-section class="q-pa-xl  ">
+      <q-card-section class="q-pa-xl">
         <div class="text-center">
           <img src="~/assets/ESUGO.png" width="370px" />
         </div>
-        <h5 class="text-weight-bolder text-center text-white">
-          Sign in to your account
-        </h5>
+        <h5 class="text-weight-bolder text-center text-white">Sign in to your account</h5>
         <div class="q-gutter-md">
           <q-input
             outlined
@@ -47,12 +45,7 @@
             v-model="val"
             label=" I have read and accepted the User Notice and Privacy"
           />
-          <q-btn
-            class="full-width"
-            color="primary"
-            label="Login"
-            @click="loginUser()"
-          />
+          <q-btn class="full-width" color="primary" label="Login" @click="loginUser()" />
         </div>
       </q-card-section>
     </div>
@@ -60,16 +53,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { AUser } from 'src/store/auth/state';
-import { mapActions } from 'vuex';
+import {Vue, Component} from 'vue-property-decorator';
+import {AUser} from 'src/store/auth/state';
+import {mapActions} from 'vuex';
 import helperService from 'src/services/helper.service';
 import userService from 'src/services/user.service';
+import loginService from 'src/services/login.service';
 
 @Component({
   methods: {
-    ...mapActions('auth', ['login'])
-  }
+    ...mapActions('auth', ['login']),
+  },
 })
 export default class Login extends Vue {
   val = false;
@@ -79,32 +73,27 @@ export default class Login extends Vue {
   isPwd = true;
   type = '';
 
-  login!: (auth: {
-    username: string;
-    password: string;
-    type: string;
-  }) => Promise<AUser>;
+  login!: (auth: {username: string; password: string; type: string}) => Promise<AUser>;
 
   async loginUser() {
     try {
       const res: any = await this.login({
         username: this.username,
         password: this.password,
-        type: this.type
+        type: this.type,
       });
-      console.log(await userService.getUserProfile());
       if (res.type == 'admin') {
-        await this.$router.replace('/admin/home');
+        await this.$router.replace('/admin/');
       } else if (res.type == 'moderator') {
-        await this.$router.replace('/moderator/home');
+        await this.$router.replace('/moderator/');
       } else if (res.type == 'worker') {
-        await this.$router.replace('/home');
+        await this.$router.replace('/worker/');
       } else if (res.type == 'employer') {
-        await this.$router.replace('/home');
+        await this.$router.replace('/employer/');
       }
       helperService.notify({
         type: 'positive',
-        message: `Welcome ${res.firstName} ${res.lastName}`
+        message: `Welcome ${res.firstName} ${res.lastName}`,
       });
     } catch (error) {
       helperService.notify({
@@ -113,7 +102,7 @@ export default class Login extends Vue {
           error.response.data.message == 'Unauthorized'
             ? 'Wrong username or password'
             : 'Something went wrong!',
-        caption: error.message
+        caption: error.message,
       });
     }
   }
