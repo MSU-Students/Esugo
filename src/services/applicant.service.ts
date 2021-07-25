@@ -1,18 +1,7 @@
 import { DefaultApi } from './rest-api/api';
 import { Configuration, ApplicationDto } from './rest-api';
 
-const dev = 'http://localhost:3000';
-
-const restConfig = new Configuration({
-  basePath: dev,
-  baseOptions: {
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }
-});
-
-const restApi = new DefaultApi(restConfig);
+import { restApi } from './rest-api.service';
 
 class ApplicationService extends DefaultApi {
   async getAll(): Promise<ApplicationDto> {

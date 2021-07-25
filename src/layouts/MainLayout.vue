@@ -10,13 +10,7 @@
         </q-toolbar-title>
 
         <div v-if="$route.path == '/'" class="q-gutter-x-md">
-          <q-btn
-            flat
-            color="white"
-            icon="person"
-            label="Sign-up"
-            to="/signup"
-          />
+          <q-btn flat color="white" icon="person" label="Sign-up" to="/signup" />
 
           <span>|</span>
           <q-btn flat color="white" icon="person" label="Log-in" to="/login" />
@@ -25,7 +19,13 @@
           v-if="$route.path == '/review' || $route.path == '/home'"
           class="q-gutter-x-md"
         >
-          <q-btn flat color="white " icon="person" label="Profile" to="/employerProfile" />
+          <q-btn
+            flat
+            color="white "
+            icon="person"
+            label="Profile"
+            to="/employerProfile"
+          />
           <q-btn flat color="white " icon="logout" label="Log-out" to="/" />
         </div>
 
@@ -51,10 +51,9 @@
               </div>
             </q-menu>
           </q-btn>
-
         </div>
 
-          <div v-if="$route.path == '/workerProfile'" class="q-gutter-x-md">
+        <div v-if="$route.path == '/workerProfile'" class="q-gutter-x-md">
           <q-btn flat round dense icon="logout">
             <q-menu>
               <div class="row no-wrap q-pa-md">
@@ -72,15 +71,11 @@
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">Yassier</div>
                   <q-btn color="primary" label="Logout" size="m" to="/" />
-                 
-
-                 
                 </div>
               </div>
             </q-menu>
-          </q-btn>   
+          </q-btn>
         </div>
-
       </q-toolbar>
     </q-header>
     <q-page-container
@@ -92,7 +87,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import {Vue, Component} from 'vue-property-decorator';
 
 @Component({})
 export default class MainLayout extends Vue {

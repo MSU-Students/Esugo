@@ -1,6 +1,5 @@
 <template>
   <q-card :style="$q.screen.lt.md ? 'width: 100%' : 'width: 25%'">
-
     <q-img
       :src="require(`../assets/${coverPhoto}`)"
       @mouseenter="showReport = true"
@@ -58,7 +57,7 @@
         label="Send Application"
         color="primary"
         icon="send"
-        clickable 
+        clickable
         @click="addApplication()"
       />
 
@@ -87,8 +86,7 @@
         <q-card>
           <q-toolbar>
             <q-toolbar-title
-              ><span class="text-weight-bold">Report</span>
-              Reason</q-toolbar-title
+              ><span class="text-weight-bold">Report</span> Reason</q-toolbar-title
             >
 
             <q-btn flat round dense icon="close" v-close-popup />
@@ -99,11 +97,7 @@
               <div class="q-gutter-sm">
                 <q-radio v-model="status" val="Nudity" label="Nudity" />
                 <q-radio v-model="status" val="Offensive" label="Offensive" />
-                <q-radio
-                  v-model="status"
-                  val="Discriminatory"
-                  label="Discriminatory"
-                />
+                <q-radio v-model="status" val="Discriminatory" label="Discriminatory" />
                 <q-radio v-model="status" val="misleading" label="misleading" />
               </div>
 
@@ -116,13 +110,7 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn
-              flat
-              label="SUBMIT"
-              color="primary"
-              @click="alert = true"
-             
-            />
+            <q-btn flat label="SUBMIT" color="primary" @click="alert = true" />
             <q-dialog v-model="alert">
               <q-card>
                 <q-card-section>
@@ -145,16 +133,20 @@
   </q-card>
 </template>
 
-<script lang="ts">  
-import { ApplicationDto } from 'src/services/rest-api';
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
+<script lang="ts">
+import {ApplicationDto, UserDto} from 'src/services/rest-api';
+import {Vue, Component, Prop} from 'vue-property-decorator';
+import {mapActions, mapState} from 'vuex';
 
-@Component({methods: {
-    ...mapActions('application', ['createApplication'])
-  }})
+@Component({
+  methods: {
+    ...mapActions('application', ['createApplication']),
+    ...mapActions('user', ['getProfile']),
+  },
+})
 export default class Card extends Vue {
   @Prop({type: Number, required: true}) readonly id!: number;
+  @Prop({type: Number, required: true}) readonly employerID!: number;
   @Prop({type: String, required: false}) readonly coverPhoto!: string;
   // @Prop({type: String, required: false}) readonly profilePic!: string;
   @Prop({type: String, required: true}) readonly title!: string;
@@ -163,6 +155,7 @@ export default class Card extends Vue {
   @Prop({type: String, required: true}) readonly description!: string;
   @Prop({type: String, required: true}) readonly location!: string;
 
+  getProfile!: () => Promise<void>;
   createApplication!: (payload: ApplicationDto) => Promise<void>;
   alerts = false;
   confirm = false;
@@ -172,14 +165,18 @@ export default class Card extends Vue {
   status = '';
   alert = false;
   application: ApplicationDto = {
-    workerID: 4,
+    workerID: 0,
+    employerID: this.employerID,
     jobID: this.id,
     status: 'pending',
-  }
+  };
 
   async addApplication() {
-    console.log(this.application);  
-    await this.createApplication(this.application);
+    const currentProfile: any = await this.getProfile();
+    await this.createApplication({
+      ...this.application,
+      workerID: currentProfile.id,
+    });
   }
 }
 </script>
