@@ -14,7 +14,7 @@
       </q-toolbar>
     </q-header>
     <ModeratorDrawer
-      v-if="$route.path == '/moderator/' || $route.path == '/moderator/accounts'"
+      v-if="$route.path == '/moderator/' || $route.path == '/moderator/jobs'"
       :drawerOpen="drawerOpen"
     />
     <q-page-container

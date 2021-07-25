@@ -50,15 +50,15 @@
       </q-toolbar-title>
     </q-toolbar>
     <div
-      v-if="!searchTap || cardItems.length != 0"
+      v-if="!searchTap"
       class="search-img text-center text-primary"
     >
       <img height="250px" src="..\..\src\assets\searchjobs.png" />
       <div class="text-h5">Search Jobs!</div>
     </div>
-    <div v-else-if="cardItems.length == 0" class="text-center q-pa-xl">
+    <!-- <div v-else-if="cardItems.length == 0" class="text-center q-pa-xl">
       <div class="text-h4 q-pb-lg text-primary">No Content!</div>
-    </div>
+    </div> -->
     <div v-else class="text-center q-pa-xl">
       <div class="text-h4 q-pb-lg text-primary">Job Results!</div>
 
