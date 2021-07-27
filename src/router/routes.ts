@@ -42,7 +42,7 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/employer/',
-    meta: { requiresAdmin: true },
+    meta: { requiresEmployer: true },
     component: () => import('src/layouts/EmployerLayout.vue'),
     children: [
       { path: '', component: () => import('pages/LandingPage.vue') },
@@ -63,10 +63,6 @@ const routes: RouteConfig[] = [
     component: () => import('src/layouts/WorkerLayout.vue'),
     children: [
       { path: '', component: () => import('pages/LandingPage.vue') },
-      {
-        path: 'applicants',
-        component: () => import('../pages/worker/WorkerPage.vue')
-      },
       {
         path: 'profile',
         meta: { requiresEmployer: true },

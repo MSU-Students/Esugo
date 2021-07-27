@@ -6,6 +6,7 @@ import { JobStateInterface } from './state';
 const actions: ActionTree<JobStateInterface, StateInterface> = {
   async getAllJob(context): Promise<any> {
     const res = await jobService.getAll();
+    console.log(res)
     context.commit('getAllJob', res);
   },
 

@@ -120,6 +120,7 @@ export default class Dialog extends Vue {
     'Production Line',
     'Driving',
     'Machine Operator',
+    'Cook',
   ];
   locate = ['Marantao', , 'Marawi', 'Saguiran', 'Wato', 'Malutlut', 'Bario Green'];
   quantity = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -139,6 +140,30 @@ export default class Dialog extends Vue {
         ...this.job,
         coverPhoto: 'plumber.jpeg',
       };
+    }
+     else if (this.job.title == 'Construction Site') {
+      this.job = {
+        ...this.job,
+        coverPhoto: 'machine-operator.jpg',
+      };
+    }
+     else if (this.job.title == 'Driving') {
+      this.job = {
+        ...this.job,
+        coverPhoto: 'driver.jpg',
+      };
+    }
+    else if (this.job.title == 'Production Line') {
+      this.job = {
+        ...this.job,
+        coverPhoto: 'ITdevelopment-1.jpg',
+      };
+    }
+    else if (this.job.title == 'Cook') {
+      this.job = {
+        ...this.job,
+        coverPhoto: 'cook.jpg',
+      };    
     }
     const res: any = await this.getProfile();
     await this.createJob({...this.job, employerID: res.id});

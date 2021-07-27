@@ -17,6 +17,7 @@
         <h5 class="text-weight-bolder text-center text-white">Sign in to your account</h5>
         <div class="q-gutter-md">
           <q-input
+            rounded
             outlined
             v-model="username"
             label="Username"
@@ -24,10 +25,10 @@
           />
 
           <q-input
+            rounded
             color="blue-9"
             outlined
             v-model="password"
-            filled
             :type="isPwd ? 'password' : 'text'"
             label="Password"
             standout="bg-white text-primary"
@@ -45,7 +46,9 @@
             v-model="val"
             label=" I have read and accepted the User Notice and Privacy"
           />
-          <q-btn class="full-width" color="primary" label="Login" @click="loginUser()" />
+          <div>
+          <q-btn rounded class="full-width" color="primary" label="Login" @click="loginUser()" />
+          </div>
         </div>
       </q-card-section>
     </div>
@@ -112,5 +115,8 @@ export default class Login extends Vue {
 .pic-text {
   padding-bottom: 120px;
   padding-left: 50px;
+}
+.radius{
+  border-radius: 10%;
 }
 </style>

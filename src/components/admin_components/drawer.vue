@@ -17,11 +17,11 @@
           </q-item-section>
           <q-item-section> Home </q-item-section>
         </q-item>
-        <q-item clickable to="/admin/applicants" v-ripple>
+        <q-item clickable to="/admin/accounts" v-ripple>
           <q-item-section avatar>
             <q-icon name="person" />
           </q-item-section>
-          <q-item-section> Applicants </q-item-section>
+          <q-item-section> Accounts </q-item-section>
         </q-item>
       </q-list>
     </q-scroll-area>

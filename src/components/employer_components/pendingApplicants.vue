@@ -60,6 +60,7 @@
 </template>
 
 <script lang="ts">
+import App from 'src/App.vue';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
 
@@ -68,7 +69,8 @@ import { mapActions, mapState } from 'vuex';
     ...mapState('application', ['applications'])
   },
   methods: {
-    ...mapActions('application', ['getAllApplication', 'updateApplication'])
+    ...mapActions('application', ['getAllApplication', 'updateApplication']),
+    ...mapActions('job', ['getOneJob', 'updateJob'])
   }
 })
 export default class pendingApplicants extends Vue {
@@ -107,9 +109,12 @@ export default class pendingApplicants extends Vue {
   ];
   applications!: any[];
   data: any = [];
+  job!: any;
   status = '';
   getAllApplication!: () => Promise<void>;
   updateApplication!: (payload: any) => Promise<void>;
+  updateJob!: (payload: any) => Promise<void>;
+  getOneJob!: (payload: any) => Promise<void>;
 
   async mounted() {
     await this.getAllApplication();
@@ -118,6 +123,7 @@ export default class pendingApplicants extends Vue {
       .map((a: any) => {
         return {
           id: a.id,
+          jobID: a.jobID,
           name: a.worker.firstName + ' ' + a.worker.lastName,
           email: a.worker.email,
           contact: a.worker.contact,
@@ -127,13 +133,36 @@ export default class pendingApplicants extends Vue {
       });
     console.log(this.data);
   }
+  updatejob(appId: number) {
+    this.applications.filter(async i => {
+      if (i.id == appId) {
+        const {user, employer, ...newJob} = i.job;
+        await this.updateJob({
+          ...newJob,
+          status: 'taken'
+        });
+      }
+    });
+  }
   async approveApplicant(id: number) {
-    console.log(id);
     await this.updateApplication({
       id,
       status: 'accepted'
     });
-    this.data = this.applications.filter(i => i.status == 'pending');
+    this.updatejob(id);
+      this.data = this.applications
+      .filter(i => i.status == 'pending')
+      .map((a: any) => {
+        return {
+          id: a.id,
+          jobID: a.jobID,
+          name: a.worker.firstName + ' ' + a.worker.lastName,
+          email: a.worker.email,
+          contact: a.worker.contact,
+          title: a.job.title,
+          status: a.status
+        };
+      });
   }
 
   async disapproveApplicant(id: number) {

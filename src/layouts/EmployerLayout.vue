@@ -5,11 +5,13 @@
         <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
         <q-toolbar-title
           class="row items-center cursor-pointer"
-          @click="$router.replace('/')"
+          
         >
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
-        <q-btn flat color="white " icon="person" label="Profile" to="/employer/profile" />
+
+        <q-btn v-if="$route.path == '/employer/applicants' || $route.path == '/employer/' " flat color="white " icon="person" label="Profile" to="/employer/profile" />
+        <q-btn v-if="$route.path == '/employer/profile'" flat color="white " icon="person" label="home" to="/employer/" />
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
