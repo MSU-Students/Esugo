@@ -32,11 +32,6 @@ const routes: RouteConfig[] = [
         meta: { requiresGuest: true },
         component: () => import('src/pages/LoginPage.vue')
       }
-      // {
-      //   path: '/workerProfile',
-      //   meta: { requiresWorker: true },
-      //   component: () => import('src/pages/worker/WorkerProfile.vue')
-      // },
     ]
   },
   {
