@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card bg-blue>
       <q-table
-        title="Pending Accounts"
+        title="List of Pending Accounts"
         :data="data"
         :columns="columns"
         row-key="name"
@@ -120,7 +120,6 @@ export default class pendingAcct extends Vue {
     this.data = this.users.filter(i => i.status == 'pending');
   }
 async approveAccount(id: number) {
-  console.log(id);
      await this.updateUser({
       id,
       status: 'available'});
@@ -128,7 +127,6 @@ async approveAccount(id: number) {
   }
   
   async disapproveAccount(id: number) {
-    console.log(this.users[id]);
     await this.updateUser({
       id,
       status: 'banned'

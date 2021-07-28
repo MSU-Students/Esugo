@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card bg-blue>
       <q-table
-        title="List of Approved Accounts"
+        title="List of Disapproved Accounts"
         :data="data"
         :columns="columns"
         row-key="name"
@@ -126,7 +126,7 @@ export default class approvedAcct extends Vue {
 
   async mounted() {
     await this.getAllUser();
-    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'banned' && i.type != 'admin' && i.type != 'moderator');
   }
 
   async approveAccount(id: number) {
@@ -134,22 +134,23 @@ export default class approvedAcct extends Vue {
       id,
       status: 'available'
     });
-    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'banned' && i.type != 'admin' && i.type != 'moderator');
   }
 async suspendAccount(id: number) {
     await this.updateUser({
       id,
       status: 'suspended'
     });
-    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'banned' && i.type != 'admin' && i.type != 'moderator');
   }
 
   async disapproveAccount(id: number) {
+    console.log(this.users[id]);
     await this.updateUser({
       id,
       status: 'banned'
     });
-    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'banned' && i.type != 'admin' && i.type != 'moderator');
   }
 
   colorManipulation(status: string) {
