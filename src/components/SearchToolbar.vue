@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-toolbar
-      class="text-white"
+      class="text-white shadow-5"
       style="background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%)"
     >
       <q-toolbar-title :class="$q.screen.lt.md ? 'text-caption' : 'text-h4'">
@@ -18,6 +18,7 @@
               <div class="col">
                 <q-input
                   outlined
+                  rounded
                   v-model="jobTitle"
                   bg-color="white"
                   type="text"
@@ -32,6 +33,7 @@
               <div class="col">
                 <q-select
                   outlined
+                  rounded
                   v-model="jobLocation"
                   :options="locationOption"
                   bg-color="white"
@@ -85,13 +87,10 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
+import {Vue, Component, Watch} from 'vue-property-decorator';
 import {mapState, mapActions} from 'vuex';
 import Card from 'components/Card.vue';
-import {JobDto} from 'src/services/rest-api';
-import loginService from 'src/services/login.service';
-import jobService from 'src/services/job.service';
-import userService from 'src/services/user.service';
+import {ApplicationDto, JobDto, UserDto} from 'src/services/rest-api';
 
 let items: JobDto[] = [];
 
@@ -101,9 +100,12 @@ let items: JobDto[] = [];
   },
   computed: {
     ...mapState('job', ['jobs']),
+    ...mapState('application', ['applications']),
   },
   methods: {
     ...mapActions('job', ['getAllJob', 'updateJob']),
+    ...mapActions('application', ['getAllApplication']),
+    ...mapActions('user', ['getProfile']),
   },
 })
 export default class SearchToolbar extends Vue {
@@ -119,17 +121,64 @@ export default class SearchToolbar extends Vue {
   currentPage = 1;
   nextPage = null;
   totalPages = 6;
-  jobs!: JobDto[];
+  jobsArr: any[] = [];
+  jobs!: any[];
+  applications!: ApplicationDto[];
   getAllJob!: () => Promise<JobDto>;
+  getAllApplication!: () => Promise<ApplicationDto[]>;
+  getProfile!: () => Promise<UserDto>;
+
+  @Watch('jobs')
+  async newApplicant(val: any) {
+    if (localStorage.getItem('access-token') != null) {
+      const currentProfile: any = await this.getProfile();
+      await this.getAllApplication();
+      const applied = this.applications.filter((i) => i.workerID == currentProfile.id);
+      this.jobsArr = val.filter((i: any) => {
+        return !applied.some((a) => {
+          return a.jobID == i.id;
+        });
+      });
+      this.getData2;
+    }
+  }
 
   async created() {
+    if (localStorage.getItem('access-token') != null) {
+      await this.getJobsWithAuth();
+    } else {
+      await this.getJobsWithoutAuth();
+    }
+  }
+
+  async getJobsWithoutAuth() {
     await this.getAllJob();
-    items = this.jobs.filter((i) => i.status == 'approved');
-    this.locationOption = items.map((i) => {
+    this.jobsArr = this.jobs;
+    let location = items.map((i) => {
       if (i.status == 'approved') {
         return i.location;
       }
     });
+    this.locationOption = [...new Set(location)];
+  }
+
+  async getJobsWithAuth() {
+    const currentProfile: any = await this.getProfile();
+    await this.getAllApplication();
+    const applied = this.applications.filter((i) => i.workerID == currentProfile.id);
+    await this.getAllJob();
+    this.jobsArr = this.jobs.filter((i) => {
+      return !applied.some((a) => {
+        return a.jobID == i.id;
+      });
+    });
+    items = this.jobsArr.filter((i: any) => i.status == 'approved');
+    let location = items.map((i) => {
+      if (i.status == 'approved') {
+        return i.location;
+      }
+    });
+    this.locationOption = [...new Set(location)];
   }
 
   get getData2() {
@@ -138,21 +187,23 @@ export default class SearchToolbar extends Vue {
       (this.page - 1) * this.totalPages + this.totalPages
     );
   }
-
   getData() {
-    const result = (items = this.jobs.filter(
+    const result = this.jobsArr.filter(
       (i) =>
-        (i.location == this.jobLocation &&
+        (i.status == 'approved' &&
+          i.location == this.jobLocation &&
           i.title.toLowerCase() == this.jobTitle.toLowerCase()) ||
-        (i.location == this.jobLocation && this.jobTitle == '') ||
-        (i.title.toLowerCase() == this.jobTitle.toLowerCase() &&
+        (i.status == 'approved' &&
+          i.location == this.jobLocation &&
+          this.jobTitle == '') ||
+        (i.status == 'approved' &&
+          i.title.toLowerCase() == this.jobTitle.toLowerCase() &&
           this.jobLocation == '') ||
-        (this.jobTitle == '' && this.jobLocation == '')
-    ));
+        (i.status == 'approved' && this.jobTitle == '' && this.jobLocation == '')
+    );
     this.cardItems = result;
     return result;
   }
-
   searchJob() {
     //
     this.searchTap = true;

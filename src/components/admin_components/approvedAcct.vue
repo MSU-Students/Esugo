@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card bg-blue>
       <q-table
-        title="List of Accounts"
+        title="List of Approved Accounts"
         :data="data"
         :columns="columns"
         row-key="name"
@@ -22,7 +22,7 @@
               auto-width
               class="text-center"
             >
-              <q-btn
+              <q-btn rounded
                 :text-color="colorManipulation(props.row.status)"
                 color="white"
                 :label="labelManipulation(props.row.status)"
@@ -32,7 +32,7 @@
                     <q-item
                       class="text-green"
                       clickable
-                      @click="approveAccount(props.rowIndex)"
+                      @click="approveAccount(props.row.id)"
                       v-close-popup
                     >
                       <q-item-section>Able</q-item-section>
@@ -40,7 +40,7 @@
                     <q-item
                       class="text-orange"
                       clickable
-                      @click="suspendAccount(props.rowIndex)"
+                      @click="suspendAccount(props.row.id)"
                       v-close-popup
                     >
                       <q-item-section>Suspend</q-item-section>
@@ -48,7 +48,7 @@
                     <q-item
                       class="text-red"
                       clickable
-                      @click="disapproveAccount(props.rowIndex)"
+                      @click="disapproveAccount(props.row.id)"
                       v-close-popup
                     >
                       <q-item-section>Ban</q-item-section>
@@ -126,32 +126,30 @@ export default class approvedAcct extends Vue {
 
   async mounted() {
     await this.getAllUser();
-    this.data = this.users.filter(i => i.status != 'pending');
+    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
   }
 
   async approveAccount(id: number) {
     await this.updateUser({
-      ...this.users[id],
+      id,
       status: 'available'
     });
-    this.data = this.users.filter(i => i.status != 'pending');
+    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
   }
 async suspendAccount(id: number) {
-    console.log(this.users[id]);
     await this.updateUser({
-      ...this.users[id],
+      id,
       status: 'suspended'
     });
-    this.data = this.users.filter(i => i.status != 'pending');
+    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
   }
 
   async disapproveAccount(id: number) {
-    console.log(this.users[id]);
     await this.updateUser({
-      ...this.users[id],
+      id,
       status: 'banned'
     });
-    this.data = this.users.filter(i => i.status != 'pending');
+    this.data = this.users.filter(i => i.status == 'available' && i.type != 'admin' && i.type != 'moderator');
   }
 
   colorManipulation(status: string) {

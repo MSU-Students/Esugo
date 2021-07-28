@@ -2,20 +2,20 @@
   <q-layout view="hhh LpR lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
         <q-toolbar-title class="row items-center cursor-pointer">
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
         <div class="q-gutter-x-md">
-          <q-btn flat color="white " icon="person" label="Profile" to="/worker/profile" />
-          <q-btn flat color="white " icon="person" label="Log-out" @click="logout()" />
+          <q-btn v-if="$route.path == '/worker/'" flat color="white " icon="person" label="Profile" to="/worker/profile" />
+          <q-btn v-if="$route.path == '/worker/profile'" flat color="white " icon="home" label="Home" to="/worker/" />
+          <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
         </div>
       </q-toolbar>
     </q-header>
     <q-page-container>
       <router-view />
     </q-page-container>
-  </q-layout>
+  </q-layout> 
 </template>
 
 <script lang="ts">

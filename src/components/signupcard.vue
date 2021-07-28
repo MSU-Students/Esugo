@@ -34,7 +34,7 @@
       >
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
-            <q-popup-proxy transition-show="scale" transition-hide="scale">
+            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
               <q-date v-model="user.birthdate">
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="Close" color="primary" flat />
@@ -102,7 +102,7 @@
         </template>
       </q-input>
     </div>
-    <q-btn
+    <q-btn  
       class="full-width"
       color="primary"
       label="sign-up"

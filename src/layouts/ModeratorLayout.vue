@@ -9,12 +9,11 @@
         >
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
-        <q-btn flat color="white " icon="person" label="Profile" to="/employerProfile" />
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
     <ModeratorDrawer
-      v-if="$route.path == '/moderator/' || $route.path == '/moderator/accounts'"
+      v-if="$route.path == '/moderator/' || $route.path == '/moderator/jobs'"
       :drawerOpen="drawerOpen"
     />
     <q-page-container
