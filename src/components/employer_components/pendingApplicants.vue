@@ -164,7 +164,10 @@ export default class pendingApplicants extends Vue {
           status: a.status,
         };
       });
-    const applicant = this.data.find((i: any) => i.id === id);
+       console.log('sdaafs: ',this.data);
+    const applicant =  this.data.find((i: any) => i.id  === id);
+    console.log('applicant',applicant);
+
     const message = `Congratulations! You'are hired as a ${applicant.title} of ${applicant.name}. Wait your employer to contact you.`;
     console.log(applicant);
     await smsService.sendMessage({
@@ -183,7 +186,7 @@ export default class pendingApplicants extends Vue {
   }
 
   colorManipulation(status: string) {
-    console.log(status);
+    console.log('status',status);
     if (status == 'pending') {
       return 'orange';
     } else if (status == 'banned') {

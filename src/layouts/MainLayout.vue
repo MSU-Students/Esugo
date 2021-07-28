@@ -15,7 +15,7 @@
           <span>|</span>
           <q-btn flat color="white" icon="person" label="Log-in" to="/login" />
         </div>
-        <div
+        <!-- <div
           v-if="$route.path == '/review' || $route.path == '/home'"
           class="q-gutter-x-md"
         >
@@ -27,9 +27,9 @@
             to="/employerProfile"
           />
           <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
-        </div>
+        </div> -->
 
-        <div v-if="$route.path == '/employerProfile'" class="q-gutter-x-md">
+        <!-- <div v-if="$route.path == '/employerProfile'" class="q-gutter-x-md">
           <q-btn flat round dense icon="logout">
             <q-menu>
               <div class="row no-wrap q-pa-md">
@@ -51,7 +51,7 @@
               </div>
             </q-menu>
           </q-btn>
-        </div>
+        </div> -->
 
         <div v-if="$route.path == '/workerProfile'" class="q-gutter-x-md">
           <q-btn flat round dense icon="logout">

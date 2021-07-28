@@ -1,40 +1,51 @@
 <template>
-  <q-card>
-    <div style="width:400px">
+  <q-card flat class="signupcard  bg-transparent">
+    <div class="q-gutter-sm" style="width:400px">
       <q-input
-        dense
+        standout="bg-blue text-white"
         filled
         v-model="user.firstName"
         label="First name *"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         dense
         filled
         v-model="user.middleName"
         label="Middle name *"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         dense
         filled
         v-model="user.lastName"
         label="Surname *"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         filled
         v-model="user.birthdate"
         mask="date"
         label="Birth Day *"
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       >
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
-            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+            <q-popup-proxy
+              ref="qDateProxy"
+              transition-show="scale"
+              transition-hide="scale"
+            >
               <q-date v-model="user.birthdate">
                 <div class="row items-center justify-end">
                   <q-btn v-close-popup label="Close" color="primary" flat />
@@ -45,53 +56,66 @@
         </template>
       </q-input>
       <q-input
+        standout="bg-blue text-white"
         dense
         filled
         v-model="user.gender"
         label="Gender *"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         dense
         filled
         v-model="user.address"
         label="Permanent Address *"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         filled
         dense
         v-model="user.contact"
         label="Contact Number*"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[val => val.length <= 3 || 'Please type something']"
+        prefix="+63"
+        mask="##########"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         filled
         dense
         v-model="user.email"
         label="Email Address*"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         dense
         filled
         v-model="user.username"
         label="Usernane*"
         lazy-rules
         :rules="[val => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space
       />
       <q-input
+        standout="bg-blue text-white"
         color="blue-9"
         outlined
         v-model="user.password"
         filled
         :type="isPwd ? 'password' : 'text'"
         label="Password"
-        standout="bg-white text-primary"
+        hide-bottom-space
       >
         <template v-slot:append>
           <q-icon
@@ -102,14 +126,16 @@
         </template>
       </q-input>
     </div>
-    <q-btn  
-      class="full-width"
-      color="primary"
-      label="sign-up"
-      :loading="loading"
-      :disabl="loading"
-      @click="addUser()"
-    />
+    <div class="q-pt-sm">
+      <q-btn
+        class="full-width"
+        color="primary"
+        label="sign-up"
+        :loading="loading"
+        :disabl="loading"
+        @click="addUser()"
+      />
+    </div>
   </q-card>
 </template>
 
@@ -133,10 +159,10 @@ export default class singupCard extends Vue {
     firstName: 'Pandi',
     middleName: 'Pogi',
     lastName: 'Panontongan',
-    birthdate: '2021-08-11',
+    birthdate: '',
     gender: 'Male',
     address: 'MSU Main, Marawi City',
-    contact: '+639990001111',
+    contact: '',
     email: 'example@gmail.com',
     company: 'example co',
     location: 'Marawi city',
