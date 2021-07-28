@@ -15,17 +15,11 @@ const routes: RouteConfig[] = [
         meta: { requiresGuest: true },
         component: () => import('pages/SignUp.vue')
       },
-
       {
         path: '/login',
         meta: { requiresGuest: true },
         component: () => import('src/pages/LoginPage.vue')
       }
-      // {
-      //   path: '/workerProfile',
-      //   meta: { requiresWorker: true },
-      //   component: () => import('src/pages/worker/WorkerProfile.vue')
-      // },
     ]
   },
   {
@@ -42,7 +36,7 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/employer/',
-    meta: { requiresAdmin: true },
+    meta: { requiresEmployer: true },
     component: () => import('src/layouts/EmployerLayout.vue'),
     children: [
       { path: '', component: () => import('pages/LandingPage.vue') },
@@ -62,11 +56,12 @@ const routes: RouteConfig[] = [
     meta: { requiresAdmin: true },
     component: () => import('src/layouts/WorkerLayout.vue'),
     children: [
+      { path: '', component: () => import('pages/LandingPage.vue') },
       {
-        path: 'applicants',
-        component: () => import('../pages/worker/WorkerPage.vue')
-      },
-      { path: '', component: () => import('pages/LandingPage.vue') }
+        path: 'profile',
+        meta: { requiresEmployer: true },
+        component: () => import('src/pages/worker/WorkerProfile.vue')
+      }
     ]
   },
   {
@@ -76,7 +71,7 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: 'jobs',
-        component: () => import('../pages/moderator/ModeratorPage.vue')
+        component: () => import('../pages/moderator/ModeratorPage.vue') 
       },
       { path: '', component: () => import('pages/LandingPage.vue') }
     ]

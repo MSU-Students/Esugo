@@ -9,9 +9,9 @@
         inline-label
         class=" text-primary shadow-2"
       >
-        <q-tab name="Approved" icon="work" label="Approved Jobs" />
+        <q-tab name="Approved" icon="work" label="Abled Jobs" />
         <q-tab name="Pending" icon="work" label="Pending Jobs" />
-        <q-tab name="Reported" icon="warning" label="Reported Jobs" />
+        <q-tab name="Disapproved" icon="warning" label="Disabled Jobs" />
       </q-tabs>
       <q-separator />
 
@@ -24,7 +24,7 @@
            <Table2/>
           </q-tab-panel>
 
-          <q-tab-panel name="Reported">
+          <q-tab-panel name="Disapproved">
           <Table3/>
           </q-tab-panel>
         </q-tab-panels>
@@ -36,7 +36,7 @@
 <script>
 import Table1 from 'components/moderator_components/approvedJobs.vue';
 import Table2 from 'components/moderator_components/pendingJobs.vue';
-import Table3 from 'components/moderator_components/reportedJobs.vue';
+import Table3 from 'components/moderator_components/disapprovedJobs.vue';
 export default {
    name: 'adminLayout',
   components: { Table1,Table2, Table3},

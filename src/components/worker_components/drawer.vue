@@ -17,11 +17,11 @@
           </q-item-section>
           <q-item-section> Home </q-item-section>
         </q-item>
-        <q-item clickable to="/moderator/jobs" v-ripple>
+        <q-item clickable to="/moderator/profile" v-ripple>
           <q-item-section avatar>
-            <q-icon name="work" />
+            <q-icon name="person" />
           </q-item-section>
-          <q-item-section> Jobs </q-item-section>
+          <q-item-section> Accounts </q-item-section>
         </q-item>
       </q-list>
     </q-scroll-area>
@@ -29,7 +29,6 @@
 </template>
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-
 @Component({})
 export default class MainLayout extends Vue {
   drawer = false;

@@ -148,6 +148,7 @@
         </div>
         <div class="col q-pa-md">
           <q-btn
+          rounded
             class="float-right"
             color="purple"
             icon="add"

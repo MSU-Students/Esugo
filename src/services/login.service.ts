@@ -21,6 +21,7 @@ class LoginService {
   async logoutUser() {
     const response = await restApi.logout();
     localStorage.removeItem('access-token');
+    localStorage.removeItem('refresh-token');
     return response;
   }
 }

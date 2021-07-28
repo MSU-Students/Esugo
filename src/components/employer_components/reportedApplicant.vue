@@ -21,7 +21,7 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td auto-width class="text-center">
-              <q-btn
+              <q-btn rounded
                 icon="more_horiz"
                 text-color="grey-8"
                 size="sm"

@@ -14,7 +14,10 @@
           color="red"
           icon="info"
           @click.prevent.stop="showReportButton = true"
-        />
+          ><q-tooltip class="bg-indigo" :offset="[10, 10]">
+            Report!
+          </q-tooltip></q-btn
+        >
       </div>
     </q-img>
 
@@ -25,15 +28,17 @@
         style="top: 0; right: 12px; transform: translateY(-50%)"
       >
         <q-avatar size="70px">
-          <!-- <img :src="require(`../assets/${profilePic}`)" /> -->
+          <img :src="require(`../assets/${profilePic}`)" />
         </q-avatar>
       </q-btn>
 
       <div class="row no-wrap items-center">
         <div class="col text-h6 ellipsis">{{ title }}</div>
-        <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
+        <div
+          class="col-auto text-grey text-caption q-pt-md row no-wrap items-center"
+        >
           <q-icon name="person" />
-          {{ user.firstName + ' ' + user.lastName }}
+          {{ user.firstName }}
         </div>
       </div>
       <div class="text-caption text-grey">
@@ -54,10 +59,13 @@
     <!-- <q-btn color="light-blue-10" icon="send" label="Send Application" />  -->
     <q-card-actions align="center">
       <q-btn
+        rounded
         label="Send Application"
         color="primary"
         icon="send"
         clickable
+        :loading="loading"
+        :disabl="loading"
         @click="addApplication()"
       />
 
@@ -86,18 +94,22 @@
         <q-card>
           <q-toolbar>
             <q-toolbar-title
-              ><span class="text-weight-bold">Report</span> Reason</q-toolbar-title
+              ><span class="text-weight-bold">Report</span
+              >Reason</q-toolbar-title
             >
 
             <q-btn flat round dense icon="close" v-close-popup />
           </q-toolbar>
-
           <q-card-section class="q-pt-none">
             <div class="q-pa-md">
               <div class="q-gutter-sm">
                 <q-radio v-model="status" val="Nudity" label="Nudity" />
                 <q-radio v-model="status" val="Offensive" label="Offensive" />
-                <q-radio v-model="status" val="Discriminatory" label="Discriminatory" />
+                <q-radio
+                  v-model="status"
+                  val="Discriminatory"
+                  label="Discriminatory"
+                />
                 <q-radio v-model="status" val="misleading" label="misleading" />
               </div>
 
@@ -134,29 +146,32 @@
 </template>
 
 <script lang="ts">
-import {ApplicationDto, UserDto} from 'src/services/rest-api';
-import {Vue, Component, Prop} from 'vue-property-decorator';
-import {mapActions, mapState} from 'vuex';
+import helperService from 'src/services/helper.service';
+import { ApplicationDto } from 'src/services/rest-api';
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 
 @Component({
   methods: {
     ...mapActions('application', ['createApplication']),
     ...mapActions('user', ['getProfile']),
-  },
+    ...mapActions('job', ['getAllJob'])
+  }
 })
 export default class Card extends Vue {
-  @Prop({type: Number, required: true}) readonly id!: number;
-  @Prop({type: Number, required: true}) readonly employerID!: number;
-  @Prop({type: String, required: false}) readonly coverPhoto!: string;
+  @Prop({ type: Number, required: true }) readonly id!: number;
+  @Prop({ type: Number, required: true }) readonly employerID!: number;
+  @Prop({ type: String, required: false }) readonly coverPhoto!: string;
   // @Prop({type: String, required: false}) readonly profilePic!: string;
-  @Prop({type: String, required: true}) readonly title!: string;
-  @Prop({type: Object, required: true}) readonly user!: any;
-  @Prop({type: String, required: true}) readonly salary!: string;
-  @Prop({type: String, required: true}) readonly description!: string;
-  @Prop({type: String, required: true}) readonly location!: string;
+  @Prop({ type: String, required: true }) readonly title!: string;
+  @Prop({ type: Object, required: true }) readonly user!: any;
+  @Prop({ type: String, required: true }) readonly salary!: string;
+  @Prop({ type: String, required: true }) readonly description!: string;
+  @Prop({ type: String, required: true }) readonly location!: string;
 
   getProfile!: () => Promise<void>;
   createApplication!: (payload: ApplicationDto) => Promise<void>;
+  getAllJob!: () => Promise<void>;
   alerts = false;
   confirm = false;
   showReport = false;
@@ -164,19 +179,50 @@ export default class Card extends Vue {
   confirmReport = false;
   status = '';
   alert = false;
+  loading = false;
+  profilePic = 'employer1.jpg';
   application: ApplicationDto = {
     workerID: 0,
     employerID: this.employerID,
     jobID: this.id,
-    status: 'pending',
+    status: 'pending'
   };
 
   async addApplication() {
-    const currentProfile: any = await this.getProfile();
-    await this.createApplication({
-      ...this.application,
-      workerID: currentProfile.id,
-    });
+    this.application = {
+      workerID: 0,
+      employerID: this.employerID,
+      jobID: this.id,
+      status: 'pending'
+    };
+    try {
+      this.loading = true;
+      const currentProfile: any = await this.getProfile();
+      if(currentProfile.type == 'worker'){      
+        await this.createApplication({
+        ...this.application,
+        workerID: currentProfile.id
+      });
+       await this.getAllJob();
+      helperService.notify({
+        type: 'positive',
+        message: 'Successfully Applied!',
+        caption: 'Employer will contact you soon.'
+      });
+      this.loading = false;}
+      else{
+        helperService.notify({
+        type: 'negative',
+        message: 'Only Worker can Apply!',
+        caption: 'Employer will contact you soon.'
+      }); 
+      }
+      await this.getAllJob();
+      this.loading = false;
+    } catch (error) {
+      await this.$router.replace('/login');
+      this.loading = false;
+    }
   }
 }
 </script>

@@ -26,7 +26,7 @@
             label="Profile"
             to="/employerProfile"
           />
-          <q-btn flat color="white " icon="logout" label="Log-out" to="/" />
+          <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
         </div>
 
         <div v-if="$route.path == '/employerProfile'" class="q-gutter-x-md">
@@ -87,11 +87,17 @@
 </template>
 
 <script lang="ts">
+import loginService from 'src/services/login.service';
 import {Vue, Component} from 'vue-property-decorator';
 
 @Component({})
 export default class MainLayout extends Vue {
   leftDrawerOpen = false;
   signup = false;
+
+  async logout() {
+    await loginService.logoutUser();
+    await this.$router.replace('/');
+  }
 }
 </script>

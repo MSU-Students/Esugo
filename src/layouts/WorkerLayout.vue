@@ -2,50 +2,40 @@
   <q-layout view="hhh LpR lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
         <q-toolbar-title class="row items-center cursor-pointer">
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
         <div class="q-gutter-x-md">
-          <q-btn
-            flat
-            color="white "
-            icon="person"
-            label="Profile"
-            to="/employerProfile"
-          />
-          <q-btn flat color="white " icon="person" label="Log-out" to="/" />
+          <q-btn v-if="$route.path == '/worker/'" flat color="white " icon="person" label="Profile" to="/worker/profile" />
+          <q-btn v-if="$route.path == '/worker/profile'" flat color="white " icon="home" label="Home" to="/worker/" />
+          <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
         </div>
       </q-toolbar>
     </q-header>
-    <ADrawer
-      v-if="$route.path == '/admin/home' || $route.path == '/admin/accounts'"
-      :drawerOpen="drawerOpen"
-    />
-    <MDrawer
-      v-if="$route.path == '/moderator/jobs' || $route.path == '/moderator/home'"
-      :drawerOpen="drawerOpen"
-    />
     <q-page-container>
       <router-view />
     </q-page-container>
-  </q-layout>
+  </q-layout> 
 </template>
 
 <script lang="ts">
+import loginService from 'src/services/login.service';
 import {Vue, Component} from 'vue-property-decorator';
-import ADrawer from 'src/components/admin_components/drawer.vue';
-import MDrawer from 'src/components/moderator_components/drawer.vue';
 
 @Component({
-  components: {MDrawer, ADrawer},
+  components: {},
 })
-export default class AdminLayout extends Vue {
+export default class WorkerLayout extends Vue {
   drawerOpen = true;
 
   onDrawerEvent() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.drawerOpen = !this.drawerOpen;
+  }
+
+  async logout() {
+    await loginService.logoutUser();
+    await this.$router.replace('/');
   }
 }
 </script>
