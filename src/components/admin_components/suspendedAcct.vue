@@ -22,7 +22,7 @@
               auto-width
               class="text-center"
             >
-              <q-btn
+              <q-btn rounded
                 :text-color="colorManipulation(props.row.status)"
                 color="white"
                 :label="labelManipulation(props.row.status)"

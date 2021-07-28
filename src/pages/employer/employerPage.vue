@@ -3,7 +3,7 @@
     <div class="q-gutter-y-md">
       <q-card>
         <q-tabs v-model="tab" dense no-caps inline-label class="text-primary shadow-2">
-          <q-tab name="Approved" icon="work" label="Job Status" />
+          <q-tab name="Approved" icon="work" label="Accepted Applicant" />
           <q-tab name="Pending" icon="work" label="Pending Applicant" />
         </q-tabs>
         <q-separator />

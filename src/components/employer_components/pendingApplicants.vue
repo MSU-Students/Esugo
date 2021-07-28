@@ -19,7 +19,7 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td auto-width class="text-center">
-              <q-btn
+              <q-btn rounded
                 :text-color="colorManipulation(props.row.status)"
                 color="white"
                 :label="labelManipulation(props.row.status)"
@@ -61,16 +61,18 @@
 
 <script lang="ts">
 import App from 'src/App.vue';
+import { UserDto } from 'src/services/rest-api';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
 
 @Component({
   computed: {
-    ...mapState('application', ['applications'])
+    ...mapState('application', ['applications']),
   },
   methods: {
     ...mapActions('application', ['getAllApplication', 'updateApplication']),
-    ...mapActions('job', ['getOneJob', 'updateJob'])
+    ...mapActions('job', ['getOneJob', 'updateJob']),
+    ...mapActions('user', ['getProfile'])
   }
 })
 export default class pendingApplicants extends Vue {
@@ -115,11 +117,13 @@ export default class pendingApplicants extends Vue {
   updateApplication!: (payload: any) => Promise<void>;
   updateJob!: (payload: any) => Promise<void>;
   getOneJob!: (payload: any) => Promise<void>;
+  getProfile!: () => Promise<void>;
 
   async mounted() {
+   const user: any = await this.getProfile();
     await this.getAllApplication();
     this.data = this.applications
-      .filter(i => i.status == 'pending')
+      .filter(i => i.status == 'pending' && i.employerID == user.id)
       .map((a: any) => {
         return {
           id: a.id,

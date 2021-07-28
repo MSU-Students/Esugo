@@ -19,7 +19,7 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td auto-width class="text-center">
-              <q-btn
+              <q-btn rounded
                 :text-color="colorManipulation(props.row.status)"
                 color="white"
                 :label="labelManipulation(props.row.status)"
@@ -68,7 +68,8 @@ import { mapActions, mapState } from 'vuex';
     ...mapState('application', ['applications'])
   },
   methods: {
-    ...mapActions('application', ['getAllApplication', 'updateApplication'])
+    ...mapActions('application', ['getAllApplication', 'updateApplication']),
+    ...mapActions('user', ['getProfile'])
   }
 })
 export default class pendingApplicants extends Vue {
@@ -110,6 +111,7 @@ export default class pendingApplicants extends Vue {
   status = '';
   getAllApplication!: () => Promise<void>;
   updateApplication!: (payload: any) => Promise<void>;
+  getProfile!: () => Promise<void>;
 
   async mounted() {
     this.data = await this.getAllApplications();
@@ -117,9 +119,10 @@ export default class pendingApplicants extends Vue {
   }
 
   async getAllApplications() {
+     const user: any = await this.getProfile();
     await this.getAllApplication();
     this.data = this.applications
-      .filter(i => i.status != 'pending')
+      .filter(i => i.status != 'pending' && i.employerID == user.id)
       .map((a: any) => {
         return {
           id: a.id,
