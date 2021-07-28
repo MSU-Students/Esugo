@@ -33,7 +33,7 @@ module.exports = configure(function(/* ctx */) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v5',
-      // 'fontawesome-v5',
+      'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -99,9 +99,9 @@ module.exports = configure(function(/* ctx */) {
       plugins: ['Notify']
     },
 
-    // animations: 'all', // --- includes all animations
+    animations: 'all', // --- includes all animations
     // https://v1.quasar.dev/options/animations
-    animations: [],
+    // animations: [],
 
     // https://v1.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
