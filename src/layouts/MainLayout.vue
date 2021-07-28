@@ -4,12 +4,12 @@
       <q-toolbar>
         <q-toolbar-title
           class="row items-center cursor-pointer"
-          @click="$router.replace('/')"
+          @click="$router.replace('/home')"
         >
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
 
-        <div v-if="$route.path == '/'" class="q-gutter-x-md">
+        <div v-if="$route.path == '/home'" class="q-gutter-x-md">
           <q-btn flat color="white" icon="person" label="Sign-up" to="/signup" />
 
           <span>|</span>
@@ -46,7 +46,7 @@
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">Amjad</div>
 
-                  <q-btn color="primary" label="Logout" size="sm" to="/" />
+                  <q-btn color="primary" label="Logout" size="sm" to="/home" />
                 </div>
               </div>
             </q-menu>
@@ -58,8 +58,8 @@
             <q-menu>
               <div class="row no-wrap q-pa-md">
                 <!-- <div class="column">
-                 <q-btn color="primary" label="Logout" size="m" to="/" />
-                  <q-btn class="p-b-xl"  color="primary" label="Profile" size="m" to="/" />
+                 <q-btn color="primary" label="Logout" size="m" to="/home" />
+                  <q-btn class="p-b-xl"  color="primary" label="Profile" size="m" to="/home" />
                 </div> -->
 
                 <!-- <q-separator vertical inset class="q-mx-lg" /> -->
@@ -70,7 +70,7 @@
                   </q-avatar>
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">Yassier</div>
-                  <q-btn color="primary" label="Logout" size="m" to="/" />
+                  <q-btn color="primary" label="Logout" size="m" to="/home" />
                 </div>
               </div>
             </q-menu>
@@ -97,7 +97,7 @@ export default class MainLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/');
+    await this.$router.replace('/home');
   }
 }
 </script>

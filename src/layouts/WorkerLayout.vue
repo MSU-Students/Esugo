@@ -15,7 +15,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-  </q-layout> 
+  </q-layout>
 </template>
 
 <script lang="ts">
@@ -35,7 +35,7 @@ export default class WorkerLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/');
+    await this.$router.replace('/home');
   }
 }
 </script>

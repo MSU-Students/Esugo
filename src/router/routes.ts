@@ -3,20 +3,32 @@ import { RouteConfig } from 'vue-router';
 const routes: RouteConfig[] = [
   {
     path: '/',
+    meta: { requiresGuest: true },
+    component: () => import('layouts/LandingLayout.vue'),
+    children: [
+      {
+        path: '/',
+        meta: { requiresGuest: true },
+        component: () => import('pages/LandingPage.vue')
+      }
+    ]
+  },
+  {
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '',
+        path: 'home',
         meta: { requiresGuest: true },
-        component: () => import('pages/LandingPage.vue')
+        component: () => import('pages/HomePage.vue')
       },
       {
-        path: '/signup',
+        path: 'signup',
         meta: { requiresGuest: true },
         component: () => import('pages/SignUp.vue')
       },
       {
-        path: '/login',
+        path: 'login',
         meta: { requiresGuest: true },
         component: () => import('src/pages/LoginPage.vue')
       }
@@ -76,7 +88,7 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: 'jobs',
-        component: () => import('../pages/moderator/ModeratorPage.vue') 
+        component: () => import('../pages/moderator/ModeratorPage.vue')
       },
       { path: '', component: () => import('pages/LandingPage.vue') }
     ]

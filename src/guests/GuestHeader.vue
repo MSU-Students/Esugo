@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-toolbar-title
           class="row items-center cursor-pointer"
-          @click="$router.replace('/')"
+          @click="$router.replace('/home')"
         >
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
@@ -24,7 +24,7 @@
           <q-btn flat color="white" icon="person" label="Log-in" to="/login" />
         </div>
         <div v-if="$route.path == '/review'" class="q-gutter-x-md">
-          <q-btn flat color="white " icon="person" label="Log-out" to="/" />
+          <q-btn flat color="white " icon="person" label="Log-out" to="/home" />
         </div>
       </q-toolbar>
     </q-header>

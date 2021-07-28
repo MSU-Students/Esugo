@@ -5,7 +5,7 @@
         <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
         <q-toolbar-title
           class="row items-center cursor-pointer"
-          @click="$router.replace('/')"
+          @click="$router.replace('/home')"
         >
           <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
         </q-toolbar-title>
@@ -47,7 +47,7 @@ export default class AdminLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/');
+    await this.$router.replace('/home');
   }
 }
 </script>
