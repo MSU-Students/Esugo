@@ -1,4 +1,4 @@
-import { SmsControllerApi, Configuration, SMSs as ISms } from './rest-api';
+import { SmsControllerApi, Configuration, SMSs as ISms } from './sms-api';
 
 const dev = 'http://localhost:9000';
 
@@ -14,7 +14,7 @@ const restConfig = new Configuration({
 const restApi = new SmsControllerApi(restConfig);
 
 class SmsService extends SmsControllerApi {
-  async insert(payload: ISms) {
+  async sendMessage(payload: ISms) {
     const response = await restApi.sendSms(payload);
     return response.data;
   }
