@@ -138,7 +138,6 @@ export default class pendingJob extends Vue {
   }
 
   async approve(id: number) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {user, employer, ...newJob} = this.data.find((i: any) => i.id == id);
     console.log(newJob);
     await this.updateJob({
@@ -149,7 +148,6 @@ export default class pendingJob extends Vue {
   }
 
   async disapprove(id: number) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {user, employer, ...newJob} = this.data.find((i: any) => i.id == id);
     console.log(newJob);
     await this.updateJob({
