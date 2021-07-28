@@ -28,7 +28,7 @@
         style="top: 0; right: 12px; transform: translateY(-50%)"
       >
         <q-avatar size="70px">
-          <!-- <img :src="require(`../assets/${profilePic}`)" /> -->
+          <img :src="require(`../assets/${profilePic}`)" />
         </q-avatar>
       </q-btn>
 
@@ -38,7 +38,7 @@
           class="col-auto text-grey text-caption q-pt-md row no-wrap items-center"
         >
           <q-icon name="person" />
-          {{ user.firstName + ' ' + user.lastName }}
+          {{ user.firstName }}
         </div>
       </div>
       <div class="text-caption text-grey">
@@ -59,12 +59,13 @@
     <!-- <q-btn color="light-blue-10" icon="send" label="Send Application" />  -->
     <q-card-actions align="center">
       <q-btn
-        v-if="$route.path == '/worker/'"
         rounded
         label="Send Application"
         color="primary"
         icon="send"
         clickable
+        :loading="loading"
+        :disabl="loading"
         @click="addApplication()"
       />
 
@@ -178,20 +179,14 @@ export default class Card extends Vue {
   confirmReport = false;
   status = '';
   alert = false;
+  loading = false;
+  profilePic = 'employer1.jpg';
   application: ApplicationDto = {
     workerID: 0,
     employerID: this.employerID,
     jobID: this.id,
     status: 'pending'
   };
-
-  async created() {
-    // know that user already applied for the job
-  }
-
-  jobsAvailable() {
-    //
-  }
 
   async addApplication() {
     this.application = {
@@ -201,19 +196,32 @@ export default class Card extends Vue {
       status: 'pending'
     };
     try {
+      this.loading = true;
       const currentProfile: any = await this.getProfile();
-      await this.createApplication({
+      if(currentProfile.type == 'worker'){      
+        await this.createApplication({
         ...this.application,
         workerID: currentProfile.id
       });
-      await this.getAllJob();
+       await this.getAllJob();
       helperService.notify({
         type: 'positive',
         message: 'Successfully Applied!',
         caption: 'Employer will contact you soon.'
       });
+      this.loading = false;}
+      else{
+        helperService.notify({
+        type: 'negative',
+        message: 'Only Worker can Apply!',
+        caption: 'Employer will contact you soon.'
+      }); 
+      }
+      await this.getAllJob();
+      this.loading = false;
     } catch (error) {
       await this.$router.replace('/login');
+      this.loading = false;
     }
   }
 }

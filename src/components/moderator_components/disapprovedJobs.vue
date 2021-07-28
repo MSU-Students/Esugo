@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-card bg-blue>
-      <q-table title="List of Approved Jobs" :data="data" :columns="columns" row-key="name">
+      <q-table title="List of Disapproved Jobs" :data="data" :columns="columns" row-key="name">
         <template v-slot:header="props">
           <q-tr :props="props">
             <q-th auto-width>Job Status</q-th>
@@ -127,7 +127,7 @@ export default class pendingJob extends Vue {
 
   async getAllJobs() {
     await this.getAllJob();
-    const jobs = this.jobs.filter((i) => i.status == 'approved');
+    const jobs = this.jobs.filter((i) => i.status == 'disapproved');
     const newJob = jobs.map((i: any) => {
       return {
         ...i,

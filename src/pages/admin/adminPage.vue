@@ -12,7 +12,7 @@
           <q-tab name="pending" icon="person" label="Pending Accounts" />
           <q-tab name="approve" icon="person" label="Approved Accounts" />
           <q-tab name="disapproved" icon="warning" label="Banned Accounts" />
-          <q-tab name="suspended" icon="warning" label="Suspended ccounts" />
+          <q-tab name="suspended" icon="warning" label="Suspended Accounts" />
         </q-tabs>
         <q-separator />
 

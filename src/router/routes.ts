@@ -15,7 +15,6 @@ const routes: RouteConfig[] = [
         meta: { requiresGuest: true },
         component: () => import('pages/SignUp.vue')
       },
-
       {
         path: '/login',
         meta: { requiresGuest: true },
@@ -77,7 +76,7 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: 'jobs',
-        component: () => import('../pages/moderator/ModeratorPage.vue')
+        component: () => import('../pages/moderator/ModeratorPage.vue') 
       },
       { path: '', component: () => import('pages/LandingPage.vue') }
     ]

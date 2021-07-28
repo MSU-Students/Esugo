@@ -139,20 +139,41 @@ export default class SearchToolbar extends Vue {
 
   @Watch('jobs')
   async newApplicant(val: any) {
-    const currentProfile: any = await this.getProfile();
-    await this.getAllApplication();
-    const applied = this.applications.filter(
-      i => i.workerID == currentProfile.id
-    );
-    this.jobsArr = val.filter((i: any) => {
-      return !applied.some(a => {
-        return a.jobID == i.id;
+    if (localStorage.getItem('access-token') != null) {
+      const currentProfile: any = await this.getProfile();
+      await this.getAllApplication();
+      const applied = this.applications.filter(
+        i => i.workerID == currentProfile.id
+      );
+      this.jobsArr = val.filter((i: any) => {
+        return !applied.some(a => {
+          return a.jobID == i.id;
+        });
       });
-    });
-    this.getData2;
+      this.getData2;
+    }
   }
 
   async created() {
+    if (localStorage.getItem('access-token') != null) {
+      await this.getJobsWithAuth();
+    } else {
+      await this.getJobsWithoutAuth();
+    }
+  }
+
+  async getJobsWithoutAuth() {
+    await this.getAllJob();
+    this.jobsArr = this.jobs;
+    let location = items.map(i => {
+      if (i.status == 'approved') {
+        return i.location;
+      }
+    });
+    this.locationOption = [...new Set(location)];
+  }
+
+  async getJobsWithAuth() {
     const currentProfile: any = await this.getProfile();
     await this.getAllApplication();
     const applied = this.applications.filter(
@@ -165,11 +186,12 @@ export default class SearchToolbar extends Vue {
       });
     });
     items = this.jobsArr.filter((i: any) => i.status == 'approved');
-    this.locationOption = items.map(i => {
+    let location = items.map(i => {
       if (i.status == 'approved') {
         return i.location;
       }
     });
+    this.locationOption = [...new Set(location)];
   }
 
   get getData2() {

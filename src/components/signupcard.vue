@@ -102,7 +102,7 @@
         </template>
       </q-input>
     </div>
-    <q-btn
+    <q-btn  
       class="full-width"
       color="primary"
       label="sign-up"

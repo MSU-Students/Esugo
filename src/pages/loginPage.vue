@@ -75,11 +75,13 @@ export default class Login extends Vue {
   signup = '';
   isPwd = true;
   type = '';
+  loading = false;
 
   login!: (auth: {username: string; password: string; type: string}) => Promise<AUser>;
 
   async loginUser() {
     try {
+      this.loading = true;
       const res: any = await this.login({
         username: this.username,
         password: this.password,
@@ -98,6 +100,7 @@ export default class Login extends Vue {
         type: 'positive',
         message: `Welcome ${res.firstName} ${res.lastName}`,
       });
+      this.loading = false;
     } catch (error) {
       helperService.notify({
         type: 'negative',
@@ -107,6 +110,7 @@ export default class Login extends Vue {
             : 'Something went wrong!',
         caption: error.message,
       });
+      this.loading = false;
     }
   }
 }

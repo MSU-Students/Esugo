@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card bg-blue>
       <q-table
-        title="Pending Jobs"
+        title="List of Pending Jobs"
         :data="data"
         :columns="columns"
         row-key="name"
