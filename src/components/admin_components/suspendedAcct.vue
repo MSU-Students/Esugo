@@ -84,7 +84,6 @@ import { IUser } from 'src/interfaces/user.interface2';
   }
 })
 export default class approvedAcct extends Vue {
-  greenModel = 'suspended';
   selectedIndex = null;
   columns = [
     {
@@ -92,7 +91,7 @@ export default class approvedAcct extends Vue {
       required: true,
       label: 'Account Name',
       align: 'left',
-      field: (row: IUser) => row.firstName,
+      field: (row: any) => row.name,
       format: (val: any) => `${val}`,
       sortable: true
     },
@@ -102,6 +101,13 @@ export default class approvedAcct extends Vue {
       label: 'Gender',
       field: 'gender',
       sortable: true
+    },
+     {
+      name: 'contactNo',
+      label: 'Contact No.',
+      field: 'contact',
+      sortable: true,
+      align: 'left'
     },
     {
       name: 'email',
@@ -118,15 +124,29 @@ export default class approvedAcct extends Vue {
       align: 'left'
     },
   ];
-  users!: IUser[];
-  data: IUser[] = [];
+  users!: any[];
+  data: any[] = [];
   status = '';
   getAllUser!: () => Promise<void>;
   updateUser!: (payload: any) => Promise<void>;
 
-  async mounted() {
+  async mounted(){
+    await this.getAllUsers();
+  }
+  async getAllUsers() {
     await this.getAllUser();
-    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+          status: a.status,
+          
+        };
+      });
   }
 
   async approveAccount(id: number) {
@@ -134,14 +154,34 @@ export default class approvedAcct extends Vue {
       id,
       status: 'available'
     });
-    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+            status: a.status,
+        };
+      });
   }
 async suspendAccount(id: number) {
     await this.updateUser({
       id,
       status: 'suspended'
     });
-    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+            status: a.status,
+        };
+      });
   }
 
   async disapproveAccount(id: number) {
@@ -149,16 +189,25 @@ async suspendAccount(id: number) {
       id,
       status: 'banned'
     });
-    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator');
+    this.data = this.users.filter(i => i.status == 'suspended' && i.type != 'admin' && i.type != 'moderator').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+           status: a.status,
+        };
+      });
   }
-
   colorManipulation(status: string) {
     if (status == 'suspended') {
       return 'orange';
     } else if (status == 'banned') {
       return 'red';
     } else {
-      return 'green';
+      return 'blue';
     }
   }
 

@@ -83,7 +83,7 @@ export default class pendingAcct extends Vue {
       required: true,
       label: 'Account Name',
       align: 'left',
-      field: (row: IUser) => row.firstName,
+      field: (row: any) => row.name,
       format: (val: any) => `${val}`,
       sortable: true
     },
@@ -93,6 +93,13 @@ export default class pendingAcct extends Vue {
       label: 'Gender',
       field: 'gender',
       sortable: true
+    },
+     {
+      name: 'contactNo',
+      label: 'Contact No.',
+      field: 'contact',
+      sortable: true,
+      align: 'left'
     },
     {
       name: 'email',
@@ -109,21 +116,44 @@ export default class pendingAcct extends Vue {
       align: 'left'
     },
   ];
-  users!: IUser[];
-  data: IUser[] = [];
+  users!: any[];
+  data: any[] = [];
   status = '';
   getAllUser!: () => Promise<void>;
   updateUser!: (payload: any) => Promise<void>;
 
-  async mounted() {
+  async mounted(){
+    await this.getAllUsers();
+  }
+  async getAllUsers() {
     await this.getAllUser();
-    this.data = this.users.filter(i => i.status == 'pending');
+    this.data = this.users.filter(i => i.status == 'pending' && i.type != 'admin' && i.type != 'moderator').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+            status: a.status,
+        };
+      });
   }
 async approveAccount(id: number) {
      await this.updateUser({
       id,
       status: 'available'});
-      this.data = this.users.filter(i => i.status == 'pending');
+      this.data = this.users.filter(i => i.status == 'pending').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+            status: a.status,
+        };
+      });
   }
   
   async disapproveAccount(id: number) {
@@ -131,7 +161,17 @@ async approveAccount(id: number) {
       id,
       status: 'banned'
     });
-    this.data = this.users.filter(i => i.status == 'pending');
+    this.data = this.users.filter(i => i.status == 'pending').map((a: any) => {
+        return {
+          id: a.id,
+          name: a.firstName + ' ' +  a.lastName,
+          gender: a.gender,
+          email: a.email,
+          contact: a.contact,
+          type: a.type,
+            status: a.status,
+        };
+      });
   }
 
   colorManipulation(status: string) {
