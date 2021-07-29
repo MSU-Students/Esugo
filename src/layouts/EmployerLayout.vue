@@ -3,20 +3,40 @@
     <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
-        <q-toolbar-title
-          class="row items-center cursor-pointer"
-
-        >
-          <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
+        <q-toolbar-title class="row items-center">
+          <img
+            class="q-pl-md cursor-pointer"
+            src="~/assets/Esugo2.png"
+            height="25px"
+            @click="$router.replace('/employer/home')"
+          />
         </q-toolbar-title>
 
-        <q-btn v-if="$route.path == '/employer/applicants' || $route.path == '/employer/' " flat color="white " icon="person" label="Profile" to="/employer/profile" />
-        <q-btn v-if="$route.path == '/employer/profile'" flat color="white " icon="person" label="home" to="/employer/" />
+        <q-btn
+          v-if="$route.path == '/employer/applicants' || $route.path == '/employer/'"
+          flat
+          color="white "
+          icon="person"
+          label="Profile"
+          to="/employer/profile"
+        />
+        <q-btn
+          v-if="$route.path == '/employer/profile'"
+          flat
+          color="white "
+          icon="person"
+          label="home"
+          to="/employer/"
+        />
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
     <EmployerDrawer
-      v-if="$route.path == '/employer/' || $route.path == '/employer/profile' || $route.path == '/employer/applicants'"
+      v-if="
+        $route.path == '/employer/' ||
+        $route.path == '/employer/profile' ||
+        $route.path == '/employer/applicants'
+      "
       :drawerOpen="drawerOpen"
     />
 
