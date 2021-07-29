@@ -2,8 +2,13 @@
   <q-layout view="hhh LpR lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title class="row items-center cursor-pointer">
-          <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
+        <q-toolbar-title class="row items-center">
+          <img
+            class="q-pl-md cursor-pointer"
+            src="~/assets/Esugo2.png"
+            height="25px"
+            @click="$router.replace('/worker/home')"
+          />
         </q-toolbar-title>
         <div class="q-gutter-x-md">
           <q-btn v-if="$route.path == '/worker/home'" flat color="white " icon="person" label="Profile" to="/worker/profile" />
