@@ -456,6 +456,7 @@
                 v-model="slide"
                 thumbnails
                 infinite
+                :autoplay="autoplay"
               >
                 <q-carousel-slide
                   :name="1"
@@ -492,6 +493,7 @@ import { Vue, Component } from 'vue-property-decorator';
 export default class LandingPage extends Vue {
   screenHeight = 0;
   slide = 1;
+  autoplay = true;
 
   created() {
     this.screenHeight = window.screen.height - 107;
@@ -581,6 +583,7 @@ export default class LandingPage extends Vue {
 .box-item {
   position: relative;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   width: 415px;
   margin-bottom: 35px;
   max-width: 100%;
