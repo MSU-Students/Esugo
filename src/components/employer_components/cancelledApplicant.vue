@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card bg-blue>
       <q-table
-        title="Job In Progress"
+        title="Job Cancelled"
         :data="data"
         :columns="columns"
         row-key="name"
@@ -106,7 +106,7 @@ export default class pendingApplicants extends Vue {
       sortable: true,
       align: 'left'
     },
-    {
+        {
       name: 'description',
       label: 'Job Description',
       field: 'description',
@@ -117,7 +117,7 @@ export default class pendingApplicants extends Vue {
   applications!: any[];
   data: any = [];
   status = '';
-  job!: any;
+     job!: any;
   updateJob!: (payload: any) => Promise<void>;
   getAllApplication!: () => Promise<void>;
   updateApplication!: (payload: any) => Promise<void>;
@@ -132,7 +132,7 @@ export default class pendingApplicants extends Vue {
      const user: any = await this.getProfile();
     await this.getAllApplication();
     this.data = this.applications
-      .filter(i => i.status == 'accepted' && i.employerID == user.id)
+      .filter(i => i.status == 'cancelled' && i.employerID == user.id)
       .map((a: any) => {
         return {
           id: a.id,
@@ -146,7 +146,7 @@ export default class pendingApplicants extends Vue {
       });
     return this.data;
   }
-    updatejob(appId: number, stat: string) {
+   updatejob(appId: number, stat: string) {
     this.applications.filter(async (i) => {
       if (i.id == appId) {
         const {user, employer, ...newJob} = i.job;
@@ -176,7 +176,6 @@ export default class pendingApplicants extends Vue {
       this.updatejob(id,'canceled');
     this.data = await this.getAllApplications();
   }
-
   colorManipulation(status: string) {
     if (status == 'accepted') {
       return 'orange';

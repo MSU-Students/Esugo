@@ -617,8 +617,18 @@
               </div>
             </div>
             <div class="col-6">
-              <q-carousel swipeable animated v-model="slide" thumbnails infinite>
-                <q-carousel-slide :name="1" img-src="~assets/ITspecialist.jpg" />
+              <q-carousel
+                swipeable
+                animated
+                v-model="slide"
+                thumbnails
+                infinite
+                :autoplay="autoplay"
+              >
+                <q-carousel-slide
+                  :name="1"
+                  img-src="~assets/ITspecialist.jpg"
+                />
                 <q-carousel-slide :name="2" img-src="~assets/carpentry.jpg" />
                 <q-carousel-slide :name="3" img-src="~assets/plumber.jpeg" />
                 <q-carousel-slide :name="4" img-src="~assets/machine-operator.jpg" />
@@ -647,6 +657,7 @@ import {Vue, Component} from 'vue-property-decorator';
 export default class LandingPage extends Vue {
   screenHeight = 0;
   slide = 1;
+  autoplay = true;
 
   created() {
     this.screenHeight = window.screen.height - 107;
@@ -736,6 +747,7 @@ export default class LandingPage extends Vue {
 .box-item {
   position: relative;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   width: 415px;
   margin-bottom: 35px;
   max-width: 100%;

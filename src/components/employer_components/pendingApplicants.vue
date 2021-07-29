@@ -161,14 +161,14 @@ export default class pendingApplicants extends Vue {
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
-          status: a.status,
+          status: a.status
         };
       });
        console.log('sdaafs: ',this.data);
     const applicant =  this.data.find((i: any) => i.id  === id);
     console.log('applicant',applicant);
 
-    const message = `Congratulations! You'are hired as a ${applicant.title} of ${applicant.name}. Wait your employer to contact you.`;
+    const message = `Congratulations! You'are hired as a ${applicant.title} of ${applicant.name}. Please waut for your employer to contact you.`;
     console.log(applicant);
     await smsService.sendMessage({
       message: message,
