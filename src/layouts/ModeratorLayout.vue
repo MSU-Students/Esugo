@@ -3,11 +3,13 @@
     <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
-        <q-toolbar-title
-          class="row items-center cursor-pointer"
-          @click="$router.replace('/home')"
-        >
-          <img class="q-pl-md" src="~/assets/Esugo2.png" height="25px" />
+        <q-toolbar-title class="row items-center">
+          <img
+            class="q-pl-md cursor-pointer"
+            src="~/assets/Esugo2.png"
+            height="25px"
+            @click="$router.replace('/moderator/home')"
+          />
         </q-toolbar-title>
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>

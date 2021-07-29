@@ -3,7 +3,14 @@
     <div class="col-8">
       <q-page :style="colorManipulation(tab)" class="flex flex-center">
         <div class="q-pa-md">
-          <q-tabs v-model="tab" dense no-caps inline-label>
+          <q-tabs
+            v-model="tab"
+            content-class="text-white"
+            indicator-color="grey-9"
+            dense
+            no-caps
+            inline-label
+          >
             <q-tab name="worker" icon="person" label="Signup as Worker" />
             <q-tab name="employer" icon="person" label="Signup as Employer" />
           </q-tabs>
@@ -18,11 +25,14 @@
         </div>
       </q-page>
     </div>
-    <div class="col-4">
-      <q-img
-        :src="require(`../assets/${imageManipulation(tab)}`)"
-        style="max-width: 800px; height: 600px"
-      />
+    <div class="col-4 flex flex-center q-pa-xl">
+      <q-img :src="require(`../assets/photos/${imageManipulation(tab)}`)"> </q-img>
+      <div
+        class="text-h2 text-weight-bolder text-uppercase"
+        :class="tab == 'worker' ? 'text-blue-3' : 'text-pink-3'"
+      >
+        {{ tab }}
+      </div>
     </div>
   </div>
 </template>
@@ -50,16 +60,16 @@ export default class PageIndex extends Vue {
 
   colorManipulation(tab: string) {
     if (tab == 'worker') {
-      return 'background: linear-gradient(to bottom, #ffffff 5%, #238ffb 100%);';
+      return 'background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%);';
     } else {
       return 'background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);';
     }
   }
   imageManipulation(tab: string) {
     if (tab == 'worker') {
-      return 'bg2.jpg';
+      return 'photo10.svg';
     } else {
-      return 'bg.jpg';
+      return 'photo11.svg';
     }
   }
 }
