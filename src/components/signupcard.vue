@@ -1,13 +1,14 @@
 <template>
-  <q-card flat class="signupcard  bg-transparent">
-    <div class="q-gutter-sm" style="width:400px">
+  <q-card flat class="signupcard">
+    <div class="q-gutter-sm" style="width: 400px">
       <q-input
         standout="bg-blue text-white"
         filled
+        dense
         v-model="user.firstName"
         label="First name *"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
@@ -17,7 +18,7 @@
         v-model="user.middleName"
         label="Middle name *"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
@@ -27,16 +28,17 @@
         v-model="user.lastName"
         label="Surname *"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
         standout="bg-blue text-white"
         filled
+        dense
         v-model="user.birthdate"
         mask="date"
         label="Birth Day *"
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       >
         <template v-slot:append>
@@ -62,7 +64,7 @@
         v-model="user.gender"
         label="Gender *"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
@@ -72,7 +74,7 @@
         v-model="user.address"
         label="Permanent Address *"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
@@ -82,7 +84,7 @@
         v-model="user.contact"
         label="Contact Number*"
         lazy-rules
-        :rules="[val => val.length <= 3 || 'Please type something']"
+        :rules="[(val) => val.length <= 3 || 'Please type something']"
         prefix="+63"
         mask="##########"
         hide-bottom-space
@@ -94,7 +96,7 @@
         v-model="user.email"
         label="Email Address*"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
@@ -104,13 +106,14 @@
         v-model="user.username"
         label="Usernane*"
         lazy-rules
-        :rules="[val => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
       />
       <q-input
         standout="bg-blue text-white"
         color="blue-9"
         outlined
+        dense
         v-model="user.password"
         filled
         :type="isPwd ? 'password' : 'text'"
@@ -140,18 +143,18 @@
 </template>
 
 <script lang="ts">
-import { UserDto } from 'src/services/rest-api';
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
+import {UserDto} from 'src/services/rest-api';
+import {Vue, Component, Prop} from 'vue-property-decorator';
+import {mapActions} from 'vuex';
 import helperService from '../services/helper.service';
 
 @Component({
   methods: {
-    ...mapActions('user', ['createUser'])
-  }
+    ...mapActions('user', ['createUser']),
+  },
 })
 export default class singupCard extends Vue {
-  @Prop({ type: String, required: true }) readonly name!: string;
+  @Prop({type: String, required: true}) readonly name!: string;
 
   isPwd = '';
   createUser!: (payload: UserDto) => Promise<void>;
@@ -170,7 +173,7 @@ export default class singupCard extends Vue {
     status: 'pending',
     username: 'worker',
     password: 'password',
-    refreshToken: ''
+    refreshToken: '',
   };
 
   loading = false;
@@ -183,13 +186,13 @@ export default class singupCard extends Vue {
       this.loading = false;
       helperService.notify({
         type: 'positive',
-        message: 'Successfully registered!'
+        message: 'Successfully registered!',
       });
     } catch (error) {
       helperService.notify({
         type: 'negative',
         message: error.response.data.message,
-        caption: error.message
+        caption: error.message,
       });
       this.loading = false;
     }
