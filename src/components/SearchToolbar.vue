@@ -4,7 +4,7 @@
       class="text-white shadow-5"
       style="background: linear-gradient(to bottom left, #0066eb 0%, #ff8ab3 100%)"
     >
-      <q-toolbar-title :class="$q.screen.lt.md ? 'text-caption' : 'text-h4'">
+      <q-toolbar-title :class="$q.screen.lt.md ? 'text-caption' : 'text-h4 q-mx-xl'">
         <div>Find the <strong>jobs </strong> that matter to you</div>
         <div
           class="row q-col-gutter-x-md justify-between items-center q-pt-sm"
@@ -22,7 +22,7 @@
                   v-model="jobTitle"
                   bg-color="white"
                   type="text"
-                  label="Job title, keyword or company"
+                  label="Job title"
                   @keyup.enter="searchJob()"
                 >
                   <template v-slot:prepend>
