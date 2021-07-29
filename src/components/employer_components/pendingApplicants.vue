@@ -154,8 +154,22 @@ export default class pendingApplicants extends Vue {
     });
   }
   async approveApplicant(id: number) {
+  //   const applicant = this.data.find((i: any) => i.id === id);
+  //   const message = `Congratulations! ${applicant.name} You'are hired as a ${applicant.title} of ${applicant.employerName} . Please wait for your employer to contact you.`;
+  //  console.log('PhonNUmber: ',applicant.contact)
+  //  await smsService.sendMessage({
+  //     message: message,
+  //     phoneNumber: applicant.contact,
+  //   });
+    
+    await this.updateApplication({
+      id,
+      status: 'accepted',
+    });
+    this.updatejob(id);
+     const user: any = await this.getProfile();
     this.data = this.applications
-      .filter((i) => i.status == 'pending')
+      .filter((i) => i.status == 'pending' && i.employerID == user.id)
       .map((a: any) => {
         return {
           id: a.id,
@@ -169,12 +183,12 @@ export default class pendingApplicants extends Vue {
           employerName: a.employer.firstName + ' ' + a.employer.lastName,
         };
       });
-    const applicant = this.data.find((i: any) => i.id === id);
-    const message = `Congratulations! ${applicant.name} You'are hired as a ${applicant.title} of ${applicant.employerName} . Please wait for your employer to contact you.`;
-    await smsService.sendMessage({
-      message: message,
-      phoneNumber: applicant.contact,
-    });
+    // const applicant = this.data.find((i: any) => i.id === id);
+    // const message = `Congratulations! ${applicant.name} You'are hired as a ${applicant.title} of ${applicant.employerName} . Please wait for your employer to contact you.`;
+    // await smsService.sendMessage({
+    //   message: message,
+    //   phoneNumber: applicant.contact,
+    // });
     await this.updateApplication({
       id,
       status: 'accepted',
@@ -202,6 +216,7 @@ export default class pendingApplicants extends Vue {
           description: a.job.description,
         };
       });
+      
   }
 
   colorManipulation(status: string) {
