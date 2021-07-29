@@ -154,11 +154,6 @@ export default class pendingApplicants extends Vue {
     });
   }
   async approveApplicant(id: number) {
-    // await this.updateApplication({
-    //   id,
-    //   status: 'accepted',
-    // });
-    // this.updatejob(id);
     this.data = this.applications
       .filter((i) => i.status == 'pending')
       .map((a: any) => {
@@ -171,19 +166,20 @@ export default class pendingApplicants extends Vue {
           title: a.job.title,
           status: a.status,
           description: a.job.description,
+          employerName: a.employer.firstName + ' ' + a.employer.lastName,
         };
       });
-    console.log('data: ', this.data);
     const applicant = this.data.find((i: any) => i.id === id);
-    const message = `Congratulations! You'are hired as a ${applicant.title} of ${applicant.name}. Please waut for your employer to contact you.`;
-    console.log('send: ', {
+    const message = `Congratulations! ${applicant.name} You'are hired as a ${applicant.title} of ${applicant.employerName} . Please wait for your employer to contact you.`;
+    await smsService.sendMessage({
       message: message,
       phoneNumber: applicant.contact,
     });
-    // await smsService.sendMessage({
-    //   message: message,
-    //   phoneNumber: applicant.contact,
-    // });
+    await this.updateApplication({
+      id,
+      status: 'accepted',
+    });
+    this.updatejob(id);
   }
 
   async disapproveApplicant(id: number) {

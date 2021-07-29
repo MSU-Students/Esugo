@@ -11,7 +11,7 @@
   >
     <q-scroll-area class="fit">
       <q-list padding>
-        <q-item clickable to="/employer/" v-ripple>
+        <q-item clickable to="/employer/home" v-ripple>
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>

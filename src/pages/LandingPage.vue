@@ -282,8 +282,7 @@
               class="text-h5 text-grey-8"
               style="width: 50%"
             >
-              E-SUGO let’s you showcase your talents and expertise to businesses
-              CityWide.
+              E-SUGO let’s you showcase your talents and expertise to businesses CityWide.
             </div>
           </div>
         </div>
@@ -532,7 +531,7 @@
           </div>
           <div
             data-aos="slide-down"
-            ata-aos-anchor-placement="top-bottom"
+            ata-aos-anchor-placement="center-center"
             data-aos-offset="1"
             data-aos-duration="700"
           >
@@ -548,7 +547,7 @@
           <div class="q-py-lg q-gutter-x-md">
             <q-btn
               data-aos="slide-right"
-              ata-aos-anchor-placement="top-bottom"
+              ata-aos-anchor-placement="top-center"
               data-aos-offset="100"
               data-aos-duration="700"
               data-aos-delay="100"
@@ -559,7 +558,7 @@
             />
             <q-btn
               data-aos="slide-right"
-              ata-aos-anchor-placement="top-bottom"
+              ata-aos-anchor-placement="top-center"
               data-aos-offset="100"
               data-aos-duration="700"
               data-aos-delay="100"
@@ -570,7 +569,7 @@
             />
             <q-btn
               data-aos="slide-left"
-              ata-aos-anchor-placement="top-bottom"
+              ata-aos-anchor-placement="top-center"
               data-aos-offset="100"
               data-aos-duration="700"
               data-aos-delay="100"
@@ -581,7 +580,7 @@
             />
             <q-btn
               data-aos="slide-left"
-              ata-aos-anchor-placement="top-bottom"
+              ata-aos-anchor-placement="top-center"
               data-aos-offset="100"
               data-aos-duration="700"
               data-aos-delay="100"

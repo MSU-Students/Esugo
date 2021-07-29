@@ -14,10 +14,7 @@
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
-    <AdminDrawer
-      :drawerOpen="true"
-    />
-    
+    <AdminDrawer :drawerOpen="true" />
 
     <q-page-container
       :style="$route.path == '/login' ? 'padding-top: 0 !important;' : ''"
@@ -45,7 +42,7 @@ export default class AdminLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/home');
+    await this.$router.replace('/');
   }
 }
 </script>

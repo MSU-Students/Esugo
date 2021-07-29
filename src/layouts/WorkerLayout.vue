@@ -11,13 +11,27 @@
           />
         </q-toolbar-title>
         <div class="q-gutter-x-md">
-          <q-btn v-if="$route.path == '/worker/home'" flat color="white " icon="person" label="Profile" to="/worker/profile" />
-          <q-btn v-if="$route.path == '/worker/profile'" flat color="white " icon="home" label="Home" to="/worker/home" />
+          <q-btn
+            v-if="$route.path == '/worker/home'"
+            flat
+            color="white "
+            icon="person"
+            label="Profile"
+            to="/worker/profile"
+          />
+          <q-btn
+            v-if="$route.path == '/worker/profile'"
+            flat
+            color="white "
+            icon="home"
+            label="Home"
+            to="/worker/home"
+          />
           <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
         </div>
       </q-toolbar>
     </q-header>
-    
+
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -41,7 +55,7 @@ export default class WorkerLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/home');
+    await this.$router.replace('/');
   }
 }
 </script>

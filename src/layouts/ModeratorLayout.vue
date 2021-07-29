@@ -44,7 +44,7 @@ export default class ModeratorLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/home');
+    await this.$router.replace('/');
   }
 }
 </script>

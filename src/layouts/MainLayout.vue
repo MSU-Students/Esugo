@@ -30,7 +30,7 @@
                   </q-avatar>
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">Yassier</div>
-                  <q-btn color="primary" label="Logout" size="m" to="/home" />
+                  <q-btn color="primary" label="Logout" size="m" @click="logout()" />
                 </div>
               </div>
             </q-menu>
@@ -57,7 +57,7 @@ export default class MainLayout extends Vue {
 
   async logout() {
     await loginService.logoutUser();
-    await this.$router.replace('/home');
+    await this.$router.replace('/');
   }
 }
 </script>
