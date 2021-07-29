@@ -2,7 +2,7 @@
   <q-layout view="hhh LpR lFf">
     <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
+        <!-- <q-btn dense flat round icon="menu" @click="onDrawerEvent" /> -->
         <q-toolbar-title class="row items-center">
           <img
             class="q-pl-md cursor-pointer"
@@ -15,7 +15,7 @@
       </q-toolbar>
     </q-header>
     <ModeratorDrawer
-      v-if="$route.path == '/moderator/' || $route.path == '/moderator/jobs'"
+      v-if="$route.path == '/moderator/home' || $route.path == '/moderator/jobs'"
       :drawerOpen="drawerOpen"
     />
     <q-page-container

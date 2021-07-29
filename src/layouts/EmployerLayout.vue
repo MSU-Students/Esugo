@@ -2,7 +2,7 @@
   <q-layout view="hhh LpR lFf">
     <q-header :class="$route.path == '/login' ? 'bg-transparent' : ''">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="onDrawerEvent" />
+        <!-- <q-btn dense flat round icon="menu" @click="onDrawerEvent" /> -->
         <q-toolbar-title class="row items-center">
           <img
             class="q-pl-md cursor-pointer"
@@ -26,14 +26,14 @@
           color="white "
           icon="person"
           label="home"
-          to="/employer/"
+          to="/employer/home"
         />
         <q-btn flat color="white " icon="logout" label="Log-out" @click="logout()" />
       </q-toolbar>
     </q-header>
     <EmployerDrawer
       v-if="
-        $route.path == '/employer/' ||
+        $route.path == '/employer/home' ||
         $route.path == '/employer/profile' ||
         $route.path == '/employer/applicants'
       "
