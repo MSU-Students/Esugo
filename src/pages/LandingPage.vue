@@ -625,10 +625,7 @@
                 infinite
                 :autoplay="autoplay"
               >
-                <q-carousel-slide
-                  :name="1"
-                  img-src="~assets/ITspecialist.jpg"
-                />
+                <q-carousel-slide :name="1" img-src="~assets/ITspecialist.jpg" />
                 <q-carousel-slide :name="2" img-src="~assets/carpentry.jpg" />
                 <q-carousel-slide :name="3" img-src="~assets/plumber.jpeg" />
                 <q-carousel-slide :name="4" img-src="~assets/machine-operator.jpg" />
@@ -647,6 +644,9 @@
         Developed by: Pandi And Yassier
       </span>
     </q-banner>
+    <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+      <q-btn fab icon="keyboard_arrow_up" color="pink-3" text-color="white" />
+    </q-page-scroller>
   </q-page>
 </template>
 
