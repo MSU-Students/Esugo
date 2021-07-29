@@ -57,7 +57,7 @@
           </q-icon>
         </template>
       </q-input>
-      <q-input
+      <!-- <q-input
         standout="bg-blue text-white"
         dense
         filled
@@ -66,7 +66,10 @@
         lazy-rules
         :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
-      />
+      /> -->
+        <q-select  standout="bg-blue text-white" dense filled v-model="user.gender" :options="options" label="Gender *"  lazy-rules
+        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
+        hide-bottom-space/>
       <q-input
         standout="bg-blue text-white"
         dense
@@ -122,7 +125,7 @@
       >
         <template v-slot:append>
           <q-icon
-            :name="isPwd ? 'visibility_off' : 'visibility'"
+            :name="isPwd ? 'visibility_off' : 'visibility '"
             class="cursor-pointer"
             @click="isPwd = !isPwd"
           />
@@ -159,8 +162,9 @@ import helperService from '../services/helper.service';
 })
 export default class singupCard extends Vue {
   @Prop({type: String, required: true}) readonly name!: string;
-
-  isPwd = '';
+  model = 'male'
+  options = [ 'male','female']
+  isPwd = true;
   createUser!: (payload: UserDto) => Promise<void>;
   user: UserDto = {
     firstName: '',
