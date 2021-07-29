@@ -146,11 +146,11 @@ export default class pendingApplicants extends Vue {
     });
   }
   async approveApplicant(id: number) {
-    await this.updateApplication({
-      id,
-      status: 'accepted',
-    });
-    this.updatejob(id);
+    // await this.updateApplication({
+    //   id,
+    //   status: 'accepted',
+    // });
+    // this.updatejob(id);
     this.data = this.applications
       .filter((i) => i.status == 'pending')
       .map((a: any) => {
@@ -161,19 +161,20 @@ export default class pendingApplicants extends Vue {
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
-          status: a.status
+          status: a.status,
         };
       });
-       console.log('sdaafs: ',this.data);
-    const applicant =  this.data.find((i: any) => i.id  === id);
-    console.log('applicant',applicant);
-
+    console.log('data: ', this.data);
+    const applicant = this.data.find((i: any) => i.id === id);
     const message = `Congratulations! You'are hired as a ${applicant.title} of ${applicant.name}. Please waut for your employer to contact you.`;
-    console.log(applicant);
-    await smsService.sendMessage({
+    console.log('send: ', {
       message: message,
       phoneNumber: applicant.contact,
     });
+    // await smsService.sendMessage({
+    //   message: message,
+    //   phoneNumber: applicant.contact,
+    // });
   }
 
   async disapproveApplicant(id: number) {
@@ -186,7 +187,7 @@ export default class pendingApplicants extends Vue {
   }
 
   colorManipulation(status: string) {
-    console.log('status',status);
+    console.log('status', status);
     if (status == 'pending') {
       return 'orange';
     } else if (status == 'banned') {
