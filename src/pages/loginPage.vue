@@ -47,7 +47,17 @@
             label=" I have read and accepted the User Notice and Privacy"
           />
           <div>
-          <q-btn rounded class="full-width" color="primary" label="Login" @click="loginUser()" />
+            <q-btn
+              rounded
+              class="full-width"
+              color="primary"
+              label="Login"
+              @click="loginUser()"
+            />
+          </div>
+          <div class="text-center q-pt-md">
+            <div class="text-grey-8">Don't have account?</div>
+            <q-btn flat rounded label="sign up" color="primary" to="/signup" />
           </div>
         </div>
       </q-card-section>
@@ -120,7 +130,7 @@ export default class Login extends Vue {
   padding-bottom: 120px;
   padding-left: 50px;
 }
-.radius{
+.radius {
   border-radius: 10%;
 }
 </style>
