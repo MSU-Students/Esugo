@@ -23,6 +23,7 @@
                   bg-color="white"
                   type="text"
                   label="Job title, keyword or company"
+                  @keyup.enter="searchJob()"
                 >
                   <template v-slot:prepend>
                     <q-icon name="search" />
@@ -46,13 +47,7 @@
             </div>
           </div>
           <div class="col text-center">
-            <q-btn
-              round
-              color="primary"
-              icon="search"
-              size="md"
-              @click="searchJob()"
-            />
+            <q-btn round color="primary" icon="search" size="md" @click="searchJob()" />
           </div>
         </div>
       </q-toolbar-title>
@@ -61,7 +56,7 @@
       <img height="250px" src="..\..\src\assets\searchjobs.png" />
       <div class="text-h5">Search Jobs!</div>
     </div>
-    <!-- <div v-else-if="cardItems.length == 0" class="text-center q-pa-xl">
+    <!-- <div v-else-if="searchTap && cardItems.length == 0" class="text-center q-pa-xl">
       <div class="text-h4 q-pb-lg text-primary">No Content!</div>
     </div> -->
     <div v-else class="text-center q-pa-xl">
@@ -69,11 +64,7 @@
 
       <div>
         <div class="row q-gutter-md flex flex-center">
-          <Card
-            v-for="(items, index) in getData2"
-            :key="index"
-            v-bind="items"
-          />
+          <Card v-for="(items, index) in getData2" :key="index" v-bind="items" />
         </div>
         <div class="flex flex-center q-pt-lg">
           <q-pagination
@@ -96,26 +87,26 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator';
-import { mapState, mapActions } from 'vuex';
+import {Vue, Component, Watch} from 'vue-property-decorator';
+import {mapState, mapActions} from 'vuex';
 import Card from 'components/Card.vue';
-import { ApplicationDto, JobDto, UserDto } from 'src/services/rest-api';
+import {ApplicationDto, JobDto, UserDto} from 'src/services/rest-api';
 
 let items: JobDto[] = [];
 
 @Component({
   components: {
-    Card
+    Card,
   },
   computed: {
     ...mapState('job', ['jobs']),
-    ...mapState('application', ['applications'])
+    ...mapState('application', ['applications']),
   },
   methods: {
     ...mapActions('job', ['getAllJob', 'updateJob']),
     ...mapActions('application', ['getAllApplication']),
-    ...mapActions('user', ['getProfile'])
-  }
+    ...mapActions('user', ['getProfile']),
+  },
 })
 export default class SearchToolbar extends Vue {
   jobTitle = '';
@@ -142,11 +133,9 @@ export default class SearchToolbar extends Vue {
     if (localStorage.getItem('access-token') != null) {
       const currentProfile: any = await this.getProfile();
       await this.getAllApplication();
-      const applied = this.applications.filter(
-        i => i.workerID == currentProfile.id
-      );
+      const applied = this.applications.filter((i) => i.workerID == currentProfile.id);
       this.jobsArr = val.filter((i: any) => {
-        return !applied.some(a => {
+        return !applied.some((a) => {
           return a.jobID == i.id;
         });
       });
@@ -165,7 +154,7 @@ export default class SearchToolbar extends Vue {
   async getJobsWithoutAuth() {
     await this.getAllJob();
     this.jobsArr = this.jobs;
-    let location = items.map(i => {
+    let location = items.map((i) => {
       if (i.status == 'approved') {
         return i.location;
       }
@@ -176,17 +165,15 @@ export default class SearchToolbar extends Vue {
   async getJobsWithAuth() {
     const currentProfile: any = await this.getProfile();
     await this.getAllApplication();
-    const applied = this.applications.filter(
-      i => i.workerID == currentProfile.id
-    );
+    const applied = this.applications.filter((i) => i.workerID == currentProfile.id);
     await this.getAllJob();
-    this.jobsArr = this.jobs.filter(i => {
-      return !applied.some(a => {
+    this.jobsArr = this.jobs.filter((i) => {
+      return !applied.some((a) => {
         return a.jobID == i.id;
       });
     });
     items = this.jobsArr.filter((i: any) => i.status == 'approved');
-    let location = items.map(i => {
+    let location = items.map((i) => {
       if (i.status == 'approved') {
         return i.location;
       }
@@ -202,7 +189,7 @@ export default class SearchToolbar extends Vue {
   }
   getData() {
     const result = this.jobsArr.filter(
-      i =>
+      (i) =>
         (i.status == 'approved' &&
           i.location == this.jobLocation &&
           i.title.toLowerCase() == this.jobTitle.toLowerCase()) ||
@@ -212,9 +199,7 @@ export default class SearchToolbar extends Vue {
         (i.status == 'approved' &&
           i.title.toLowerCase() == this.jobTitle.toLowerCase() &&
           this.jobLocation == '') ||
-        (i.status == 'approved' &&
-          this.jobTitle == '' &&
-          this.jobLocation == '')
+        (i.status == 'approved' && this.jobTitle == '' && this.jobLocation == '')
     );
     this.cardItems = result;
     return result;

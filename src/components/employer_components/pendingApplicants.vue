@@ -1,12 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-card bg-blue>
-      <q-table
-        title="Pending Applicant"
-        :data="data"
-        :columns="columns"
-        row-key="name"
-      >
+      <q-table title="Pending Applicant" :data="data" :columns="columns" row-key="name">
         <template v-slot:header="props">
           <q-tr :props="props">
             <q-th auto-width>Applicant Status</q-th>
@@ -19,7 +14,8 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td auto-width class="text-center">
-              <q-btn rounded
+              <q-btn
+                rounded
                 :text-color="colorManipulation(props.row.status)"
                 color="white"
                 :label="labelManipulation(props.row.status)"
@@ -61,9 +57,10 @@
 
 <script lang="ts">
 import App from 'src/App.vue';
-import { UserDto } from 'src/services/rest-api';
-import { Vue, Component } from 'vue-property-decorator';
-import { mapActions, mapState } from 'vuex';
+import {UserDto} from 'src/services/rest-api';
+import {Vue, Component} from 'vue-property-decorator';
+import {mapActions, mapState} from 'vuex';
+import smsService from 'src/services/sms.service';
 
 @Component({
   computed: {
@@ -72,8 +69,8 @@ import { mapActions, mapState } from 'vuex';
   methods: {
     ...mapActions('application', ['getAllApplication', 'updateApplication']),
     ...mapActions('job', ['getOneJob', 'updateJob']),
-    ...mapActions('user', ['getProfile'])
-  }
+    ...mapActions('user', ['getProfile']),
+  },
 })
 export default class pendingApplicants extends Vue {
   selectedIndex = null;
@@ -85,29 +82,29 @@ export default class pendingApplicants extends Vue {
       align: 'left',
       field: (row: any) => row.name,
       format: (val: any) => `${val}`,
-      sortable: true
+      sortable: true,
     },
     {
       name: 'email',
       label: 'Email',
       field: 'email',
       sortable: true,
-      align: 'left'
+      align: 'left',
     },
     {
       name: 'contact',
       label: 'Contact Number',
       field: 'contact',
       sortable: true,
-      align: 'left'
+      align: 'left',
     },
     {
       name: 'title',
       label: 'Job Title',
       field: 'title',
       sortable: true,
-      align: 'left'
-    }
+      align: 'left',
+    },
   ];
   applications!: any[];
   data: any = [];
@@ -120,10 +117,10 @@ export default class pendingApplicants extends Vue {
   getProfile!: () => Promise<void>;
 
   async mounted() {
-   const user: any = await this.getProfile();
+    const user: any = await this.getProfile();
     await this.getAllApplication();
     this.data = this.applications
-      .filter(i => i.status == 'pending' && i.employerID == user.id)
+      .filter((i) => i.status == 'pending' && i.employerID == user.id)
       .map((a: any) => {
         return {
           id: a.id,
@@ -132,18 +129,18 @@ export default class pendingApplicants extends Vue {
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
-          status: a.status
+          status: a.status,
         };
       });
     console.log(this.data);
   }
   updatejob(appId: number) {
-    this.applications.filter(async i => {
+    this.applications.filter(async (i) => {
       if (i.id == appId) {
         const {user, employer, ...newJob} = i.job;
         await this.updateJob({
           ...newJob,
-          status: 'taken'
+          status: 'taken',
         });
       }
     });
@@ -151,11 +148,11 @@ export default class pendingApplicants extends Vue {
   async approveApplicant(id: number) {
     await this.updateApplication({
       id,
-      status: 'accepted'
+      status: 'accepted',
     });
     this.updatejob(id);
-      this.data = this.applications
-      .filter(i => i.status == 'pending')
+    this.data = this.applications
+      .filter((i) => i.status == 'pending')
       .map((a: any) => {
         return {
           id: a.id,
@@ -164,22 +161,32 @@ export default class pendingApplicants extends Vue {
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
-          status: a.status
+          status: a.status,
         };
       });
+       console.log('sdaafs: ',this.data);
+    const applicant =  this.data.find((i: any) => i.id  === id);
+    console.log('applicant',applicant);
+
+    const message = `Congratulations! You'are hired as a ${applicant.title} of ${applicant.name}. Wait your employer to contact you.`;
+    console.log(applicant);
+    await smsService.sendMessage({
+      message: message,
+      phoneNumber: applicant.contact,
+    });
   }
 
   async disapproveApplicant(id: number) {
     console.log(this.applications[id]);
     await this.updateApplication({
       id,
-      status: 'rejected'
+      status: 'rejected',
     });
-    this.data = this.applications.filter(i => i.status == 'pending');
+    this.data = this.applications.filter((i) => i.status == 'pending');
   }
 
   colorManipulation(status: string) {
-    console.log(status);
+    console.log('status',status);
     if (status == 'pending') {
       return 'orange';
     } else if (status == 'banned') {

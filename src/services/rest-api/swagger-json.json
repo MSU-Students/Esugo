@@ -1,1 +1,565 @@
-{"openapi":"3.0.0","info":{"title":"Esusgo REST API","description":"ESUGO Online Job Listing","version":"1.0","contact":{}},"tags":[{"name":"eSugo Online Job listing","description":""}],"servers":[],"components":{"securitySchemes":{"bearer":{"scheme":"bearer","bearerFormat":"JWT","type":"http"}},"schemas":{"UserDto":{"type":"object","properties":{"firstName":{"type":"string","example":"Pandi"},"middleName":{"type":"string","example":"Pogi"},"lastName":{"type":"string","example":"Panontongan"},"birthdate":{"type":"string","example":"2021/08/11"},"gender":{"type":"string","example":"Male"},"address":{"type":"string","example":"MSU Main, Marawi City"},"contact":{"type":"string","example":"+639990001111"},"email":{"type":"string","example":"example@gmail.com"},"company":{"type":"string","example":"example co."},"location":{"type":"string","example":"Marawi City"},"type":{"type":"string","example":"admin"},"status":{"type":"string","example":"available"},"username":{"type":"string","example":"user"},"password":{"type":"string","example":"password"},"refreshToken":{"type":"string"}},"required":["firstName","middleName","lastName","birthdate","gender","address","contact","email","company","location","type","status","username","password"]},"JobDto":{"type":"object","properties":{"title":{"type":"string","example":"Carpentry"},"description":{"type":"string","example":"Make a 5 feet tall cabinet with 2 doors"},"location":{"type":"string","example":"MSU Main, Marawi City"},"salary":{"type":"string","example":5000},"datePosted":{"format":"date-time","type":"string"},"status":{"type":"string","example":"pending"},"coverPhoto":{"type":"string","example":"carpentry.jpg"},"employerID":{"type":"number","example":1}},"required":["title","description","location","salary","datePosted","status","coverPhoto","employerID"]},"ApplicationDto":{"type":"object","properties":{"status":{"type":"string","example":"pending"},"workerID":{"type":"number","example":1},"employerID":{"type":"number","example":1},"jobID":{"type":"number","example":1}},"required":["status","workerID","employerID","jobID"]},"AccessTokenDto":{"type":"object","properties":{"accessToken":{"type":"string","minLength":5},"refreshToken":{"type":"string","minLength":5}}},"RefreshDto":{"type":"object","properties":{"refresh_token":{"type":"string","minLength":5}},"required":["refresh_token"]}}},"paths":{"/user/create":{"post":{"operationId":"AddUser","summary":"Add new user","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}}}}},"/user":{"get":{"operationId":"GetUsers","summary":"Get all users","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}}},"security":[{"bearer":[]}]}},"/user/{id}":{"get":{"operationId":"GetUser","summary":"Get user by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}}},"security":[{"bearer":[]}]},"put":{"operationId":"UpdateUser","summary":"Update user by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}}},"security":[{"bearer":[]}]},"delete":{"operationId":"DeleteUser","summary":"Delete user by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}}},"security":[{"bearer":[]}]}},"/job":{"post":{"operationId":"AddJob","summary":"Add new job","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}}},"security":[{"bearer":[]}]},"get":{"operationId":"GetJobs","summary":"Get all jobs","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}}}}},"/job/{id}":{"get":{"operationId":"GetJob","summary":"Get job by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}}}},"put":{"operationId":"UpdateJob","summary":"Update job by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}}},"security":[{"bearer":[]}]},"delete":{"operationId":"DeleteJob","summary":"Delete job by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/JobDto"}}}}},"security":[{"bearer":[]}]}},"/application":{"post":{"operationId":"AddApplication","summary":"Add new application","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}}},"security":[{"bearer":[]}]},"get":{"operationId":"GetApplications","summary":"Get all application","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}}},"security":[{"bearer":[]}]}},"/application/{id}":{"get":{"operationId":"GetApplication","summary":"Get application by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}}},"security":[{"bearer":[]}]},"put":{"operationId":"UpdateApplication","summary":"Update application by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}}},"security":[{"bearer":[]}]},"delete":{"operationId":"DeleteApplication","summary":"Delete application by id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"number"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ApplicationDto"}}}}},"security":[{"bearer":[]}]}},"/auth/register":{"post":{"operationId":"register","summary":"Register User","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}}}}},"/auth/login":{"post":{"operationId":"login","summary":"Login User","parameters":[{"name":"username","in":"query","required":true,"schema":{"type":"string"}},{"name":"password","in":"query","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/AccessTokenDto"}}}}}}},"/auth/refresh_token":{"post":{"operationId":"refreshToken","summary":"Refresh Token","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/RefreshDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/AccessTokenDto"}}}}},"security":[{"bearer":[]}]}},"/auth/logout":{"post":{"operationId":"logout","summary":"logout given user","parameters":[],"responses":{"201":{"description":""}},"security":[{"bearer":[]}]}},"/auth/profile":{"get":{"operationId":"getProfile","summary":"get profile info","parameters":[],"responses":{"200":{"description":""}},"security":[{"bearer":[]}]}}}}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Esusgo REST API",
+    "description": "ESUGO Online Job Listing",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [{ "name": "eSugo Online Job listing", "description": "" }],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" }
+    },
+    "schemas": {
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string", "example": "Pandi" },
+          "middleName": { "type": "string", "example": "Pogi" },
+          "lastName": { "type": "string", "example": "Panontongan" },
+          "birthdate": { "type": "string", "example": "2021/08/11" },
+          "gender": { "type": "string", "example": "Male" },
+          "address": { "type": "string", "example": "MSU Main, Marawi City" },
+          "contact": { "type": "string", "example": "+639990001111" },
+          "email": { "type": "string", "example": "example@gmail.com" },
+          "company": { "type": "string", "example": "example co." },
+          "location": { "type": "string", "example": "Marawi City" },
+          "type": { "type": "string", "example": "admin" },
+          "status": { "type": "string", "example": "available" },
+          "username": { "type": "string", "example": "user" },
+          "password": { "type": "string", "example": "password" },
+          "refreshToken": { "type": "string" }
+        },
+        "required": [
+          "firstName",
+          "middleName",
+          "lastName",
+          "birthdate",
+          "gender",
+          "address",
+          "contact",
+          "email",
+          "company",
+          "location",
+          "type",
+          "status",
+          "username",
+          "password"
+        ]
+      },
+      "JobDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "example": "Carpentry" },
+          "description": {
+            "type": "string",
+            "example": "Make a 5 feet tall cabinet with 2 doors"
+          },
+          "location": { "type": "string", "example": "MSU Main, Marawi City" },
+          "salary": { "type": "string", "example": 5000 },
+          "datePosted": { "format": "date-time", "type": "string" },
+          "status": { "type": "string", "example": "pending" },
+          "coverPhoto": { "type": "string", "example": "carpentry.jpg" },
+          "employerID": { "type": "number", "example": 1 }
+        },
+        "required": [
+          "title",
+          "description",
+          "location",
+          "salary",
+          "datePosted",
+          "status",
+          "coverPhoto",
+          "employerID"
+        ]
+      },
+      "ApplicationDto": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "example": "pending" },
+          "workerID": { "type": "number", "example": 1 },
+          "employerID": { "type": "number", "example": 1 },
+          "jobID": { "type": "number", "example": 1 }
+        },
+        "required": ["status", "workerID", "employerID", "jobID"]
+      },
+      "AccessTokenDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": { "type": "string", "minLength": 5 },
+          "refreshToken": { "type": "string", "minLength": 5 }
+        }
+      },
+      "RefreshDto": {
+        "type": "object",
+        "properties": { "refresh_token": { "type": "string", "minLength": 5 } },
+        "required": ["refresh_token"]
+      }
+    }
+  },
+  "paths": {
+    "/user/create": {
+      "post": {
+        "operationId": "AddUser",
+        "summary": "Add new user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "operationId": "GetUsers",
+        "summary": "Get all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "operationId": "GetUser",
+        "summary": "Get user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "put": {
+        "operationId": "UpdateUser",
+        "summary": "Update user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "DeleteUser",
+        "summary": "Delete user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/job": {
+      "post": {
+        "operationId": "AddJob",
+        "summary": "Add new job",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JobDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "GetJobs",
+        "summary": "Get all jobs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/job/{id}": {
+      "get": {
+        "operationId": "GetJob",
+        "summary": "Get job by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateJob",
+        "summary": "Update job by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/JobDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "DeleteJob",
+        "summary": "Delete job by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JobDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/application": {
+      "post": {
+        "operationId": "AddApplication",
+        "summary": "Add new application",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "GetApplications",
+        "summary": "Get all application",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/application/{id}": {
+      "get": {
+        "operationId": "GetApplication",
+        "summary": "Get application by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "put": {
+        "operationId": "UpdateApplication",
+        "summary": "Update application by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "DeleteApplication",
+        "summary": "Delete application by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "register",
+        "summary": "Register User",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "login",
+        "summary": "Login User",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AccessTokenDto" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh_token": {
+      "post": {
+        "operationId": "refreshToken",
+        "summary": "Refresh Token",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RefreshDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AccessTokenDto" }
+              }
+            }
+          }
+        },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "logout",
+        "summary": "logout given user",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/auth/profile": {
+      "get": {
+        "operationId": "getProfile",
+        "summary": "get profile info",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "security": [{ "bearer": [] }]
+      }
+    }
+  }
+}

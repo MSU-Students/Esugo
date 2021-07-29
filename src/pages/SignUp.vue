@@ -8,7 +8,7 @@
             dense
             no-caps
             inline-label
-            class=" text-primary bg-white shadow-2"
+            class=" text-primary bg-white shadow-2 __border-radius"
           >
             <q-tab name="worker" icon="person" label="Signup as Worker" />
             <q-tab
@@ -17,7 +17,7 @@
               label="Signup as Employer"
             />
           </q-tabs>
-          <q-tab-panels v-model="tab" animated>
+          <q-tab-panels class="backdrop-filter" v-model="tab" animated>
             <q-tab-panel name="worker">
               <Card name="worker" />
             </q-tab-panel>  
@@ -57,9 +57,9 @@ export default class PageIndex extends Vue {
 
   colorManipulation(tab: string) {
     if (tab == 'worker') {
-      return 'background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);';
+      return 'background: linear-gradient(to bottom, #ffffff 5%, #238ffb 100%);';
     } else {
-      return 'background: linear-gradient(to bottom, #e01327 29%, #ffffff 100%);';
+      return 'background: linear-gradient(to bottom, #238ffb 29%, #ffffff 100%);';
     }
   }
    imageManipulation(tab: string) {
@@ -72,4 +72,12 @@ export default class PageIndex extends Vue {
 }
 </script>
 
-<style></style>
+<style scoped>
+
+.backdrop-filter{
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  background-color: #ffffff23 ;
+}
+
+</style>
