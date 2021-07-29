@@ -87,7 +87,7 @@
         v-model="user.contact"
         label="Contact Number *"
         lazy-rules
-        :rules="[(val) => val.length <= 3 || 'Please type something']"
+        :rules="[(val) => val.length <= 10 || 'Please type something']"
         prefix="+63"
         mask="##########"
         hide-bottom-space
