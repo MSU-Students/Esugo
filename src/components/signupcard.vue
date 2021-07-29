@@ -82,7 +82,7 @@
         filled
         dense
         v-model="user.contact"
-        label="Contact Number*"
+        label="Contact Number *"
         lazy-rules
         :rules="[(val) => val.length <= 3 || 'Please type something']"
         prefix="+63"
@@ -94,7 +94,7 @@
         filled
         dense
         v-model="user.email"
-        label="Email Address*"
+        label="Email Address *"
         lazy-rules
         :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
@@ -104,7 +104,7 @@
         dense
         filled
         v-model="user.username"
-        label="Usernane*"
+        label="Usernane *"
         lazy-rules
         :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         hide-bottom-space
@@ -117,7 +117,7 @@
         v-model="user.password"
         filled
         :type="isPwd ? 'password' : 'text'"
-        label="Password"
+        label="Password *"
         hide-bottom-space
       >
         <template v-slot:append>
@@ -139,6 +139,10 @@
         @click="addUser()"
       />
     </div>
+    <div class="text-center q-pt-md">
+      <div class="text-grey-8">Already have account?</div>
+      <q-btn flat rounded label="login" color="primary" to="/login" />
+    </div>
   </q-card>
 </template>
 
@@ -159,20 +163,20 @@ export default class singupCard extends Vue {
   isPwd = '';
   createUser!: (payload: UserDto) => Promise<void>;
   user: UserDto = {
-    firstName: 'Pandi',
-    middleName: 'Pogi',
-    lastName: 'Panontongan',
+    firstName: '',
+    middleName: '',
+    lastName: '',
     birthdate: '',
-    gender: 'Male',
-    address: 'MSU Main, Marawi City',
+    gender: '',
+    address: '',
     contact: '',
-    email: 'example@gmail.com',
-    company: 'example co',
-    location: 'Marawi city',
+    email: '',
+    company: '',
+    location: '',
     type: this.name,
     status: 'pending',
-    username: 'worker',
-    password: 'password',
+    username: '',
+    password: '',
     refreshToken: '',
   };
 
