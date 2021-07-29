@@ -38,8 +38,22 @@
     </div>
     <div class="__content q-pb-xl">
       <div class="text-center text-pink-3 q-pt-xl q-px-xl">
-        <div class="text-h4 q-pb-md">Work with a Team</div>
-        <div class="text-h3 text-blue-3">
+        <div
+          class="text-h4 q-pb-md"
+          data-aos="zoom-in-down"
+          data-aos-duration="700"
+          ata-aos-anchor-placement="top-bottom"
+          data-aos-offset="100"
+        >
+          Work with a Team
+        </div>
+        <div
+          class="text-h3 text-blue-3"
+          data-aos="fade-right"
+          ata-aos-anchor-placement="bottom-bottom"
+          data-aos-offset="100"
+          data-aos-duration="500"
+        >
           Why Should You Hire A Team At E-SUGO?
         </div>
       </div>
@@ -65,12 +79,18 @@
             class="text-h5"
             style="width: 50%"
           >
-            at E-SUGO are required to submit Philippine government-issued
-            documents to establish their legitimacy
+            at E-SUGO are required to submit Philippine government-issued documents to
+            establish their legitimacy
           </div>
         </div>
         <div class="col-6 text-center">
-          <div>
+          <div
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="10"
+            data-aos-duration="700"
+            data-aos-delay="100"
+          >
             <q-img
               class="__photo2"
               src="~assets/photos/photo2.svg"
@@ -80,7 +100,13 @@
           </div>
         </div>
         <div class="col-6">
-          <div>
+          <div
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="10"
+            data-aos-duration="700"
+            data-aos-delay="100"
+          >
             <q-img
               class="__photo2 q-ml-xl"
               src="~assets/photos/photo3.svg"
@@ -92,7 +118,7 @@
         <div class="col-6">
           <div class="col-6 q-pa-xl q-mt-xl text-grey-9">
             <div
-              data-aos="slide-left"
+              data-aos="slide-right"
               data-aos-offset="100"
               data-aos-duration="700"
               ata-aos-anchor-placement="top-bottom"
@@ -110,8 +136,8 @@
               class="text-h5"
               style="width: 50%"
             >
-              E-SUGO’s time tracking app helps you monitor your remote team’s
-              worked hours.
+              E-SUGO’s time tracking app helps you monitor your remote team’s worked
+              hours.
             </div>
           </div>
         </div>
@@ -136,12 +162,17 @@
             class="text-h5"
             style="width: 50%"
           >
-            Hiring a team at E-SUGO cuts your business operating cost to up to
-            50%.
+            Hiring a team at E-SUGO cuts your business operating cost to up to 50%.
           </div>
         </div>
         <div class="col-6 text-center">
-          <div>
+          <div
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="10"
+            data-aos-duration="700"
+            data-aos-delay="100"
+          >
             <q-img
               class="__photo2"
               src="~assets/photos/photo4.svg"
@@ -164,7 +195,7 @@
           Join Us Now!
         </div>
         <div
-          data-aos="fade-left"
+          data-aos="fade-right"
           ata-aos-anchor-placement="bottom-bottom"
           data-aos-offset="100"
           data-aos-duration="500"
@@ -195,12 +226,18 @@
             class="text-h5 text-pink-1"
             style="width: 50%"
           >
-            At E-SUGO, you do not have to worry about competing against
-            freelancers. It’s teams against teams.
+            At E-SUGO, you do not have to worry about competing against freelancers. It’s
+            teams against teams.
           </div>
         </div>
         <div class="col-6 text-center">
-          <div>
+          <div
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="100"
+            data-aos-duration="700"
+            data-aos-delay="200"
+          >
             <q-img
               class="__photo2"
               src="~assets/photos/photo5.svg"
@@ -210,7 +247,13 @@
           </div>
         </div>
         <div class="col-6">
-          <div>
+          <div
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="10"
+            data-aos-duration="700"
+            data-aos-delay="100"
+          >
             <q-img
               class="__photo2 q-ml-xl"
               src="~assets/photos/photo6.svg"
@@ -220,17 +263,15 @@
           </div>
         </div>
         <div class="col-6">
-          <div class="col-6 q-pa-xl q-mt-xl">
-            <div
-              data-aos="slide-left"
-              data-aos-offset="100"
-              data-aos-duration="700"
-              ata-aos-anchor-placement="top-bottom"
-              data-aos-delay="100"
-              class="text-h3 text-weight-bolder text-grey-8"
-            >
-              Worldwide Market
-            </div>
+          <div
+            class="col-6 q-pa-xl q-mt-xl"
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="10"
+            data-aos-duration="700"
+            data-aos-delay="100"
+          >
+            <div class="text-h3 text-weight-bolder text-grey-8">Worldwide Market</div>
             <q-separator color="white" size="5px" spaced />
             <div
               data-aos="fade-up"
@@ -271,7 +312,12 @@
           </div>
         </div>
         <div class="col-6 text-center">
-          <div>
+          <div
+            data-aos="slide-right"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="100"
+            data-aos-duration="700"
+          >
             <q-img
               class="__photo2"
               src="~assets/photos/photo7.svg"
@@ -413,41 +459,162 @@
     </div>
     <div class="col-12">
       <div class="text-center text-pink-3 q-pt-xl q-px-xl">
-        <div class="text-h5 q-pb-md">Our Services</div>
-        <div class="text-h4 text-blue-3">Services Available On Our Site</div>
-        <q-separator color="pink-3" size="5px" spaced />
+        <div
+          class="text-h5 q-pb-md"
+          data-aos="slide-right"
+          ata-aos-anchor-placement="top-bottom"
+          data-aos-offset="100"
+          data-aos-duration="700"
+          data-aos-delay="100"
+        >
+          Our Services
+        </div>
+        <div
+          class="text-h4 text-blue-3"
+          data-aos="fadeUp"
+          ata-aos-anchor-placement="top-bottom"
+          data-aos-offset="100"
+          data-aos-duration="700"
+          data-aos-delay="100"
+        >
+          Services Available On Our Site
+        </div>
+        <q-separator
+          data-aos="fade"
+          ata-aos-anchor-placement="top-bottom"
+          data-aos-offset="100"
+          data-aos-duration="700"
+          data-aos-delay="100"
+          color="pink-3"
+          size="5px"
+          spaced
+        />
       </div>
     </div>
     <div class="col-12">
-      <div class="q-gutter-x-md text-center q-pb-xl">
-        <q-btn round icon="fab fa-facebook" color="blue" size="xl" /><q-btn
-          round
-          icon="fab fa-facebook"
-          color="blue"
-          size="xl"
-        /><q-btn round icon="fab fa-facebook" color="blue" size="xl" /><q-btn
-          round
-          icon="fab fa-facebook"
-          color="blue"
-          size="xl"
-        /><q-btn round icon="fab fa-facebook" color="blue" size="xl" />
+      <div class="q-gutter-x-md text-center q-pb-xl q-pt-lg">
+        <div class="row justify-center justify-evenly text-grey-9">
+          <div
+            data-aos="slide-down"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="1"
+            data-aos-duration="700"
+          >
+            <q-btn round icon="fas fa-hammer" color="brown" size="xl" />
+            <div>Carpentry</div>
+          </div>
+          <div
+            data-aos="slide-up"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="1"
+            data-aos-duration="700"
+          >
+            <q-btn round icon="fas fa-tools" color="pink" size="xl" />
+            <div>Toolman</div>
+          </div>
+          <div
+            data-aos="slide-down"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="1"
+            data-aos-duration="700"
+          >
+            <q-btn round icon="fas fa-toolbox" color="green" size="xl" />
+            <div>Plumber</div>
+          </div>
+          <div
+            data-aos="slide-up"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="1"
+            data-aos-duration="700"
+          >
+            <q-btn round icon="fas fa-laptop-medical" color="purple" size="xl" />
+            <div>IT Specialist</div>
+          </div>
+          <div
+            data-aos="slide-down"
+            ata-aos-anchor-placement="top-bottom"
+            data-aos-offset="1"
+            data-aos-duration="700"
+          >
+            <q-btn round icon="fas fa-heartbeat" color="red" size="xl" />
+            <div>Medical Assistance</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="__footer">
       <div class="row">
         <div class="col-12 __content text-center">
           <div class="q-py-lg q-gutter-x-md">
-            <q-btn round icon="fab fa-facebook" color="blue" size="md" />
-            <q-btn round icon="fab fa-twitter" color="blue-10" size="md" />
-            <q-btn round icon="fab fa-instagram" color="red-5" size="md" />
-            <q-btn round icon="fab fa-linkedin" color="indigo-10" size="md" />
+            <q-btn
+              data-aos="slide-right"
+              ata-aos-anchor-placement="top-bottom"
+              data-aos-offset="100"
+              data-aos-duration="700"
+              data-aos-delay="100"
+              round
+              icon="fab fa-facebook"
+              color="blue"
+              size="md"
+            />
+            <q-btn
+              data-aos="slide-right"
+              ata-aos-anchor-placement="top-bottom"
+              data-aos-offset="100"
+              data-aos-duration="700"
+              data-aos-delay="100"
+              round
+              icon="fab fa-twitter"
+              color="blue-10"
+              size="md"
+            />
+            <q-btn
+              data-aos="slide-left"
+              ata-aos-anchor-placement="top-bottom"
+              data-aos-offset="100"
+              data-aos-duration="700"
+              data-aos-delay="100"
+              round
+              icon="fab fa-instagram"
+              color="red-5"
+              size="md"
+            />
+            <q-btn
+              data-aos="slide-left"
+              ata-aos-anchor-placement="top-bottom"
+              data-aos-offset="100"
+              data-aos-duration="700"
+              data-aos-delay="100"
+              round
+              icon="fab fa-linkedin"
+              color="indigo-10"
+              size="md"
+            />
           </div>
         </div>
         <div class="col-12">
           <div class="row q-pa-xl">
             <div class="col-6">
-              <div class="text-h4 text-blue-3">Gallery</div>
-              <div class="text-h2 text-red-3">Videos You Want to Watch</div>
+              <div
+                data-aos="slide-left"
+                ata-aos-anchor-placement="top-bottom"
+                data-aos-offset="100"
+                data-aos-duration="700"
+                data-aos-delay="100"
+                class="text-h4 text-blue-3"
+              >
+                Gallery
+              </div>
+              <div
+                data-aos="slide-left"
+                ata-aos-anchor-placement="top-bottom"
+                data-aos-offset="100"
+                data-aos-duration="700"
+                data-aos-delay="100"
+                class="text-h2 text-red-3"
+              >
+                Videos You Want to Watch
+              </div>
             </div>
             <div class="col-6">
               <q-carousel
@@ -464,10 +631,7 @@
                 />
                 <q-carousel-slide :name="2" img-src="~assets/carpentry.jpg" />
                 <q-carousel-slide :name="3" img-src="~assets/plumber.jpeg" />
-                <q-carousel-slide
-                  :name="4"
-                  img-src="~assets/machine-operator.jpg"
-                />
+                <q-carousel-slide :name="4" img-src="~assets/machine-operator.jpg" />
               </q-carousel>
             </div>
           </div>
@@ -487,7 +651,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import {Vue, Component} from 'vue-property-decorator';
 
 @Component({})
 export default class LandingPage extends Vue {
