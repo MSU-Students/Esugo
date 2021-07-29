@@ -16,7 +16,6 @@
       </q-toolbar>
     </q-header>
     <EmployerDrawer
-      v-if="$route.path == '/employer/' || $route.path == '/employer/profile' || $route.path == '/employer/applicants'"
       :drawerOpen="drawerOpen"
     />
 

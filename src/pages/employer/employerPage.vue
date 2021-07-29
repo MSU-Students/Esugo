@@ -39,7 +39,7 @@ export default {
   components: {Table1, Table2,Table3, Table4},
   data() {
     return {
-      tab: 'Approved',
+      tab: 'Pending',
       selected: [],
     };
   },

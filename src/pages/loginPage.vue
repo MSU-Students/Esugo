@@ -88,13 +88,13 @@ export default class Login extends Vue {
         type: this.type,
       });
       if (res.type == 'admin') {
-        await this.$router.replace('/admin/');
+        await this.$router.replace('/admin/home');
       } else if (res.type == 'moderator') {
-        await this.$router.replace('/moderator/');
+        await this.$router.replace('/moderator/home');
       } else if (res.type == 'worker') {
-        await this.$router.replace('/worker/');
+        await this.$router.replace('/worker/home');
       } else if (res.type == 'employer') {
-        await this.$router.replace('/employer/');
+        await this.$router.replace('/employer/home');
       }
       helperService.notify({
         type: 'positive',

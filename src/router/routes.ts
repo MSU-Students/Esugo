@@ -43,7 +43,7 @@ const routes: RouteConfig[] = [
         path: 'accounts',
         component: () => import('../pages/admin/AdminPage.vue')
       },
-      { path: '', component: () => import('pages/LandingPage.vue') }
+      { path: 'home', component: () => import('pages/HomePage.vue') }
     ]
   },
   {
@@ -51,7 +51,7 @@ const routes: RouteConfig[] = [
     meta: { requiresEmployer: true },
     component: () => import('src/layouts/EmployerLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/LandingPage.vue') },
+      { path: 'home', component: () => import('pages/HomePage.vue') },
       {
         path: 'applicants',
         component: () => import('../pages/employer/EmployerPage.vue')
@@ -68,7 +68,7 @@ const routes: RouteConfig[] = [
     meta: { requiresAdmin: true },
     component: () => import('src/layouts/WorkerLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/LandingPage.vue') },
+      { path: 'home', component: () => import('pages/HomePage.vue') },
       {
         path: 'profile',
         meta: { requiresEmployer: true },
@@ -85,7 +85,7 @@ const routes: RouteConfig[] = [
         path: 'jobs',
         component: () => import('../pages/moderator/ModeratorPage.vue')
       },
-      { path: '', component: () => import('pages/LandingPage.vue') }
+      { path: 'home', component: () => import('pages/LandingPage.vue') }
     ]
   },
 
