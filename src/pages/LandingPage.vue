@@ -7,7 +7,7 @@
           <div class="col-6 q-pl-xl flex flex-center text-h2 text-white">
             <div>
               <transition appear enter-active-class="animated fadeInUp">
-                <div>Hire A Vetted Team To Help You With Your Needs</div>
+                <div>Hire A Skilled Worker To Help You With Your Needs</div>
               </transition>
               <transition appear enter-active-class="animated fadeInLeft">
                 <div class="q-pt-md">
@@ -54,7 +54,7 @@
           data-aos-offset="100"
           data-aos-duration="500"
         >
-          Why Should You Hire A Team At E-SUGO?
+          Why Should You Hire A Worker At E-SUGO?
         </div>
       </div>
       <div class="row items-center q-pa-md">
@@ -67,7 +67,7 @@
             data-aos-delay="100"
             class="text-h3 text-weight-bolder"
           >
-            Vetted Teams Teams
+            Vetted Skilled Worker
           </div>
           <q-separator color="pink-3" size="5px" spaced />
           <div
@@ -271,7 +271,7 @@
             data-aos-duration="700"
             data-aos-delay="100"
           >
-            <div class="text-h3 text-weight-bolder text-grey-8">Worldwide Market</div>
+            <div class="text-h3 text-weight-bolder text-grey-8">CityWide Market</div>
             <q-separator color="white" size="5px" spaced />
             <div
               data-aos="fade-up"
@@ -283,7 +283,7 @@
               style="width: 50%"
             >
               E-SUGO let’s you showcase your talents and expertise to businesses
-              worldwide.
+              CityWide.
             </div>
           </div>
         </div>
@@ -402,8 +402,8 @@
             <div class="flip-box">
               <div class="flip-box-front text-center svg">
                 <div class="inner color-white">
-                  <h3 class="flip-box-header">Start as a Team Owner</h3>
-                  <p>Apply to job postings that fit your team.</p>
+                  <h3 class="flip-box-header">Start as a Worker</h3>
+                  <p>Look for Job for you</p>
                   <img
                     src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png"
                     alt=""
@@ -413,8 +413,8 @@
               </div>
               <div class="flip-box-back text-center svg1">
                 <div class="inner color-white">
-                  <h3 class="flip-box-header">Start as a Team Owner</h3>
-                  <p>A short sentence describing this callout is.</p>
+                  <h3 class="flip-box-header">Start as a Worker</h3>
+                  <p>Apply for job near you</p>
                   <q-btn
                     class="q-mt-sm flip-box-button"
                     text-color="pink-3"
@@ -430,8 +430,8 @@
             <div class="flip-box">
               <div class="flip-box-front text-center svg2">
                 <div class="inner color-white">
-                  <h3 class="flip-box-header">Start as a Client</h3>
-                  <p>Hire vetted talents for a lower cost.</p>
+                  <h3 class="flip-box-header">Start as an Employer</h3>
+                  <p>Post job you need to be done</p>
                   <img
                     src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png"
                     alt=""
@@ -441,8 +441,8 @@
               </div>
               <div class="flip-box-back text-center svg3">
                 <div class="inner color-white">
-                  <h3 class="flip-box-header">Start as a Client</h3>
-                  <p>Hire vetted talents for a lower cost.</p>
+                  <h3 class="flip-box-header">Start as an Employer</h3>
+                  <p>Hire Skilled Worker near you</p>
                   <q-btn
                     class="q-mt-sm flip-box-button"
                     text-color="pink-3"

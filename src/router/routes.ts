@@ -43,7 +43,9 @@ const routes: RouteConfig[] = [
         path: 'accounts',
         component: () => import('../pages/admin/AdminPage.vue')
       },
-      { path: 'home', component: () => import('pages/HomePage.vue') }
+      { path: 'home', component: () => import('pages/HomePage.vue') },
+      
+      
     ]
   },
   {
@@ -85,7 +87,7 @@ const routes: RouteConfig[] = [
         path: 'jobs',
         component: () => import('../pages/moderator/ModeratorPage.vue')
       },
-      { path: 'home', component: () => import('pages/LandingPage.vue') }
+      { path: 'home', component: () => import('pages/HomePage.vue') }
     ]
   },
 
