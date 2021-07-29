@@ -109,7 +109,15 @@ export default class pendingApplicants extends Vue {
       field: 'title',
       sortable: true,
       align: 'left'
+    }, 
+    {
+      name: 'description',
+      label: 'Job Description',
+      field: 'description',
+      sortable: true,
+      align: 'left'
     }
+
   ];
   applications!: any[];
   data: any = [];
@@ -134,7 +142,8 @@ export default class pendingApplicants extends Vue {
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
-          status: a.status
+          status: a.status,
+          description: a.job.description
         };
       });
     console.log(this.data);
@@ -166,7 +175,8 @@ export default class pendingApplicants extends Vue {
           email: a.worker.email,
           contact: a.worker.contact,
           title: a.job.title,
-          status: a.status
+          status: a.status,
+          description: a.job.description
         };
       });
     console.log('data: ', this.data);
@@ -186,7 +196,18 @@ export default class pendingApplicants extends Vue {
       id,
       status: 'rejected'
     });
-    this.data = this.applications.filter(i => i.status == 'pending');
+    this.data = this.applications.filter(i => i.status == 'pending')      .map((a: any) => {
+        return {
+          id: a.id,
+          jobID: a.jobID,
+          name: a.worker.firstName + ' ' + a.worker.lastName,
+          email: a.worker.email,
+          contact: a.worker.contact,
+          title: a.job.title,
+          status: a.status,
+          description: a.job.description
+        };
+      });
   }
 
   colorManipulation(status: string) {
